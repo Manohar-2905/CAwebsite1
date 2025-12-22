@@ -8,7 +8,10 @@ const createTransporter = () => {
         auth: process.env.SMTP_USER ? {
             user: process.env.SMTP_USER,
             pass: process.env.SMTP_PASS
-        } : undefined
+        } : undefined,
+        connectionTimeout: 20000, // 20 seconds
+        greetingTimeout: 20000,
+        socketTimeout: 20000
     });
 };
 
