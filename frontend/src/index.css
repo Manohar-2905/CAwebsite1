@@ -1,0 +1,684 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  color: #333;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+:root {
+  --primary-color: #002a54;
+  /* Navy Blue */
+  --primary-dark: #001f3f;
+  --secondary-color: #D4AF37;
+  /* Gold */
+  --accent-color: #C5A059;
+  /* Muted Gold */
+
+  /* Neutrals */
+  --text-dark: #1A1A1A;
+  --text-secondary: #4A4A4A;
+  --text-light: #757575;
+  --bg-light: #F7F9FC;
+  --bg-white: #FFFFFF;
+  --border-color: #E0E0E0;
+
+  /* Typography */
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.section-padding {
+  padding: 80px 0;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: 3rem;
+}
+
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Animations */
+/* Professional Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0;
+  /* Multiply ensure it starts hidden */
+  animation-fill-mode: forwards;
+}
+
+/* Stagger Delays */
+.delay-1 {
+  animation-delay: 0.1s;
+}
+
+.delay-2 {
+  animation-delay: 0.2s;
+}
+
+.delay-3 {
+  animation-delay: 0.3s;
+}
+
+.delay-4 {
+  animation-delay: 0.4s;
+}
+
+.delay-5 {
+  animation-delay: 0.5s;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.8s ease-out;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.3;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Stats Section */
+.stats-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 60px 0;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 20px;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Testimonials */
+.testimonial-card {
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+}
+
+.testimonial-text {
+  font-style: italic;
+  color: var(--text-light);
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.testimonial-author {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.testimonial-role {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* Features Section */
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: white;
+  font-size: 2rem;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 30px;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.cta-section h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.cta-section p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+/* Service Card Enhanced */
+.service-card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.service-card-img {
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-card-img {
+  transform: scale(1.05);
+}
+
+/* Badge */
+.badge-custom {
+  background: var(--accent-color);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+/* Section Divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-color), transparent);
+  margin: 60px 0;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Button Enhancements */
+.btn-custom {
+  padding: 12px 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading Animation */
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Enhanced Feature Card Hover Effects */
+.feature-card {
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Override sections to white background */
+
+
+.hero-section .text-white {
+  color: var(--text-dark) !important;
+}
+
+.hero-section h1 {
+  color: var(--text-dark) !important;
+}
+
+.hero-section p {
+  color: var(--text-light) !important;
+}
+
+.stats-section {
+  background: white !important;
+  color: var(--primary-color) !important;
+  padding: 60px 0;
+}
+
+.stat-number {
+  color: var(--primary-color) !important;
+  font-size: 3rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  display: block !important;
+}
+
+.stat-label {
+  color: var(--primary-color) !important;
+  opacity: 0.8 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  font-size: 1.1rem !important;
+}
+
+.cta-section {
+  background: white !important;
+  color: var(--text-dark) !important;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.cta-section h2 {
+  color: var(--text-dark) !important;
+  margin-bottom: 20px;
+}
+
+.cta-section p {
+  color: var(--text-light) !important;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 1 !important;
+}
+
+/* Deloitte-style Button Design */
+.btn,
+.btn-primary,
+.btn-outline-primary,
+.btn-light,
+.btn-outline-light,
+.btn-custom {
+  border-radius: 50px !important;
+  padding: 14px 36px !important;
+  /* Slightly larger padding to match solid look */
+  font-weight: 700 !important;
+  /* Bolder text like the image */
+  font-size: 1rem !important;
+  text-transform: none !important;
+  letter-spacing: 0.5px !important;
+  border: none !important;
+  /* Remove default border to match the clean filled look */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  min-width: 140px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  /* Soft shadow */
+}
+
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08) !important;
+}
+
+.btn-primary:hover i {
+  transform: translateX(4px);
+}
+
+.btn i {
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Outline Buttons - Need visible border */
+.btn-outline-primary {
+  background-color: transparent !important;
+  border: 2px solid var(--primary-color) !important;
+  color: var(--primary-color) !important;
+  box-shadow: none !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1) !important;
+}
+
+.btn-light {
+  background-color: white !important;
+  color: var(--primary-color) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-light:hover {
+  background-color: var(--bg-light) !important;
+  border-color: var(--bg-light) !important;
+  color: var(--primary-color) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-outline-light {
+  background-color: transparent !important;
+  border-color: white !important;
+  color: white !important;
+}
+
+.btn-outline-light:hover {
+  background-color: white !important;
+  border-color: white !important;
+  color: var(--primary-color) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Large button sizes */
+.btn-lg {
+  padding: 14px 32px !important;
+  font-size: 1rem !important;
+  border-radius: 30px !important;
+  min-width: 140px !important;
+}
+
+/* Small button sizes */
+.btn-sm {
+  padding: 8px 20px !important;
+  font-size: 0.875rem !important;
+  border-radius: 20px !important;
+  min-width: 100px !important;
+}
+
+/* Remove custom button overrides that conflict */
+.btn-custom {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+/* Force 
+stats section to white background - Final Override */
+.stats-section {
+  background: white !important;
+  background-image: none !important;
+  background-color: white !important;
+}
+
+.stats-section .stat-item {
+  color: var(--primary-color) !important;
+}
+
+.stats-section .stat-number {
+  color: var(--primary-color) !important;
+}
+
+.stats-section .stat-label {
+  color: var(--primary-color) !important;
+  opacity: 0.8 !important;
+}
+
+/* 
+Section Hover Effects */
+.section-hover {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.section-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(26, 77, 140, 0.15);
+}
+
+/* Specific section hover effects for home page */
+.services-section:hover,
+.publications-section:hover,
+.features-section:hover,
+.testimonials-section:hover,
+.stats-section:hover,
+.cta-section:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 15px 35px rgba(26, 77, 140, 0.15) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Make sections hoverable */
+.services-section,
+.publications-section,
+.features-section,
+.testimonials-section,
+.stats-section,
+.cta-section {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+/* Hero section special hover effect */
+.hero-section:hover {
+  box-shadow: 0 10px 25px rgba(26, 77, 140, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+/*
+ Remove all feature card hover effects */
+.feature-card:hover {
+  background: none !important;
+  background-color: transparent !important;
+  color: inherit !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.feature-card:hover h4 {
+  color: inherit !important;
+}
+
+.feature-card:hover p {
+  color: inherit !important;
+}
+
+/* Navbar Custom Styles */
+.navbar-custom-link {
+  color: white !important;
+  font-weight: 500;
+}
+
+/* Deloitte Search Bar Custom Styles */
+.deloitte-search-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-bottom: 2px solid #86BC25 !important;
+  /* Green underline on focus */
+}
+
+/* Navbar Button Overrides - Prevent global pill styles from affecting navbar icons */
+.navbar .btn {
+  padding: 8px !important;
+  border-radius: 4px !important;
+  min-width: auto !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar .btn:hover {
+  transform: none !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+}
+
+.navbar .btn svg {
+  vertical-align: middle;
+}
+
+.deloitte-search-input {
+  border-radius: 0 !important;
+  border-bottom: 1px solid transparent !important;
+  transition: border-color 0.3s ease;
+}
+
+/* Ensure placeholder is subtle */
+.deloitte-search-input::placeholder {
+  color: #999;
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* Contact Page Enhancements */
+.location-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.location-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Form Input Focus */
+.form-control:focus,
+.form-select:focus {
+  box-shadow: none !important;
+  border-bottom-color: #86BC25 !important;
+  /* Deloitte Green focus */
+}
+
+/* Classic Corporate Form Styles */
+.form-control:focus,
+.form-select:focus {
+  border-bottom-color: #D4AF37 !important;
+  /* Gold Focus */
+  box-shadow: none !important;
+}
+
+/* Ensure placeholder is subtle */
+::placeholder {
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
