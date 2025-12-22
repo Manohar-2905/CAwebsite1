@@ -56,6 +56,13 @@ const sendEmail = async ({ to, subject, text, html, replyTo, attachments }) => {
         return info;
     } catch (error) {
         console.error('Error in sendMail:', error);
+        console.error('SMTP Config Used:', {
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
+            secure: process.env.SMTP_SECURE,
+            user: process.env.SMTP_USER ? '***' : 'MISSING',
+            auth_pass_len: process.env.SMTP_PASS ? process.env.SMTP_PASS.length : 0
+        });
         throw error;
     }
 };
