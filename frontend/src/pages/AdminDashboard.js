@@ -217,7 +217,7 @@ const AdminDashboard = () => {
       {/* Sidebar */}
       <div className="sidebar">
         <div className="sidebar-brand">
-          <i className="fas fa-shield-alt me-2"></i> ADMIN PANEL
+          <i className="fas fa-shield-alt me-2"></i> ADMIN PANEL <Badge bg="warning" text="dark" className="ms-1" style={{ fontSize: '0.6rem' }}>v1.1</Badge>
         </div>
         <div className="sidebar-menu">
           <div className={`menu-item ${activeTab === 'overview' ? 'active' : ''}`} onClick={() => setActiveTab('overview')}>
