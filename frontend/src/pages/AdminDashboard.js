@@ -149,8 +149,11 @@ const AdminDashboard = () => {
   };
 
   const handleDelete = async (type, id) => {
-    if (!window.confirm('Are you sure?')) return;
-    console.log(`Attempting to delete ${type} with ID: ${id}`);
+    // Debugging: Force visual feedback immediately
+    // if (!window.confirm('Are you sure?')) return; 
+    
+    alert(`DEBUG: Clicking Delete for ${type} ${id}. Check Console for logs.`);
+    console.log(`[DEBUG] Attempting to delete ${type} with ID: ${id}`);
     toast.info('Processing delete...'); // Immediate feedback
     try {
       await api.delete(`/${type}/${id}`);
@@ -190,23 +193,48 @@ const AdminDashboard = () => {
   }
 
 
+  // Mobile Sidebar State
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  // Close sidebar when route changes or screen resizes to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) setShowSidebar(false);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   if (loading) return <div className="d-flex justify-content-center align-items-center vh-100 text-primary"><div className="spinner-border" /></div>;
 
   return (
-    <div className="d-flex min-vh-100 bg-light">
+    <div className="d-flex min-vh-100 bg-light position-relative overflow-hidden">
       <style>{`
-        .sidebar { width: 260px; background: #002147; color: #fff; min-height: 100vh; position: fixed; transition: all 0.3s; }
+        .sidebar { width: 260px; background: #002147; color: #fff; min-height: 100vh; position: fixed; transition: all 0.3s; z-index: 1050; }
         .sidebar-brand { padding: 20px; font-weight: bold; font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); color: #D4AF37; }
         .sidebar-menu { padding: 20px 0; }
         .menu-item { padding: 12px 20px; cursor: pointer; display: flex; align-items: center; transition: all 0.2s; color: rgba(255,255,255,0.7); }
         .menu-item:hover, .menu-item.active { background: rgba(255,255,255,0.1); color: #fff; border-left: 4px solid #D4AF37; }
         .menu-item i { width: 25px; margin-right: 10px; }
-        .main-content { margin-left: 260px; padding: 30px; width: 100%; }
+        .main-content { margin-left: 260px; padding: 30px; width: calc(100% - 260px); transition: all 0.3s; }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+          .sidebar { transform: translateX(-100%); }
+          .sidebar.show { transform: translateX(0); }
+          .main-content { margin-left: 0; width: 100%; padding: 15px; }
+          .sidebar-overlay { 
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+            background: rgba(0,0,0,0.5); z-index: 1040; display: none; 
+          }
+          .sidebar-overlay.show { display: block; }
+        }
+
         .stat-card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: transform 0.2s; border-top: 4px solid transparent; }
         .stat-card:hover { transform: translateY(-3px); }
         .stat-card.blue { border-color: #002147; }
         .stat-card.gold { border-color: #D4AF37; }
-        .content-card { background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: none; }
+        .content-card { background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: none; overflow: hidden; }
         .btn-add { background: #002147; border: none; border-radius: 8px; padding: 8px 20px; font-weight: 500; }
         .btn-add:hover { background: #00152e; }
         .table-custom th { background: #f8f9fa; border: none; font-weight: 600; text-transform: uppercase; font-size: 0.8rem; color: #666; padding: 15px; }
@@ -214,29 +242,40 @@ const AdminDashboard = () => {
         .badge-status { padding: 5px 10px; border-radius: 20px; font-weight: 500; font-size: 0.75rem; }
         .badge-status.active { background: #e6f4ea; color: #1e7e34; }
       `}</style>
+      
+      {/* Mobile Sidebar Overlay */}
+      <div 
+        className={`sidebar-overlay ${showSidebar ? 'show' : ''}`} 
+        onClick={() => setShowSidebar(false)}
+      ></div>
 
       {/* Sidebar */}
-      <div className="sidebar">
-        <div className="sidebar-brand">
-          <i className="fas fa-shield-alt me-2"></i> ADMIN PANEL <Badge bg="warning" text="dark" className="ms-1" style={{ fontSize: '0.6rem' }}>v1.1</Badge>
+      <div className={`sidebar ${showSidebar ? 'show' : ''}`}>
+        <div className="sidebar-brand d-flex justify-content-between align-items-center">
+          <div>
+            <i className="fas fa-shield-alt me-2"></i> ADMIN PANEL <Badge bg="warning" text="dark" className="ms-1" style={{ fontSize: '0.6rem' }}>v1.1</Badge>
+          </div>
+          <div className="d-md-none cursor-pointer" onClick={() => setShowSidebar(false)}>
+            <i className="fas fa-times"></i>
+          </div>
         </div>
         <div className="sidebar-menu">
-          <div className={`menu-item ${activeTab === 'overview' ? 'active' : ''}`} onClick={() => setActiveTab('overview')}>
+          <div className={`menu-item ${activeTab === 'overview' ? 'active' : ''}`} onClick={() => { setActiveTab('overview'); setShowSidebar(false); }}>
             <i className="fas fa-th-large"></i> Dashboard
           </div>
-          <div className={`menu-item ${activeTab === 'services' ? 'active' : ''}`} onClick={() => setActiveTab('services')}>
+          <div className={`menu-item ${activeTab === 'services' ? 'active' : ''}`} onClick={() => { setActiveTab('services'); setShowSidebar(false); }}>
             <i className="fas fa-briefcase"></i> Services
           </div>
-          <div className={`menu-item ${activeTab === 'publications' ? 'active' : ''}`} onClick={() => setActiveTab('publications')}>
+          <div className={`menu-item ${activeTab === 'publications' ? 'active' : ''}`} onClick={() => { setActiveTab('publications'); setShowSidebar(false); }}>
             <i className="fas fa-book"></i> Publications
           </div>
-          <div className={`menu-item ${activeTab === 'newsroom' ? 'active' : ''}`} onClick={() => setActiveTab('newsroom')}>
+          <div className={`menu-item ${activeTab === 'newsroom' ? 'active' : ''}`} onClick={() => { setActiveTab('newsroom'); setShowSidebar(false); }}>
             <i className="fas fa-newspaper"></i> Newsroom
           </div>
-          <div className={`menu-item ${activeTab === 'careers' ? 'active' : ''}`} onClick={() => setActiveTab('careers')}>
+          <div className={`menu-item ${activeTab === 'careers' ? 'active' : ''}`} onClick={() => { setActiveTab('careers'); setShowSidebar(false); }}>
             <i className="fas fa-user-tie"></i> Careers
           </div>
-          <div className={`menu-item ${activeTab === 'sectors' ? 'active' : ''}`} onClick={() => setActiveTab('sectors')}>
+          <div className={`menu-item ${activeTab === 'sectors' ? 'active' : ''}`} onClick={() => { setActiveTab('sectors'); setShowSidebar(false); }}>
             <i className="fas fa-landmark"></i> Sectors
           </div>
           <div className="menu-item mt-5 text-danger" onClick={handleLogout}>
@@ -250,16 +289,27 @@ const AdminDashboard = () => {
 
         {/* Header */}
         <div className="d-flex justify-content-between align-items-center mb-4">
-          <div>
-            <h2 className="fw-bold mb-0" style={{ color: "#002147" }}>
-              {activeTab === 'overview' ? 'Dashboard Overview' :
-                activeTab === 'sectors' ? 'Sectors' :
-                  activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-            </h2>
-            <p className="text-muted small">Manage your website content efficiently.</p>
+          <div className="d-flex align-items-center">
+            {/* Mobile Sidebar Toggle */}
+            <div className="d-md-none me-3 cursor-pointer p-2" onClick={() => setShowSidebar(true)}>
+              <i className="fas fa-bars fa-lg text-dark"></i>
+            </div>
+            <div>
+              <h2 className="fw-bold mb-0 d-none d-sm-block" style={{ color: "#002147" }}>
+                {activeTab === 'overview' ? 'Dashboard Overview' :
+                  activeTab === 'sectors' ? 'Sectors' :
+                    activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+              </h2>
+              <h4 className="fw-bold mb-0 d-sm-none" style={{ color: "#002147" }}>
+                 {activeTab === 'overview' ? 'Dashboard' :
+                  activeTab === 'sectors' ? 'Sectors' :
+                   activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+              </h4>
+              <p className="text-muted small mb-0 d-none d-sm-block">Manage your website content efficiently.</p>
+            </div>
           </div>
-          <div className="d-flex gap-3 align-items-center">
-            <div className="bg-white px-3 py-2 rounded-pill shadow-sm text-muted">
+          <div className="d-flex gap-2 gap-md-3 align-items-center">
+            <div className="bg-white px-3 py-2 rounded-pill shadow-sm text-muted d-none d-md-block">
               <i className="far fa-calendar me-2"></i> {new Date().toLocaleDateString()}
             </div>
             <div className="rounded-circle bg-white d-flex align-items-center justify-content-center shadow-sm cursor-pointer" style={{ width: "40px", height: "40px", color: "#002147" }} onClick={() => setShowPasswordModal(true)} title="Change Password">
