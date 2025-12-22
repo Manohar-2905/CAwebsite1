@@ -16,6 +16,9 @@ const createTransporter = () => {
             user: process.env.SMTP_USER,
             pass: process.env.SMTP_PASS
         } : undefined,
+        tls: {
+            rejectUnauthorized: false
+        },
         // Increased timeouts
         connectionTimeout: 30000, 
         greetingTimeout: 30000,

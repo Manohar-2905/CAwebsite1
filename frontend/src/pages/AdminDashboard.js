@@ -150,7 +150,8 @@ const AdminDashboard = () => {
 
   const handleDelete = async (type, id) => {
     if (!window.confirm('Are you sure?')) return;
-    console.log(`Attempting to delete ${type} with ID: ${id}`); // Debug ID
+    console.log(`Attempting to delete ${type} with ID: ${id}`);
+    toast.info('Processing delete...'); // Immediate feedback
     try {
       await api.delete(`/${type}/${id}`);
       toast.success('Deleted successfully');

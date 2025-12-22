@@ -74,7 +74,7 @@ const Navbar = () => {
       expanded={expanded}
       style={{ backgroundColor: "#002147", minHeight: "76px" }}
     >
-      <Container className="position-relative">
+      <Container fluid className="px-0 position-relative">
         {/* --- Main Navbar Content --- */}
         <div
           className={`d-flex flex-wrap flex-lg-nowrap w-100 align-items-center justify-content-between navbar-custom-margins ${
@@ -129,24 +129,7 @@ const Navbar = () => {
           >
             <div className="d-flex flex-column flex-lg-row align-items-center w-100 justify-content-end bg-dark-mobile p-3 p-lg-0 rounded">
               {/* Navigation Links */}
-                {/* Desktop: Right aligned with standard gap */}
-                <Nav className="d-flex flex-column flex-lg-row align-items-center ms-lg-auto gap-lg-4 w-100 w-lg-auto">
-                  {/* Mobile Search Bar */}
-                  <div className="d-lg-none w-100 px-3 mb-3 mt-2">
-                    <Form className="d-flex" onSubmit={handleSearch}>
-                      <Form.Control
-                        type="search"
-                        placeholder="Search..."
-                        className="me-2 text-white bg-transparent border-white placeholder-white-50"
-                        aria-label="Search"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        style={{ color: 'white' }}
-                      />
-                      <Button variant="outline-light" type="submit">Go</Button>
-                    </Form>
-                  </div>
-
+              <Nav className="d-flex flex-column flex-lg-row align-items-center me-lg-3">
                 {[
                   { path: "/", label: "Home" },
                   { path: "/about", label: "About" },
@@ -155,32 +138,19 @@ const Navbar = () => {
                   { path: "/publications", label: "Publications" },
                   { path: "/newsroom", label: "Newsroom" },
                   { path: "/careers", label: "Career" },
-                  ].map((link) => (
+                ].map((link) => (
                   <Nav.Link
                     key={link.path}
                     as={Link}
                     to={link.path}
                     onClick={() => setExpanded(false)}
-                    className={`nav-link px-2 text-center mb-2 mb-lg-0 ${
-                      location.pathname === link.path ? "active fw-bold" : ""
+                    className={`mx-2 px-3 py-2 navbar-custom-link text-center w-100 w-lg-auto mb-2 mb-lg-0 ${
+                      location.pathname === link.path ? "active" : ""
                     } golden-line-hover`}
-                    style={{ fontSize: '0.95rem', letterSpacing: '0.3px', color: 'white' }}
                   >
                     {link.label}
                   </Nav.Link>
                 ))}
-
-                {/* Mobile Contact Link */}
-                <Nav.Link
-                  as={Link}
-                  to="/contact"
-                  onClick={() => setExpanded(false)}
-                  className={`mx-2 px-3 py-2 navbar-custom-link text-center w-100 w-lg-auto mb-2 mb-lg-0 d-lg-none ${
-                    location.pathname === "/contact" ? "active" : ""
-                  } golden-line-hover`}
-                >
-                  Contact Us
-                </Nav.Link>
               </Nav>
 
               {/* Icons (UNCHANGED SVGs) */}
