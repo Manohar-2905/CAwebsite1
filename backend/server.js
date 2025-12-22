@@ -8,11 +8,19 @@ dotenv.config();
 
 const app = express();
 
+// Request Logger Middleware
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});
+
 // Middleware
 app.use(
   cors({
     origin: process.env.FRONTEND_URL || "https://caweb.onrender.com",
     credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Content-Type,Authorization"
   })
 );
 app.use(express.json());
