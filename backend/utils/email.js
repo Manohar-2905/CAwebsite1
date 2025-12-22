@@ -33,7 +33,15 @@ const sendEmail = async ({ to, subject, text, html, replyTo, attachments }) => {
         attachments: attachments
     };
 
-    return await transporter.sendMail(mailOptions);
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Email sent successfully:', info.messageId);
+        console.log('SMTP Config:', { host: process.env.SMTP_HOST, port: process.env.SMTP_PORT, secure: process.env.SMTP_SECURE, user: process.env.SMTP_USER });
+        return info;
+    } catch (error) {
+        console.error('Error in sendMail:', error);
+        throw error;
+    }
 };
 
 module.exports = { sendEmail };
