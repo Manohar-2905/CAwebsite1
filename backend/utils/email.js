@@ -2,25 +2,24 @@ const nodemailer = require('nodemailer');
 
 // Safe transporter creation with defaults
 const createTransporter = () => {
-    const port = Number(process.env.SMTP_PORT) || 587;
-    // Force secure=false for 587 (STARTTLS), secure=true for 465
+    // Default to 465 (SSL) which is more reliable for Zoho
+    const port = Number(process.env.SMTP_PORT) || 465;
     const secure = process.env.SMTP_SECURE === 'true' || port === 465;
 
     console.log(`Initializing SMTP Transporter: ${process.env.SMTP_HOST}:${port} (Secure: ${secure})`);
 
     return nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
+        host: process.env.SMTP_HOST || 'smtp.zoho.com', // Fallback to Zoho
         port: port,
         secure: secure,
         auth: process.env.SMTP_USER ? {
             user: process.env.SMTP_USER,
             pass: process.env.SMTP_PASS
         } : undefined,
-        // Increased timeouts for cloud environments
-        connectionTimeout: 20000, 
-        greetingTimeout: 20000,
-        socketTimeout: 20000,
-        // Debug options
+        // Increased timeouts
+        connectionTimeout: 30000, 
+        greetingTimeout: 30000,
+        socketTimeout: 30000,
         debug: true,
         logger: true 
     });
