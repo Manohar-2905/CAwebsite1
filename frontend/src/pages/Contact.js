@@ -47,10 +47,13 @@ const Contact = () => {
                 toast.error('Unable to send message. Please try again later.');
             }
         } catch (error) {
-            console.error('Submission error:', error);
-            // Extract specific error message from backend response if available
-            const backendErrorMsg = error.response?.data?.error || error.response?.data?.message || 'An error occurred. Please try again.';
-            toast.error(`Failed: ${backendErrorMsg}`);
+            console.error('Backend err:', error);
+            // Serialize error for user visibility
+            const debugError = error.response?.data ? JSON.stringify(error.response.data) : error.message;
+            console.log('Backend error message (Clean):', debugError);
+            
+            const errorMsg = error.response?.data?.message || error.response?.data?.error || 'An error occurred';
+            toast.error(`Failed: ${errorMsg}`);
         } finally {
             setLoading(false);
         }

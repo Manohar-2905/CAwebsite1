@@ -150,12 +150,18 @@ const AdminDashboard = () => {
 
   const handleDelete = async (type, id) => {
     if (!window.confirm('Are you sure?')) return;
+    console.log(`Attempting to delete ${type} with ID: ${id}`); // Debug ID
     try {
       await api.delete(`/${type}/${id}`);
       toast.success('Deleted successfully');
       fetchData();
     } catch (error) {
       console.error('Delete error:', error);
+      
+      // Serialize for better debug visibility
+      const debugError = error.response?.data ? JSON.stringify(error.response.data) : error.message;
+      console.log('Delete Failure Details:', debugError);
+
       const errorMsg = error.response?.data?.message || error.message || 'Error deleting item';
       toast.error(`Failed: ${errorMsg}`);
       

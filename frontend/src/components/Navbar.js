@@ -160,10 +160,10 @@ const Navbar = () => {
                     as={Link}
                     to={link.path}
                     onClick={() => setExpanded(false)}
-                    className={`mx-1 px-2 py-2 navbar-custom-link text-center w-100 w-lg-auto mb-2 mb-lg-0 ${
+                    className={`px-2 py-2 navbar-custom-link text-center w-100 w-lg-auto mb-2 mb-lg-0 ${
                       location.pathname === link.path ? "active" : ""
                     } golden-line-hover`}
-                    style={{ fontSize: '0.95rem' }}
+                    style={{ fontSize: '0.9rem', letterSpacing: '0.5px' }}
                   >
                     {link.label}
                   </Nav.Link>
