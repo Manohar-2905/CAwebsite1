@@ -155,7 +155,13 @@ const AdminDashboard = () => {
       toast.success('Deleted successfully');
       fetchData();
     } catch (error) {
-      toast.error('Error deleting item');
+      console.error('Delete error:', error);
+      const errorMsg = error.response?.data?.message || error.message || 'Error deleting item';
+      toast.error(`Failed: ${errorMsg}`);
+      
+      if (error.response?.status === 401) {
+          navigate('/admin/login');
+      }
     }
   };
 
