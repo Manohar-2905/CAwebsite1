@@ -1,16 +1,15 @@
+require("dotenv").config(); // MUST BE TOP
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const dotenv = require("dotenv");
 const path = require("path");
-
-dotenv.config();
 
 const app = express();
 
-// Request Logger Middleware
+// Request Logger Middleware (Debug Mode)
 app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  const hasAuth = !!req.headers.authorization;
+  console.log(`[REQUEST] ${new Date().toISOString()} | ${req.method} ${req.url} | Auth: ${hasAuth} | Origin: ${req.headers.origin}`);
   next();
 });
 
@@ -19,7 +18,7 @@ app.use(
   cors({
     origin: process.env.FRONTEND_URL || "https://caweb.onrender.com",
     credentials: true,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: "Content-Type,Authorization"
   })
 );

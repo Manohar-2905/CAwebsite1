@@ -30,8 +30,13 @@ ${message}`,
 
     res.json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
-    console.error('Nodemailer error:', error);
-    res.status(500).json({ message: 'Failed to send email', error: error.message });
+    console.error('Nodemailer error details:', error);
+    // Return explicit 500 but with clean JSON
+    res.status(500).json({ 
+      message: 'Failed to send email. Server configuration issue.', 
+      error: error.message,
+      code: error.code 
+    });
   }
 });
 
