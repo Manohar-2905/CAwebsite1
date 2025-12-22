@@ -15,6 +15,8 @@ const createTransporter = () => {
 const sendEmail = async ({ to, subject, text, html, replyTo, attachments }) => {
     const missingVars = [];
     if (!process.env.SMTP_HOST) missingVars.push('SMTP_HOST');
+    if (!process.env.SMTP_USER) missingVars.push('SMTP_USER');
+    if (!process.env.SMTP_PASS) missingVars.push('SMTP_PASS');
     if (!process.env.ADMIN_EMAIL) missingVars.push('ADMIN_EMAIL');
     
     if (missingVars.length > 0) {

@@ -31,8 +31,11 @@ const Contact = () => {
                 await api.post('/contact/send-email', formData); 
                 sentSuccessfully = true; 
             } catch (err) { 
-                console.warn('Backend err', err); 
-                throw err; // Re-throw to be caught by outer catch block for UI display
+                console.warn('Backend err:', err);
+                if (err.response && err.response.data) {
+                    console.warn('Backend error message:', err.response.data);
+                }
+                throw err; 
             }
             // Backend WhatsApp
             try { await api.post('/contact/send-whatsapp', formData); sentSuccessfully = true; } catch (err) { console.warn('Whatsapp err', err); }
