@@ -5,7 +5,7 @@
   "description": "Backend API for CA Consultancy Website",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon backend/server.js",
+    "start": "node backend/server.js",
     "dev": "nodemon backend/server.js",
     "build": "npm install --prefix frontend && npm run build --prefix frontend && rm -rf dist && cp -r frontend/build dist"
   },
