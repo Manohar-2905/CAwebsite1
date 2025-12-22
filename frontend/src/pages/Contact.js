@@ -27,7 +27,13 @@ const Contact = () => {
 
         try {
             // Backend Email
-            try { await api.post('/contact/send-email', formData); sentSuccessfully = true; } catch (err) { console.warn('Backend err', err); }
+            try { 
+                await api.post('/contact/send-email', formData); 
+                sentSuccessfully = true; 
+            } catch (err) { 
+                console.warn('Backend err', err); 
+                throw err; // Re-throw to be caught by outer catch block for UI display
+            }
             // Backend WhatsApp
             try { await api.post('/contact/send-whatsapp', formData); sentSuccessfully = true; } catch (err) { console.warn('Whatsapp err', err); }
 
@@ -39,7 +45,9 @@ const Contact = () => {
             }
         } catch (error) {
             console.error('Submission error:', error);
-            toast.error('An error occurred. Please try again.');
+            // Extract specific error message from backend response if available
+            const backendErrorMsg = error.response?.data?.error || error.response?.data?.message || 'An error occurred. Please try again.';
+            toast.error(`Failed: ${backendErrorMsg}`);
         } finally {
             setLoading(false);
         }
