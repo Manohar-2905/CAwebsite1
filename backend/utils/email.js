@@ -1,17 +1,28 @@
 const nodemailer = require('nodemailer');
 
+// Safe transporter creation with defaults
 const createTransporter = () => {
+    const port = Number(process.env.SMTP_PORT) || 587;
+    // Force secure=false for 587 (STARTTLS), secure=true for 465
+    const secure = process.env.SMTP_SECURE === 'true' || port === 465;
+
+    console.log(`Initializing SMTP Transporter: ${process.env.SMTP_HOST}:${port} (Secure: ${secure})`);
+
     return nodemailer.createTransport({
         host: process.env.SMTP_HOST,
-        port: Number(process.env.SMTP_PORT) || 587,
-        secure: process.env.SMTP_SECURE === 'true' || Number(process.env.SMTP_PORT) === 465,
+        port: port,
+        secure: secure,
         auth: process.env.SMTP_USER ? {
             user: process.env.SMTP_USER,
             pass: process.env.SMTP_PASS
         } : undefined,
-        connectionTimeout: 20000, // 20 seconds
+        // Increased timeouts for cloud environments
+        connectionTimeout: 20000, 
         greetingTimeout: 20000,
-        socketTimeout: 20000
+        socketTimeout: 20000,
+        // Debug options
+        debug: true,
+        logger: true 
     });
 };
 
