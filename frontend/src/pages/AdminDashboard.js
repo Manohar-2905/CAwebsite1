@@ -525,8 +525,12 @@ const AdminDashboard = () => {
             <Form.Group className="mb-3"><Form.Label>Title</Form.Label><Form.Control type="text" value={newsroomForm.title} onChange={e => setNewsroomForm({ ...newsroomForm, title: e.target.value })} required /></Form.Group>
             <Form.Group className="mb-3"><Form.Label>Date</Form.Label><Form.Control type="date" value={newsroomForm.date} onChange={e => setNewsroomForm({ ...newsroomForm, date: e.target.value })} required /></Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" rows={3} value={newsroomForm.description} onChange={e => setNewsroomForm({ ...newsroomForm, description: e.target.value })} required />
+              <Form.Label>Description (Summary)</Form.Label>
+              <Form.Control as="textarea" rows={2} value={newsroomForm.description} onChange={e => setNewsroomForm({ ...newsroomForm, description: e.target.value })} required />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Full Content (Article Body)</Form.Label>
+              <Form.Control as="textarea" rows={6} value={newsroomForm.content} onChange={e => setNewsroomForm({ ...newsroomForm, content: e.target.value })} />
               <Form.Text className="text-muted">
                 Tip: Start a line with a hyphen (-) or asterisk (*) to create a bullet point. Use **text** to bold phrases.
               </Form.Text>

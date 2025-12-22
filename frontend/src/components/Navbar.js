@@ -74,7 +74,7 @@ const Navbar = () => {
       expanded={expanded}
       style={{ backgroundColor: "#002147", minHeight: "76px" }}
     >
-      <Container fluid className="px-0 position-relative">
+      <Container className="position-relative">
         {/* --- Main Navbar Content --- */}
         <div
           className={`d-flex flex-wrap flex-lg-nowrap w-100 align-items-center justify-content-between navbar-custom-margins ${
