@@ -85,7 +85,11 @@ const Home = () => {
         });
 
       // If it's the first segment and the original text didn't start with a marker, treat as paragraph
-      if (idx === 0 && !processed.startsWith("*") && !processed.startsWith("-")) {
+      if (
+        idx === 0 &&
+        !processed.startsWith("*") &&
+        !processed.startsWith("-")
+      ) {
         return (
           <div key={idx} className="mb-2">
             {restored}
@@ -96,7 +100,10 @@ const Home = () => {
       // Treat as bullet item
       return (
         <div key={idx} className="d-flex mb-1 align-items-start">
-          <span className="me-2 text-dark" style={{ fontSize: "1.4rem", lineHeight: "1" }}>
+          <span
+            className="me-2 text-dark"
+            style={{ fontSize: "1.4rem", lineHeight: "1" }}
+          >
             •
           </span>
           <span>{restored}</span>
@@ -468,8 +475,8 @@ const Home = () => {
 
                       <div
                         className="text-secondary mb-3 flex-grow-1"
-                        style={{ 
-                          fontSize: "0.85rem", 
+                        style={{
+                          fontSize: "0.85rem",
                           lineHeight: "1.5",
                           display: "-webkit-box",
                           WebkitLineClamp: "1",
