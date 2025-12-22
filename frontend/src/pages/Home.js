@@ -415,7 +415,7 @@ const Home = () => {
             </Carousel>
           ) : (
             <Row className="g-4 justify-content-center">
-              {services.map((service, index) => (
+              {(isMobile ? services.slice(0, 3) : services).map((service, index) => (
                 <Col
                   md={6}
                   lg={4}
