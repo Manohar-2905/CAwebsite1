@@ -298,7 +298,7 @@ const Home = () => {
                 <span className="visually-hidden">Loading...</span>
               </div>
             </div>
-          ) : services.length > 3 ? (
+          ) : services.length > 3 && !isMobile ? (
             <Carousel
               indicators={false}
               controls={false}
