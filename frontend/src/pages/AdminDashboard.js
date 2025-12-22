@@ -536,9 +536,28 @@ const AdminDashboard = () => {
         <Modal.Body>
           <Form onSubmit={handleCareerSubmit}>
             <Form.Group className="mb-3"><Form.Label>Job Title</Form.Label><Form.Control type="text" value={careerForm.title} onChange={e => setCareerForm({ ...careerForm, title: e.target.value })} required /></Form.Group>
-            <Form.Group className="mb-3"><Form.Label>Location</Form.Label><Form.Control type="text" value={careerForm.location} onChange={e => setCareerForm({ ...careerForm, location: e.target.value })} required /></Form.Group>
             
+            <Row>
+              <Col md={6}>
+                <Form.Group className="mb-3"><Form.Label>Location</Form.Label><Form.Control type="text" value={careerForm.location} onChange={e => setCareerForm({ ...careerForm, location: e.target.value })} required /></Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3"><Form.Label>Department</Form.Label><Form.Control type="text" value={careerForm.department} onChange={e => setCareerForm({ ...careerForm, department: e.target.value })} /></Form.Group>
+              </Col>
+            </Row>
 
+            <Form.Group className="mb-3">
+              <Form.Label>Short Description (Summary)</Form.Label>
+              <Form.Control as="textarea" rows={3} value={careerForm.description} onChange={e => setCareerForm({ ...careerForm, description: e.target.value })} required />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Full Details (Requirements, Responsibilities)</Form.Label>
+              <Form.Control as="textarea" rows={6} value={careerForm.content} onChange={e => setCareerForm({ ...careerForm, content: e.target.value })} />
+              <Form.Text className="text-muted">Supports basic formatting (hyphens for bullets).</Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3"><Form.Label>Keywords (Comma separated)</Form.Label><Form.Control type="text" value={careerForm.keywords} onChange={e => setCareerForm({ ...careerForm, keywords: e.target.value })} placeholder="e.g. tax, audit, junior" /></Form.Group>
 
             <Form.Group className="mb-3"><Form.Label>Type</Form.Label><Form.Select value={careerForm.type} onChange={e => setCareerForm({ ...careerForm, type: e.target.value })}><option>Full-time</option><option>Part-time</option><option>Contract</option></Form.Select></Form.Group>
             <div className="text-end"><Button variant="secondary" className="me-2" onClick={() => setShowCareerModal(false)}>Cancel</Button><Button type="submit" className="btn-add">Save</Button></div>
