@@ -13,8 +13,12 @@ const createTransporter = () => {
 };
 
 const sendEmail = async ({ to, subject, text, html, replyTo, attachments }) => {
-    if (!process.env.SMTP_HOST || !process.env.ADMIN_EMAIL) {
-        throw new Error('Email configuration is missing');
+    const missingVars = [];
+    if (!process.env.SMTP_HOST) missingVars.push('SMTP_HOST');
+    if (!process.env.ADMIN_EMAIL) missingVars.push('ADMIN_EMAIL');
+    
+    if (missingVars.length > 0) {
+        throw new Error(`Email configuration is missing: ${missingVars.join(', ')}`);
     }
 
     const transporter = createTransporter();
