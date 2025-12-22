@@ -154,15 +154,16 @@ const Navbar = () => {
                   { path: "/publications", label: "Publications" },
                   { path: "/newsroom", label: "Newsroom" },
                   { path: "/careers", label: "Career" },
-                ].map((link) => (
+                  ].map((link) => (
                   <Nav.Link
                     key={link.path}
                     as={Link}
                     to={link.path}
                     onClick={() => setExpanded(false)}
-                    className={`mx-2 px-3 py-2 navbar-custom-link text-center w-100 w-lg-auto mb-2 mb-lg-0 ${
+                    className={`mx-1 px-2 py-2 navbar-custom-link text-center w-100 w-lg-auto mb-2 mb-lg-0 ${
                       location.pathname === link.path ? "active" : ""
                     } golden-line-hover`}
+                    style={{ fontSize: '0.95rem' }}
                   >
                     {link.label}
                   </Nav.Link>

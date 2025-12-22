@@ -35,59 +35,41 @@ const NewsroomDetail = () => {
   const renderDescription = (text) => {
     if (!text) return null;
 
-    // Shield bold tags
-    const boldContents = [];
-    const BOLD_PH = "___BOLD_PH___";
-    const shieldedText = text.replace(/\*\*.*?\*\*/g, (match) => {
-      boldContents.push(match);
-      return `${BOLD_PH}${boldContents.length - 1}${BOLD_PH}`;
-    });
+    // Split by newlines to preserve paragraph structure
+    const lines = text.split('\n');
+    
+    return lines.map((line, idx) => {
+      const trimmedLine = line.trim();
+      if (!trimmedLine) return <br key={idx} />;
 
-    const segments = shieldedText.split(/\*|-/);
-    const elements = [];
+      // Check for list items
+      const isListItem = trimmedLine.startsWith('•') || trimmedLine.startsWith('-') || trimmedLine.startsWith('*');
+      const cleanLine = isListItem ? trimmedLine.substring(1).trim() : trimmedLine;
 
-    segments.forEach((seg, idx) => {
-      let content = seg.trim();
-      if (!content && idx === 0) return;
+      // Handle bold formatting
+      const parts = cleanLine.split(/(\*\*.*?\*\*)/g);
+      const renderedParts = parts.map((part, pIdx) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+          return <strong key={pIdx}>{part.slice(2, -2)}</strong>;
+        }
+        return part;
+      });
 
-      const restored = content
-        .split(new RegExp(`(${BOLD_PH}\\d+${BOLD_PH})`, "g"))
-        .map((part, pIdx) => {
-          if (part.startsWith(BOLD_PH)) {
-            const index = parseInt(part.replace(new RegExp(BOLD_PH, "g"), ""));
-            const rawBold = boldContents[index];
-            return (
-              <strong key={pIdx} className="fw-bold">
-                {rawBold.slice(2, -2)}
-              </strong>
-            );
-          }
-          return part;
-        });
-
-      if (idx === 0 && !text.trim().startsWith("*") && !text.trim().startsWith("-")) {
-        elements.push(
-          <p key={`p-${idx}`} style={{ marginBottom: "1.5rem" }}>
-            {restored}
-          </p>
-        );
-      } else {
-        elements.push(
-          <div
-            key={`li-${idx}`}
-            className="d-flex mb-2 align-items-start"
-            style={{ paddingLeft: "1rem" }}
-          >
-            <span className="me-2 text-dark" style={{ fontSize: "1.4rem", lineHeight: "1" }}>
-              •
-            </span>
-            <span>{restored}</span>
+      if (isListItem) {
+        return (
+          <div key={idx} className="d-flex mb-2 align-items-start" style={{ paddingLeft: "1rem" }}>
+            <span className="me-2 text-dark" style={{ fontSize: "1.2rem", lineHeight: "1.5" }}>•</span>
+            <span>{renderedParts}</span>
           </div>
         );
       }
-    });
 
-    return elements;
+      return (
+        <p key={idx} style={{ marginBottom: "1rem" }}>
+          {renderedParts}
+        </p>
+      );
+    });
   };
 
   if (loading) {
