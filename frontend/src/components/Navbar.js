@@ -128,6 +128,22 @@ const Navbar = () => {
             className="w-100 w-lg-auto mt-2 mt-lg-0"
           >
             <div className="d-flex flex-column flex-lg-row align-items-center w-100 justify-content-end bg-dark-mobile p-3 p-lg-0 rounded">
+              {/* --- Mobile Search (Top) --- */}
+              <div className="d-lg-none w-100 mb-3">
+                <Form className="d-flex" onSubmit={handleSearch}>
+                  <Form.Control
+                    type="search"
+                    placeholder="Search..."
+                    className="me-2"
+                    aria-label="Search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)' }}
+                  />
+                  <Button variant="outline-light" type="submit">Search</Button>
+                </Form>
+              </div>
+
               {/* Navigation Links */}
               <Nav className="d-flex flex-column flex-lg-row align-items-center me-lg-3">
                 {[
@@ -191,6 +207,13 @@ const Navbar = () => {
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                   </svg>
                 </Button>
+              </div>
+
+              {/* --- Mobile Contact (Bottom) --- */}
+              <div className="d-lg-none w-100 mt-3 text-center border-top border-secondary pt-3">
+                 <Link to="/contact" className="text-white text-decoration-none fw-bold" onClick={() => setExpanded(false)} style={{ fontSize: '1rem' }}>
+                    Contact Us
+                 </Link>
               </div>
             </div>
           </BootstrapNavbar.Collapse>

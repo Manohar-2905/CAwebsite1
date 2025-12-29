@@ -4,7 +4,11 @@ const nodemailer = require('nodemailer');
 const createTransporter = () => {
     // Default to 587 (STARTTLS) which is more reliable for new deployments
     const port = Number(process.env.SMTP_PORT) || 587;
-    const secure = process.env.SMTP_SECURE === 'true' || port === 465;
+    
+    // Force secure: true ONLY for port 465 (Implicit SSL). 
+    // For 587 (STARTTLS), secure MUST be false. 
+    // We ignore process.env.SMTP_SECURE because it's often misconfigured as 'true' for 587.
+    const secure = port === 465; 
 
     console.log(`Initializing SMTP Transporter: ${process.env.SMTP_HOST}:${port} (Secure: ${secure})`);
 

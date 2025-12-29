@@ -175,7 +175,7 @@ const Home = () => {
             <Col md={9} lg={6}>
               {/* Professional White Card for Content */}
               <div
-                className="hero-card shadow-lg rounded-0 p-4 p-lg-5"
+                className="hero-card shadow-lg rounded-0 p-4 p-lg-5 d-none d-md-block"
                 style={{
                   backgroundColor: isMobile
                     ? "rgba(255, 255, 255, 0.85)"
