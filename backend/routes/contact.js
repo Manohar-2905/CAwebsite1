@@ -78,4 +78,21 @@ router.post('/send-whatsapp', async (req, res) => {
   }
 });
 
+
+// SMTP Verification Endpoint (GET)
+router.get('/test', async (req, res) => {
+    const { verifyConnection } = require('../utils/email');
+    const result = await verifyConnection();
+    if (result.success) {
+        res.json({ message: 'SMTP Connection Successful', config: { host: process.env.SMTP_HOST, port: process.env.SMTP_PORT } });
+    } else {
+        res.status(500).json({ 
+            message: 'SMTP Connection Failed', 
+            error: result.error.message, 
+            code: result.error.code,
+            details: result.error 
+        });
+    }
+});
+
 module.exports = router;

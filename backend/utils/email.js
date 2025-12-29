@@ -69,4 +69,16 @@ const sendEmail = async ({ to, subject, text, html, replyTo, attachments }) => {
     }
 };
 
-module.exports = { sendEmail };
+const verifyConnection = async () => {
+    const transporter = createTransporter();
+    try {
+        await transporter.verify();
+        console.log('SMTP Connection Verified');
+        return { success: true };
+    } catch (error) {
+        console.error('SMTP Connection Failed:', error);
+        return { success: false, error };
+    }
+};
+
+module.exports = { sendEmail, verifyConnection };
