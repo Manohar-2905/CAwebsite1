@@ -32,10 +32,7 @@ const About = () => {
                     "Tuned to Truth, Committed to Excellence"
                  </p>
                  <p className="text-muted" style={{ fontSize: "1.1rem", lineHeight: "1.8" }}>
-                    At <strong>Dasgupta Maiti & Associates</strong>, we believe that a Chartered Accountancy firm is more than a service provider—it is a trusted partner in financial excellence. Since our inception, we have evolved from a traditional audit firm into a holistic professional services group.
-                 </p>
-                 <p className="text-muted" style={{ fontSize: "1.1rem", lineHeight: "1.8" }}>
-                    We operate with integrity, independence, and professionalism, upholding the highest ethical standards of the ICAI.
+                    At <strong>Dasgupta Maiti & Associates</strong>, we believe that a Chartered Accountancy Firm is more than a service provider—it is a trusted partner in financial excellence. Our firm represents a coalition of specialized skills committed to delivering robust financial solutions, compliance support, and strategic advisory services. We operate with integrity, independence, and professionalism, upholding the highest ethical standards of the ICAI. Guided by our motto, 'Tuned to Truth', we continuously strive to enhance the quality, accuracy, and value of our services for every client we serve.
                  </p>
              </Col>
           </Row>
@@ -46,25 +43,26 @@ const About = () => {
       <section className="section-padding bg-light">
         <Container>
            <div className="text-center mb-5">
-              <h3 className="h2 fw-bold" style={{ color: "#002147" }}>Meet Our Partners</h3>
+              <h3 className="h2 fw-bold" style={{ color: "#002147" }}>Our Team</h3>
+              <p className="text-muted">Partners</p>
            </div>
 
-             <Row className="g-4 justify-content-center">
+             <Row className="g-4 justify-content-center mb-5">
                 {[
                    { 
                      name: "CA Sandip Dasgupta", 
                      title: "Partner",
-                     bio: "22+ years experience in Banking, Infrastructure, Real Estate & Audit." 
+                     bio: "Over 25 years of diversified experience in Banking, Infrastructure, Real Estate & Construction, Manufacturing, and Audit & Assurance with extensive audit and advisory exposure." 
                    },
                    { 
                      name: "CA Santanu Chatterjee", 
                      title: "Partner",
-                     bio: "20+ years experience across Banking, Infrastructure, Real Estate sectors." 
+                     bio: "Over 25 years of professional experience in the FMCG sectors." 
                    },
                    { 
                      name: "CA Krishnendu Maiti", 
                      title: "Partner",
-                     bio: "5 years experience in Finance, Taxation, and MCA matters. DISA qualified." 
+                     bio: "5 years of experience in Accounting, Finance, Direct & Indirect Taxation, and MCA matters. Also, a DISA (ICAI) qualified professional." 
                    }
                 ].map((partner, idx) => (
                   <Col md={4} key={idx}>
@@ -79,6 +77,47 @@ const About = () => {
                            <span className="text-uppercase text-muted small fw-bold">{partner.title}</span>
                            <p className="text-muted small mt-3 mb-0">
                              {partner.bio}
+                           </p>
+                        </div>
+                     </div>
+                  </Col>
+                ))}
+             </Row>
+
+             <div className="text-center mb-5">
+                <p className="text-muted h4">Consultants</p>
+             </div>
+
+             <Row className="g-4 justify-content-center">
+                {[
+                   { 
+                     name: "Tapas Chakraborty", 
+                     title: "Certified Financial Planner",
+                     bio: "Certified Financial Planner with decades of experience in investments, financial planning, and capital markets." 
+                   },
+                   { 
+                     name: "Phalguni Chakraborty", 
+                     title: "Company Secretary",
+                     bio: "Company Secretary with over 10 years of experience in corporate law compliance and secretarial practice." 
+                   },
+                   { 
+                     name: "Tridib Lahiri", 
+                     title: "Cost Accountant",
+                     bio: "Cost Accountant with 23 years of experience in Finance, Auditing, MIS, Fund Management, and Statutory Compliance." 
+                   }
+                ].map((consultant, idx) => (
+                  <Col md={4} key={idx}>
+                     <div className="bg-white border rounded shadow-sm h-100 overflow-hidden">
+                        {/* Simple Gray Placeholder */}
+                        <div className="d-flex align-items-center justify-content-center bg-light" style={{ height: "300px" }}>
+                            <i className="fas fa-briefcase text-secondary opacity-25 fa-5x"></i>
+                        </div>
+                        
+                        <div className="p-4 text-center">
+                           <h5 className="fw-bold mb-1" style={{ color: "#002147" }}>{consultant.name}</h5>
+                           <span className="text-uppercase text-muted small fw-bold">{consultant.title}</span>
+                           <p className="text-muted small mt-3 mb-0">
+                             {consultant.bio}
                            </p>
                         </div>
                      </div>
