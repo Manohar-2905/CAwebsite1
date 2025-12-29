@@ -87,7 +87,7 @@ const Services = () => {
 
       {/* Services Hero Banner */}
       <section 
-        className="position-relative py-5 d-flex align-items-center"
+        className="position-relative d-flex align-items-center responsive-hero-section"
         style={{
            // Professional Business Background
            backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')",
@@ -95,7 +95,6 @@ const Services = () => {
            backgroundPosition: "center",
            minHeight: "50vh", // Increased height for better image visibility
            marginTop: "-76px",
-           paddingTop: "120px",
            color: "white"
         }}
       >
@@ -109,13 +108,13 @@ const Services = () => {
          ></div>
 
          <Container className="position-relative" style={{ zIndex: 2 }}>
-             <Row className="align-items-center">
-                 <Col md={8} className="fade-in-up">
+             <Row className="align-items-center justify-content-center">
+                 <Col md={10} className="fade-in-up text-center">
                      {/* Tag Removed */}
                      <h1 className="display-3 fw-bold mb-3 font-heading fade-in-up delay-1" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
                         Our Professional Services
                      </h1>
-                     <p className="lead opacity-100 mb-4 fade-in-up delay-2" style={{ maxWidth: "800px", fontWeight: "400", textShadow: "0 1px 2px rgba(0,0,0,0.8)" }}>
+                     <p className="lead opacity-100 mb-4 fade-in-up delay-2 mx-auto" style={{ maxWidth: "800px", fontWeight: "400", textShadow: "0 1px 2px rgba(0,0,0,0.8)" }}>
                         From statutory audits to complex taxation and regulatory compliance, we provide reliable, ethical, and strategic professional services tailored to client needs.
                      </p>
                  </Col>

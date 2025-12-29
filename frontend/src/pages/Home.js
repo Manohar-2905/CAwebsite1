@@ -146,7 +146,7 @@ const Home = () => {
             isMobile ? "/PhoneView.png" : "/desktopview.png"
           }')`,
           backgroundAttachment: "fixed",
-          backgroundPosition: "center", // Centered for balance
+          backgroundPosition: isMobile ? "center" : "center 76px",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           minHeight: "100vh",
@@ -172,28 +172,29 @@ const Home = () => {
           style={{ zIndex: 2, marginTop: isMobile ? "60px" : "0" }}
         >
           <Row>
-            <Col md={7} lg={6}>
+            <Col md={9} lg={6}>
               {/* Professional White Card for Content */}
               <div
-                className={
-                  isMobile
-                    ? "p-3 bg-white shadow-lg rounded-0"
-                    : "p-5 bg-white shadow-lg rounded-0"
-                }
+                className="hero-card shadow-lg rounded-0 p-4 p-lg-5"
                 style={{
-                  borderLeft: "5px solid #D4AF37", // Gold accent branding
+                  backgroundColor: isMobile
+                    ? "rgba(255, 255, 255, 0.85)"
+                    : "white", // Glassmorphism on mobile
+                  backdropFilter: isMobile ? "blur(10px)" : "none", // Blur effect
+                  borderLeft: "5px solid #D4AF37", // Gold accent
                   opacity: 0.98,
-                  margin: isMobile ? "150px 20px 10px" : "0",
+                  margin: isMobile ? "120px 15px 10px" : "0", // Adjusted margin
+                  maxWidth: isMobile ? "95%" : "100%",
                 }}
               >
                 {/* Tag Removed */}
 
                 <h1
-                  className="fw-bold mb-4 font-heading fade-in-up delay-1"
+                  className="fw-bold mb-4 font-heading fade-in-up delay-1 hero-title"
                   style={{
                     color: "#002147",
                     lineHeight: "1.1",
-                    fontSize: isMobile ? "1.75rem" : "3rem",
+                    fontSize: isMobile ? "1.8rem" : "inherit", // Smaller font on mobile
                   }}
                 >
                   Trusted Partners in <br />
@@ -204,7 +205,7 @@ const Home = () => {
                   className="lead mb-4 fade-in-up delay-2"
                   style={{
                     color: "#444",
-                    fontSize: isMobile ? "0.9rem" : "1.1rem",
+                    fontSize: isMobile ? "0.95rem" : "1.25rem", // Adjust text size
                   }}
                 >
                   Audit, Tax, Compliance & Advisory Services Delivered with
@@ -228,6 +229,7 @@ const Home = () => {
                       fontSize: isMobile ? "0.75rem" : "0.9rem",
                       padding: isMobile ? "10px 20px" : "12px 16px",
                       borderRadius: "25px",
+                      whiteSpace: "nowrap",
                     }}
                   >
                     Contact Us{" "}
@@ -247,6 +249,7 @@ const Home = () => {
                       fontSize: isMobile ? "0.75rem" : "0.9rem",
                       padding: isMobile ? "10px 20px" : "12px 16px",
                       borderRadius: "25px",
+                      whiteSpace: "nowrap",
                     }}
                   >
                     Our Services{" "}
@@ -268,7 +271,7 @@ const Home = () => {
         style={{ backgroundColor: "#F9FAFB" }} // Very light grey for contrast
       >
         <Container>
-          <div className="text-center mb-5 fade-in-up">
+          <div className="text-center mb-3 mb-lg-5 fade-in-up">
             <span className="text-uppercase fw-bold text-muted small letter-spacing-2">
               What We Do
             </span>
@@ -408,7 +411,7 @@ const Home = () => {
                         ))}
                     </Row>
                     {/* Add some padding bottom for indicators */}
-                    <div style={{ height: "40px" }}></div>
+                    <div className="d-none d-lg-block" style={{ height: "40px" }}></div>
                   </Carousel.Item>
                 )
               )}
@@ -510,7 +513,7 @@ const Home = () => {
             </Row>
           )}
 
-          <div className="text-center mt-5">
+          <div className="text-center mt-3 mt-lg-5">
             <Button
               as={Link}
               to="/services"
@@ -534,13 +537,35 @@ const Home = () => {
         </Container>
       </section>
 
+      <style>{`
+        /* Hero Section Responsive Styles */
+        .hero-title { font-size: 3rem; }
+        .hero-card { padding: 3rem; }
+        .hero-desc { font-size: 1.1rem; }
+        
+        @media (max-width: 1200px) {
+            .hero-title { font-size: 2rem; }
+            .hero-card { padding: 1.5rem; }
+        }
+        
+        @media (max-width: 992px) {
+             .hero-title { font-size: 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 1.75rem; }
+            .hero-card { padding: 1rem !important; }
+            .hero-desc { font-size: 0.9rem; }
+        }
+      `}</style>
+
       {/* Publications Preview - Professional Design */}
       <section
         className="section-padding publications-section"
         style={{ backgroundColor: "white" }}
       >
         <Container>
-          <div className="text-center mb-5 fade-in-up">
+          <div className="text-center mb-3 mb-lg-5 fade-in-up">
             <span className="text-uppercase fw-bold text-muted small letter-spacing-2">
               Insights
             </span>
@@ -671,7 +696,7 @@ const Home = () => {
           ) : (
             <div className="text-center text-muted">No publications found.</div>
           )}
-          <div className="text-center mt-4">
+          <div className="text-center mt-3 mt-lg-5">
             <Button
               as={Link}
               to="/publications"

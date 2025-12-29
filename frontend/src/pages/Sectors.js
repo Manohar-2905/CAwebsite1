@@ -49,14 +49,13 @@ const Sectors = () => {
 
       {/* Hero Banner (Keep the Skyline as it matches the corporate theme) */}
       <section
-        className="position-relative py-5 d-flex align-items-center"
+        className="position-relative d-flex align-items-center responsive-hero-section"
         style={{
           backgroundImage: "url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           minHeight: "50vh",
           marginTop: "-76px",
-          paddingTop: "120px",
           color: "white"
         }}
       >
@@ -69,12 +68,12 @@ const Sectors = () => {
         ></div>
 
         <Container className="position-relative" style={{ zIndex: 2 }}>
-          <Row className="align-items-center">
-            <Col md={8}>
+          <Row className="align-items-center justify-content-center">
+            <Col md={10} className="text-center">
               <h1 className="display-3 fw-bold mb-3 font-heading fade-in-up delay-1" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
                 Industries We Serve
               </h1>
-              <p className="lead opacity-100 mb-4 fade-in-up delay-2" style={{ maxWidth: "800px", fontWeight: "400", textShadow: "0 1px 2px rgba(0,0,0,0.8)" }}>
+              <p className="lead opacity-100 mb-4 fade-in-up delay-2 mx-auto" style={{ maxWidth: "800px", fontWeight: "400", textShadow: "0 1px 2px rgba(0,0,0,0.8)" }}>
                 We partner with organizations across multiple industries, offering sector-specific audit, taxation, compliance, and advisory services grounded in regulatory expertise and professional integrity.
               </p>
             </Col>

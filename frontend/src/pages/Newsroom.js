@@ -92,7 +92,7 @@ const Newsroom = () => {
 
       {/* Hero Banner (Matching Services & Publications Style) */}
       <section 
-        className="position-relative py-5 d-flex align-items-center"
+        className="position-relative d-flex align-items-center responsive-hero-section"
         style={{
            // Professional News/Media Background
            backgroundImage: "url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2070&auto=format&fit=crop')",
@@ -100,7 +100,6 @@ const Newsroom = () => {
            backgroundPosition: "center",
            minHeight: "50vh",
            marginTop: "-76px",
-           paddingTop: "120px",
            color: "white"
         }}
       >
@@ -114,12 +113,12 @@ const Newsroom = () => {
          ></div>
 
          <Container className="position-relative" style={{ zIndex: 2 }}>
-             <Row className="align-items-center">
-                 <Col md={8}>
+             <Row className="align-items-center justify-content-center">
+                 <Col md={10} className="fade-in-up text-center">
                       <h1 className="display-3 fw-bold mb-3 font-heading fade-in-up delay-1" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
                         Newsroom
                      </h1>
-                     <p className="lead opacity-100 mb-4 fade-in-up delay-2" style={{ maxWidth: "800px", fontWeight: "400", textShadow: "0 1px 2px rgba(0,0,0,0.8)" }}>
+                     <p className="lead opacity-100 mb-4 fade-in-up delay-2 mx-auto" style={{ maxWidth: "800px", fontWeight: "400", textShadow: "0 1px 2px rgba(0,0,0,0.8)" }}>
                         Stay updated with official announcements, regulatory alerts, and firm communications from Dasgupta Maiti & Associates.
                      </p>
                  </Col>

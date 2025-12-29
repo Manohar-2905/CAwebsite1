@@ -682,3 +682,28 @@ Section Hover Effects */
   font-size: 0.9rem;
   opacity: 0.6;
 }
+
+/* Page Hero Responsive Spacing */
+.responsive-hero-section {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+@media (max-width: 768px) {
+  .responsive-hero-section {
+    padding-top: 140px;
+    /* Increased to account for -76px margin and clear navbar */
+    padding-bottom: 60px;
+  }
+}
+
+@media (max-width: 991px) {
+  .section-padding {
+    padding: 1rem 0;
+  }
+
+  .services-section,
+  .publications-section {
+    padding-bottom: 20px !important;
+  }
+}

@@ -96,13 +96,13 @@ const Navbar = () => {
                 src="/cawebsite_logo.png"
                 alt="DASGUPTA MAITI & ASSOCIATES Logo"
                 height="45"
-                className="me-2 me-md-3"
+                className="me-2 me-md-3 navbar-logo"
               />
 
-              <span style={{ fontSize: "0.9rem", lineHeight: "1.2" }}>
+              <span className="brand-title" style={{ fontSize: "0.9rem", lineHeight: "1.2" }}>
                 DASGUPTA MAITI & ASSOCIATES
                 <br />
-                <small style={{ fontSize: "0.7rem", opacity: 0.9 }}>
+                <small className="brand-subtitle" style={{ fontSize: "0.7rem", opacity: 0.9 }}>
                   CHARTERED ACCOUNTANTS
                 </small>
               </span>
@@ -144,9 +144,10 @@ const Navbar = () => {
                     as={Link}
                     to={link.path}
                     onClick={() => setExpanded(false)}
-                    className={`mx-2 px-3 py-2 navbar-custom-link text-center w-100 w-lg-auto mb-2 mb-lg-0 ${
+                    className={`mx-1 px-2 py-2 navbar-custom-link text-center w-100 w-lg-auto mb-2 mb-lg-0 ${
                       location.pathname === link.path ? "active" : ""
                     } golden-line-hover`}
+                    style={{ fontSize: "0.9rem" }}
                   >
                     {link.label}
                   </Nav.Link>
@@ -255,12 +256,17 @@ const Navbar = () => {
           left: 10%;
         }
         @media (min-width: 992px) {
-          .navbar-custom-margins { margin: 0 3rem; }
+          .navbar-custom-margins { margin: 0 1rem; }
           .border-start-lg { border-left: 1px solid rgba(255,255,255,0.5); }
         }
         @media (max-width: 991.98px) {
           .bg-dark-mobile { background-color: #002147; width: 100%; border-top: 1px solid rgba(255,255,255,0.1); }
           .border-start-lg { border-left: 0 !important; }
+        }
+        @media (max-width: 450px) {
+            .navbar-logo { height: 35px !important; }
+            .brand-title { font-size: 0.7rem !important; }
+            .brand-subtitle { font-size: 0.6rem !important; }
         }
       `}</style>
     </BootstrapNavbar>
