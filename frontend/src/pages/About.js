@@ -8,7 +8,7 @@ const About = () => {
         <title>About Us - Dasgupta Maiti & Associates</title>
         <meta
           name="description"
-          content="Leard about Dasgupta Maiti & Associates, a trusted Chartered Accountancy firm since 1940."
+          content="Leard about Dasgupta Maiti & Associates, a trusted Chartered Accountancy firm."
         />
       </Helmet>
 

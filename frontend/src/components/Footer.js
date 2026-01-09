@@ -11,7 +11,7 @@ const Footer = () => {
               DASGUPTA MAITI & ASSOCIATES
             </h5>
             <p className="opacity-75" style={{ lineHeight: "1.7", fontSize: "0.95rem" }}>
-              Providing world-class audit, tax, and financial consulting with integrity since 1940. Your strategic partner for sustainable growth.
+              Providing world-class audit, tax, and financial consulting with integrity. Your strategic partner for sustainable growth.
             </p>
             <div className="mt-4 d-flex gap-3">
               <a
