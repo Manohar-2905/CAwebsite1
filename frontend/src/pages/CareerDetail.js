@@ -119,7 +119,7 @@ const CareerDetail = () => {
       </Helmet>
 
       {/* Header Area */}
-      <section className="bg-light border-bottom" style={{ paddingTop: "120px", paddingBottom: "40px" }}>
+      <section className="py-4 bg-light border-bottom" style={{ marginTop: "0" }}>
         <Container>
           <Button
             as={Link}
