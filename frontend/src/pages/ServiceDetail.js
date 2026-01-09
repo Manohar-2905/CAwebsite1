@@ -252,7 +252,7 @@ const ServiceDetail = () => {
       {/* --- END PDF TEMPLATE --- */}
 
 
-      <section className="py-4 bg-light shadow-sm" style={{ marginTop: "0", position: "sticky", top: "76px", zIndex: 900 }}>
+      <section className="py-4 bg-light shadow-sm" style={{ marginTop: "0" }}>
         <Container>
           <Row className="justify-content-center">
             <Col md={10}>

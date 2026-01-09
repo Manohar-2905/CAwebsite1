@@ -706,4 +706,83 @@ Section Hover Effects */
   .publications-section {
     padding-bottom: 20px !important;
   }
+
+  .services-section,
+  .publications-section {
+    padding-bottom: 20px !important;
+  }
+}
+
+/* --- Corporate Search Bar Custom Styles --- */
+.corporate-search-input {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 0 !important;
+  transition: all 0.3s ease !important;
+}
+
+.corporate-search-input:focus {
+  border-bottom-color: #D4AF37 !important;
+  /* Gold Underline */
+  box-shadow: none !important;
+}
+
+.corporate-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-style: italic;
+}
+
+.hover-opacity-100:hover {
+  opacity: 1 !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- Services Dropdown Styles --- */
+#services-dropdown {
+  color: white !important;
+  font-weight: 500;
+}
+
+.dropdown-menu {
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  margin-top: 0;
+  animation: fadeIn 0.2s ease-in-out;
+  background-color: #002147 !important;
+  /* Navy Blue Background */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-item {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  color: #ffffff !important;
+  /* White text */
+  border-left: 2px solid transparent;
+  /* Prepare for gold border */
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: rgba(255, 255, 255, 0.05);
+  /* Subtle hover bg */
+  color: #D4AF37 !important;
+  /* Gold Text */
+  border-left: 2px solid #D4AF37;
+  /* Gold accent on left */
+}
+
+/* Divider Styling */
+.dropdown-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
 }

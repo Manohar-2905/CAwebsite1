@@ -15,10 +15,30 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [servicesSummary, setServicesSummary] = useState([]);
+  const [showServicesDropdown, setShowServicesDropdown] = useState(false);
   
   const navigate = useNavigate();
   const location = useLocation();
   const searchInputRef = useRef(null);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+        try {
+            const { data } = await api.get('/services');
+            // Sort by createdAt: 1 (Ascending - Oldest First) is already done in backend? 
+            // The user wants "added service will show at last".
+            // So if we just take slice(0,3), we get the FIRST 3 added (Oldest 3).
+            // Usually dropdowns show either "Top" or "Latest". 
+            // If the user said "added service will show at last", it means they want sequential order.
+            // So first 3 services added will be shown.
+            setServicesSummary(data.slice(0, 3)); 
+        } catch (error) {
+            console.error("Failed to fetch services for dropdown", error);
+        }
+    };
+    fetchServices();
+  }, []);
 
 
   // --- Bootstrap CSS Injection (Optional) ---
@@ -129,18 +149,32 @@ const Navbar = () => {
           >
             <div className="d-flex flex-column flex-lg-row align-items-center w-100 justify-content-end bg-dark-mobile p-3 p-lg-0 rounded">
               {/* --- Mobile Search (Top) --- */}
-              <div className="d-lg-none w-100 mb-3">
-                <Form className="d-flex" onSubmit={handleSearch}>
+              <div className="d-lg-none w-100 mb-3 px-2">
+                <Form className="d-flex align-items-center" onSubmit={handleSearch}>
                   <Form.Control
                     type="search"
-                    placeholder="Search..."
-                    className="me-2"
+                    placeholder="Search services, publications, etc..."
+                    className="corporate-search-input me-2 bg-transparent text-white shadow-none"
                     aria-label="Search"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)' }}
+                    style={{ 
+                        border: 'none', 
+                        borderBottom: '1px solid rgba(255,255,255,0.3)',
+                        borderRadius: 0,
+                        color: 'white'
+                    }}
                   />
-                  <Button variant="outline-light" type="submit">Search</Button>
+                  <Button variant="link" type="submit" className="p-0 text-white opacity-75">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                       <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14A4.5 4.5 0 119.5 5a4.5 4.5 0 010 9z" />
+                    </svg>
+                  </Button>
                 </Form>
               </div>
 
@@ -149,12 +183,56 @@ const Navbar = () => {
                 {[
                   { path: "/", label: "Home" },
                   { path: "/about", label: "About" },
-                  { path: "/services", label: "Services" },
+                  { path: "/services", label: "Services", isDropdown: true },
                   { path: "/sectors", label: "Sectors" },
                   { path: "/publications", label: "Publications" },
                   { path: "/newsroom", label: "Newsroom" },
                   { path: "/careers", label: "Career" },
-                ].map((link) => (
+                ].map((link) => {
+                   if (link.isDropdown && link.label === "Services") {
+                     return (
+                        <NavDropdown
+                          key={link.label}
+                          title={link.label}
+                          id="services-dropdown"
+                          show={showServicesDropdown}
+                          onMouseEnter={() => setShowServicesDropdown(true)}
+                          onMouseLeave={() => setShowServicesDropdown(false)}
+                          onClick={() => {
+                            setExpanded(false);
+                            navigate(link.path);
+                          }}
+                          className={`mx-1 px-2 py-2 navbar-custom-link text-center w-100 w-lg-auto mb-2 mb-lg-0 golden-line-hover`}
+                          style={{ fontSize: "0.9rem" }}
+                          renderMenuOnMount={true}
+                        >
+                            {servicesSummary.length > 0 ? (
+                                servicesSummary.map(service => (
+                                    <NavDropdown.Item 
+                                        as={Link} 
+                                        to={`/services/${service.slug}`} 
+                                        key={service._id}
+                                        onClick={() => setExpanded(false)}
+                                    >
+                                        {service.title}
+                                    </NavDropdown.Item>
+                                ))
+                            ) : (
+                                <NavDropdown.Item disabled>Loading...</NavDropdown.Item>
+                            )}
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item 
+                                as={Link} 
+                                to="/services" 
+                                onClick={() => setExpanded(false)}
+                                className="fw-bold text-primary"
+                            >
+                                View All Services
+                            </NavDropdown.Item>
+                        </NavDropdown>
+                     );
+                   }
+                   return (
                   <Nav.Link
                     key={link.path}
                     as={Link}
@@ -167,7 +245,7 @@ const Navbar = () => {
                   >
                     {link.label}
                   </Nav.Link>
-                ))}
+                )})}
               </Nav>
 
               {/* Icons (UNCHANGED SVGs) */}
@@ -219,40 +297,73 @@ const Navbar = () => {
           </BootstrapNavbar.Collapse>
         </div>
 
-        {/* --- Search Overlay --- */}
+        {/* --- Corporate Full-Width Search Bar --- */}
         {isSearchExpanded && (
           <div
-            className="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center w-100"
-            style={{ zIndex: 1050 }}
+            className="corporate-search-bar position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+            style={{ 
+              backgroundColor: "#002147", 
+              zIndex: 1050,
+              animation: "fadeIn 0.3s ease-in-out"
+            }}
           >
-            <Form
-              className="d-flex align-items-center bg-white rounded-pill px-3 py-2 shadow-lg"
-              onSubmit={handleSearch}
-              style={{ width: "90%", maxWidth: "600px" }}
-            >
-              <Button
-                type="submit"
-                variant="link"
-                className="p-0 border-0 text-primary me-2"
+            <Container fluid>
+              <Form
+                className="d-flex align-items-center justify-content-center w-100 px-3"
+                onSubmit={handleSearch}
               >
-                🔍
-              </Button>
-              <Form.Control
-                ref={searchInputRef}
-                type="search"
-                placeholder="Search services, publications..."
-                className="border-0 shadow-none bg-transparent"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <Button
-                variant="link"
-                onClick={closeSearch}
-                className="p-0 ms-2 text-secondary border-0"
-              >
-                ✖
-              </Button>
-            </Form>
+                <div className="d-flex align-items-center w-100" style={{ maxWidth: "800px" }}>
+                  <Button
+                    type="submit"
+                    variant="link"
+                    className="p-0 border-0 text-white me-3 opacity-75 hover-opacity-100"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                       <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14A4.5 4.5 0 119.5 5a4.5 4.5 0 010 9z" />
+                    </svg>
+                  </Button>
+                  
+                  <Form.Control
+                    ref={searchInputRef}
+                    type="search"
+                    placeholder="Search services, publications, etc..."
+                    className="corporate-search-input border-0 bg-transparent text-white p-0 shadow-none"
+                    style={{ 
+                       fontSize: "1.1rem", 
+                       fontWeight: "300",
+                       borderBottom: "1px solid rgba(255,255,255,0.3)" 
+                    }}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+
+                  <Button
+                    variant="link"
+                    onClick={closeSearch}
+                    className="p-0 ms-3 text-white border-0 opacity-75 hover-opacity-100"
+                  >
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </Button>
+                </div>
+              </Form>
+            </Container>
           </div>
         )}
       </Container>
