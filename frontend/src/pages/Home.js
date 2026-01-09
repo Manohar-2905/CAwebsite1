@@ -720,413 +720,50 @@ const Home = () => {
         </Container>
       </section>
 
-      {/* Why Choose Us - Professional Icon Grid */}
-      <section
-        className="section-padding why-choose-us-section"
-        style={{ backgroundColor: "#F9FAFB" }}
-      >
+      {/* Our Team Section - Replaced About Us */}
+      <section className="section-padding team-section" style={{ backgroundColor: "#F9FAFB" }}>
         <Container>
-          <div className="text-center mb-5 fade-in-up">
-            <span className="text-uppercase fw-bold text-muted small letter-spacing-2">
-              Why Choose Us
-            </span>
-            <h2
-              className="fw-bold mt-2"
-              style={{
-                color: "#002147",
-                fontFamily: "var(--font-heading)",
-                fontSize: isMobile ? "1.75rem" : "2.5rem",
-              }}
-            >
-              Excellence in Every Detail
-            </h2>
-            <div
-              className="mx-auto mt-3"
-              style={{
-                height: "3px",
-                width: "60px",
-                backgroundColor: "#D4AF37",
-              }}
-            ></div>
-          </div>
-
-          <Row className="g-4 justify-content-center">
-            {/* Feature 1 - Expertise */}
-            <Col
-              md={4}
-              className="fade-in-up"
-              style={{ animationDelay: "0.1s" }}
-            >
-              <div
-                className="h-100 p-5 bg-white text-center rounded-0 position-relative hover-lift"
-                style={{
-                  borderTop: "4px solid #D4AF37",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-10px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 20px 40px rgba(0,0,0,0.1)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow =
-                    "0 10px 30px rgba(0,0,0,0.05)";
-                }}
-              >
-                <div
-                  className="mb-4 mx-auto d-flex align-items-center justify-content-center rounded-circle"
-                  style={{
-                    width: "80px",
-                    height: "80px",
-                    backgroundColor: "#FDF8E4",
-                    color: "#D4AF37",
-                  }}
-                >
-                  <i className="fas fa-users-cog fa-2x"></i>
-                </div>
-                <h3 className="h4 fw-bold mb-3" style={{ color: "#002147" }}>
-                  Unmatched Expertise
-                </h3>
-                <p className="text-muted mb-0" style={{ lineHeight: "1.7" }}>
-                  Our team of 750+ professionals combines decades of deep
-                  regulatory knowledge with modern strategic insight.
-                </p>
-              </div>
-            </Col>
-
-            {/* Feature 2 - Integrity */}
-            <Col
-              md={4}
-              className="fade-in-up"
-              style={{ animationDelay: "0.2s" }}
-            >
-              <div
-                className="h-100 p-5 bg-white text-center rounded-0 position-relative hover-lift"
-                style={{
-                  borderTop: "4px solid #002147",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-10px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 20px 40px rgba(0,0,0,0.1)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow =
-                    "0 10px 30px rgba(0,0,0,0.05)";
-                }}
-              >
-                <div
-                  className="mb-4 mx-auto d-flex align-items-center justify-content-center rounded-circle"
-                  style={{
-                    width: "80px",
-                    height: "80px",
-                    backgroundColor: "#E6EAED",
-                    color: "#002147",
-                  }}
-                >
-                  <i className="fas fa-balance-scale fa-2x"></i>
-                </div>
-                <h3 className="h4 fw-bold mb-3" style={{ color: "#002147" }}>
-                  Unwavering Integrity
-                </h3>
-                <p className="text-muted mb-0" style={{ lineHeight: "1.7" }}>
-                  Serving with transparency since 1940. We build relationships
-                  on trust, ensuring your compliance is never compromised.
-                </p>
-              </div>
-            </Col>
-
-            {/* Feature 3 - Technology */}
-            <Col
-              md={4}
-              className="fade-in-up"
-              style={{ animationDelay: "0.3s" }}
-            >
-              <div
-                className="h-100 p-5 bg-white text-center rounded-0 position-relative hover-lift"
-                style={{
-                  borderTop: "4px solid #D4AF37",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-10px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 20px 40px rgba(0,0,0,0.1)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow =
-                    "0 10px 30px rgba(0,0,0,0.05)";
-                }}
-              >
-                <div
-                  className="mb-4 mx-auto d-flex align-items-center justify-content-center rounded-circle"
-                  style={{
-                    width: "80px",
-                    height: "80px",
-                    backgroundColor: "#FDF8E4",
-                    color: "#D4AF37",
-                  }}
-                >
-                  <i className="fas fa-chart-line fa-2x"></i>
-                </div>
-                <h3 className="h4 fw-bold mb-3" style={{ color: "#002147" }}>
-                  Results Driven
-                </h3>
-                <p className="text-muted mb-0" style={{ lineHeight: "1.7" }}>
-                  We don't just manage books; we engineer growth. Our strategies
-                  are designed to optimize your financial performance.
-                </p>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-
-      {/* Testimonials Section */}
-      {/* Testimonials Section - Light Professional */}
-      <section
-        className="py-5 testimonials-section"
-        style={{ backgroundColor: "#FFFFFF" }}
-      >
-        <Container>
-          <div className="text-center mb-5 fade-in-up">
-            <span className="text-uppercase fw-bold text-muted small letter-spacing-2">
-              Client Endorsements
-            </span>
-            <h2
-              className="fw-bold mt-2 font-heading"
-              style={{
-                color: "#002147",
-                fontSize: isMobile ? "1.75rem" : "2.5rem",
-              }}
-            >
-              Trusted by Leaders
-            </h2>
-            <div
-              className="mx-auto mt-3"
-              style={{
-                height: "3px",
-                width: "60px",
-                backgroundColor: "#D4AF37",
-              }}
-            ></div>
-          </div>
-
-          <Row className="g-4">
-            {/* Client 1 */}
-            <Col
-              md={4}
-              className="fade-in-up"
-              style={{ animationDelay: "0.1s" }}
-            >
-              <div
-                className="h-100 p-4 rounded-3 position-relative"
-                style={{
-                  backgroundColor: "#fff",
-                  border: "1px solid #eef0f2",
-                  boxShadow: "0 5px 20px rgba(0,0,0,0.03)",
-                }}
-              >
-                <div
-                  className="position-absolute"
-                  style={{
-                    top: "-15px",
-                    left: "30px",
-                    background: "#fff",
-                    padding: "0 10px",
-                  }}
-                >
-                  <i
-                    className="fas fa-quote-left fa-2x"
-                    style={{ color: "#D4AF37" }}
-                  ></i>
-                </div>
-                <div className="pt-4">
-                  <p
-                    className="mb-4 text-secondary"
-                    style={{
-                      fontSize: "1.05rem",
-                      lineHeight: "1.8",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    "CA Consultancy has been our strategic anchor for over a
-                    decade. Their proactive tax planning and regulatory guidance
-                    have been instrumental in our expansion."
-                  </p>
-                  <div className="d-flex align-items-center mt-3 pt-3 border-top border-light">
-                    <div
-                      className="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        color: "#002147",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      RK
-                    </div>
-                    <div className="ms-3">
-                      <div
-                        className="fw-bold"
-                        style={{ color: "#002147", fontSize: "0.95rem" }}
-                      >
-                        Rajesh Kumar
+           <div className="text-center mb-5">
+              <h3 className="h2 fw-bold" style={{ color: "#002147" }}>Our Team</h3>
+              <p className="text-muted">Partners</p>
+           </div>
+           
+           <Row className="g-4 justify-content-center">
+              {[
+                 { 
+                   name: "CA Sandip Dasgupta", 
+                   title: "Partner",
+                   bio: "Over 25 years of diversified experience in Banking, Infrastructure, Real Estate & Construction, Manufacturing, and Audit & Assurance with extensive audit and advisory exposure." 
+                 },
+                 { 
+                   name: "CA Santanu Chatterjee", 
+                   title: "Partner",
+                   bio: "Over 25 years of professional experience in the FMCG sectors." 
+                 },
+                 { 
+                   name: "CA Krishnendu Maiti", 
+                   title: "Partner",
+                   bio: "5 years of experience in Accounting, Finance, Direct & Indirect Taxation, and MCA matters. Also, a DISA (ICAI) qualified professional." 
+                 }
+              ].map((partner, idx) => (
+                <Col md={4} key={idx} className="fade-in-up" style={{ animationDelay: `${0.1 * idx}s` }}>
+                   <div className="bg-white border rounded shadow-sm h-100 overflow-hidden">
+                      {/* Simple Gray Placeholder */}
+                      <div className="d-flex align-items-center justify-content-center bg-light" style={{ height: "300px" }}>
+                          <i className="fas fa-user text-secondary opacity-25 fa-5x"></i>
                       </div>
-                      <div className="small text-muted">
-                        CEO, Tech Solutions Pvt Ltd
+                      
+                      <div className="p-4 text-center">
+                         <h5 className="fw-bold mb-1" style={{ color: "#002147" }}>{partner.name}</h5>
+                         <span className="text-uppercase text-muted small fw-bold">{partner.title}</span>
+                         <p className="text-muted small mt-3 mb-0">
+                           {partner.bio}
+                         </p>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Col>
-
-            {/* Client 2 */}
-            <Col
-              md={4}
-              className="fade-in-up"
-              style={{ animationDelay: "0.2s" }}
-            >
-              <div
-                className="h-100 p-4 rounded-3 position-relative"
-                style={{
-                  backgroundColor: "#fff",
-                  border: "1px solid #eef0f2",
-                  boxShadow: "0 5px 20px rgba(0,0,0,0.03)",
-                }}
-              >
-                <div
-                  className="position-absolute"
-                  style={{
-                    top: "-15px",
-                    left: "30px",
-                    background: "#fff",
-                    padding: "0 10px",
-                  }}
-                >
-                  <i
-                    className="fas fa-quote-left fa-2x"
-                    style={{ color: "#D4AF37" }}
-                  ></i>
-                </div>
-                <div className="pt-4">
-                  <p
-                    className="mb-4 text-secondary"
-                    style={{
-                      fontSize: "1.05rem",
-                      lineHeight: "1.8",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    "Availability and accuracy are what define their team.
-                    Whether it's a routine audit or a complex merger, their
-                    precision ensures we are always compliant."
-                  </p>
-                  <div className="d-flex align-items-center mt-3 pt-3 border-top border-light">
-                    <div
-                      className="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        color: "#002147",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      PS
-                    </div>
-                    <div className="ms-3">
-                      <div
-                        className="fw-bold"
-                        style={{ color: "#002147", fontSize: "0.95rem" }}
-                      >
-                        Priya Sharma
-                      </div>
-                      <div className="small text-muted">
-                        CFO, Manufacturing Corp
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Col>
-
-            {/* Client 3 */}
-            <Col
-              md={4}
-              className="fade-in-up"
-              style={{ animationDelay: "0.3s" }}
-            >
-              <div
-                className="h-100 p-4 rounded-3 position-relative"
-                style={{
-                  backgroundColor: "#fff",
-                  border: "1px solid #eef0f2",
-                  boxShadow: "0 5px 20px rgba(0,0,0,0.03)",
-                }}
-              >
-                <div
-                  className="position-absolute"
-                  style={{
-                    top: "-15px",
-                    left: "30px",
-                    background: "#fff",
-                    padding: "0 10px",
-                  }}
-                >
-                  <i
-                    className="fas fa-quote-left fa-2x"
-                    style={{ color: "#D4AF37" }}
-                  ></i>
-                </div>
-                <div className="pt-4">
-                  <p
-                    className="mb-4 text-secondary"
-                    style={{
-                      fontSize: "1.05rem",
-                      lineHeight: "1.8",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    "Outstanding service! Their GST filing and compliance
-                    support has made our operations so much smoother. Highly
-                    recommended for any business."
-                  </p>
-                  <div className="d-flex align-items-center mt-3 pt-3 border-top border-light">
-                    <div
-                      className="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        color: "#002147",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      AP
-                    </div>
-                    <div className="ms-3">
-                      <div
-                        className="fw-bold"
-                        style={{ color: "#002147", fontSize: "0.95rem" }}
-                      >
-                        Amit Patel
-                      </div>
-                      <div className="small text-muted">
-                        Director, Retail Chain
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Col>
-          </Row>
+                   </div>
+                </Col>
+              ))}
+           </Row>
         </Container>
       </section>
 
