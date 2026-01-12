@@ -21,6 +21,13 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // VALIDATION: Ensure at least one contact method is provided
+        if (!formData.email && !formData.phone) {
+            toast.error('Please provide either an Email OR a Phone Number so we can contact you.');
+            return;
+        }
+
         setLoading(true);
 
         let sentSuccessfully = false;
@@ -158,13 +165,12 @@ const Contact = () => {
                                                 </Col>
                                                 <Col md={6}>
                                                     <Form.Group className="mb-4">
-                                                        <Form.Label className="small text-uppercase fw-bold text-muted">Email <span className="text-danger">*</span></Form.Label>
+                                                        <Form.Label className="small text-uppercase fw-bold text-muted">Email</Form.Label>
                                                         <Form.Control
                                                             type="email"
                                                             name="email"
                                                             value={formData.email}
                                                             onChange={handleChange}
-                                                            required
                                                             className="rounded-0 border-top-0 border-start-0 border-end-0 bg-transparent px-0"
                                                             style={{ borderBottom: '1px solid #ddd' }}
                                                             placeholder="name@example.com"
@@ -208,14 +214,13 @@ const Contact = () => {
                                             </Row>
 
                                             <Form.Group className="mb-5">
-                                                <Form.Label className="small text-uppercase fw-bold text-muted">Message <span className="text-danger">*</span></Form.Label>
+                                                <Form.Label className="small text-uppercase fw-bold text-muted">Message</Form.Label>
                                                 <Form.Control
                                                     as="textarea"
                                                     rows={3}
                                                     name="message"
                                                     value={formData.message}
                                                     onChange={handleChange}
-                                                    required
                                                     className="rounded-0 border-top-0 border-start-0 border-end-0 bg-transparent px-0"
                                                     style={{ borderBottom: '1px solid #ddd' }}
                                                     placeholder="How can we help?"

@@ -8,7 +8,7 @@ router.post('/send-email', async (req, res) => {
     const { name, email, phone, service, message } = req.body;
 
     await sendEmail({
-      replyTo: email,
+      replyTo: email || undefined,
       subject: `New contact form submission from ${name || 'Visitor'}`,
       text: `Name: ${name}
 Email: ${email}
