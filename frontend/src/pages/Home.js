@@ -46,70 +46,16 @@ const Home = () => {
     window.open(fileURL, "_blank");
   };
 
-  const renderFormattedDescription = (text, limit) => {
+  const renderFormattedDescription = (text) => {
     if (!text) return "";
-    let processed = text;
-    if (limit && text.length > limit) {
-      processed = text.substring(0, limit).trim() + "...";
-    }
-
-    // Temporarily shield bold tags to avoid splitting them
-    const boldContents = [];
-    const BOLD_PH = "___BOLD_PH___";
-    const shieldedText = processed.replace(/\*\*.*?\*\*/g, (match) => {
-      boldContents.push(match);
-      return `${BOLD_PH}${boldContents.length - 1}${BOLD_PH}`;
-    });
-
-    // Split by * or - markers
-    const segments = shieldedText.split(/\*|-/);
-
-    return segments.map((seg, idx) => {
-      let content = seg.trim();
-      if (!content && idx === 0) return null;
-
-      // Restore bold in this segment
-      const restored = content
-        .split(new RegExp(`(${BOLD_PH}\\d+${BOLD_PH})`, "g"))
-        .map((part, pIdx) => {
-          if (part.startsWith(BOLD_PH)) {
-            const index = parseInt(part.replace(new RegExp(BOLD_PH, "g"), ""));
-            const rawBold = boldContents[index];
-            return (
-              <strong key={pIdx} className="fw-bold">
-                {rawBold.slice(2, -2)}
-              </strong>
-            );
-          }
-          return part;
-        });
-
-      // If it's the first segment and the original text didn't start with a marker, treat as paragraph
-      if (
-        idx === 0 &&
-        !processed.startsWith("*") &&
-        !processed.startsWith("-")
-      ) {
-        return (
-          <div key={idx} className="mb-2">
-            {restored}
-          </div>
-        );
-      }
-
-      // Treat as bullet item
-      return (
-        <div key={idx} className="d-flex mb-1 align-items-start">
-          <span
-            className="me-2 text-dark"
-            style={{ fontSize: "1.4rem", lineHeight: "1" }}
-          >
-            •
-          </span>
-          <span>{restored}</span>
-        </div>
-      );
-    });
+    
+    // Simple plain text conversion for card previews
+    // Remove markdown bold/italic (** or __), bullets (*, -, •), and extra whitespace
+    return text
+      .replace(/(\*\*|__)/g, "")
+      .replace(/[*•\-]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
   };
 
   return (
