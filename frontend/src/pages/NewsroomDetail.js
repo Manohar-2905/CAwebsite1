@@ -58,7 +58,7 @@ const NewsroomDetail = () => {
       if (isListItem) {
         return (
           <div key={idx} className="d-flex mb-2 align-items-start" style={{ paddingLeft: "1rem" }}>
-            <span className="me-2 text-dark" style={{ fontSize: "1.2rem", lineHeight: "1.5" }}>•</span>
+            <span className="me-2 text-warning" style={{ fontSize: "1.2rem", lineHeight: "1.5" }}>•</span>
             <span>{renderedParts}</span>
           </div>
         );

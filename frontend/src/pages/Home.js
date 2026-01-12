@@ -48,14 +48,27 @@ const Home = () => {
 
   const renderFormattedDescription = (text) => {
     if (!text) return "";
-    
-    // Simple plain text conversion for card previews
-    // Remove markdown bold/italic (** or __), bullets (*, -, •), and extra whitespace
-    return text
-      .replace(/(\*\*|__)/g, "")
-      .replace(/[*•\-]/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
+
+    // 1. Remove HTML tags
+    let cleanText = text.replace(/<[^>]*>/g, "");
+
+    // 2. Split by bullet points (*, -, •) or newlines
+    // This allows us to reconstruct the list items
+    const items = cleanText.split(/[*•\-\n]/).map(item => item.trim()).filter(item => item.length > 0);
+
+    // 3. Take the first 3 items to keep card height consistent
+    const displayItems = items.slice(0, 3);
+
+    return (
+      <div className="d-flex flex-column gap-1">
+        {displayItems.map((item, idx) => (
+          <div key={idx} className="d-flex align-items-start">
+            <span className="me-2 text-warning" style={{ lineHeight: "1.4" }}>•</span>
+            <span style={{ fontSize: "0.85rem", lineHeight: "1.4" }}>{item}</span>
+          </div>
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -323,15 +336,12 @@ const Home = () => {
                                   style={{
                                     fontSize: "0.85rem",
                                     lineHeight: "1.5",
-                                    display: "-webkit-box",
-                                    WebkitLineClamp: "1",
-                                    WebkitBoxOrient: "vertical",
+                                    display: "block",
                                     overflow: "hidden",
                                   }}
                                 >
                                   {renderFormattedDescription(
-                                    service.description,
-                                    40
+                                    service.description
                                   )}
                                 </div>
 
@@ -427,13 +437,11 @@ const Home = () => {
                         style={{
                           fontSize: "0.85rem",
                           lineHeight: "1.5",
-                          display: "-webkit-box",
-                          WebkitLineClamp: "1",
-                          WebkitBoxOrient: "vertical",
+                          display: "block",
                           overflow: "hidden",
                         }}
                       >
-                        {renderFormattedDescription(service.description, 40)}
+                        {renderFormattedDescription(service.description)}
                       </div>
 
                       <div className="mt-auto pt-2 border-top border-light">

@@ -15,6 +15,14 @@ body {
   height: 100%;
 }
 
+/* Universal Gold Bullets for Content Areas */
+.career-content ul li::marker,
+.news-description ul li::marker,
+.publication-description ul li::marker,
+.gold-bullets li::marker {
+  color: #D4AF37 !important;
+}
+
 .App {
   display: flex;
   flex-direction: column;

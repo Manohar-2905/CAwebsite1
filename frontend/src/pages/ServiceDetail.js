@@ -133,7 +133,7 @@ const ServiceDetail = () => {
                 : { paddingLeft: "1rem" }
             }
           >
-            <span className="me-2 text-dark" style={{ fontSize: "1.4rem", lineHeight: "1" }}>
+            <span className="me-2 text-warning" style={{ fontSize: "1.4rem", lineHeight: "1" }}>
               •
             </span>
             <span>{restored}</span>

@@ -24,58 +24,29 @@ const Services = () => {
     }
   };
 
-  const renderFormattedDescription = (text, limit) => {
+  const renderFormattedDescription = (text) => {
     if (!text) return "";
-    let processed = text;
-    if (limit && text.length > limit) {
-      processed = text.substring(0, limit).trim() + "...";
-    }
 
-    const boldContents = [];
-    const BOLD_PH = "___BOLD_PH___";
-    const shieldedText = processed.replace(/\*\*.*?\*\*/g, (match) => {
-      boldContents.push(match);
-      return `${BOLD_PH}${boldContents.length - 1}${BOLD_PH}`;
-    });
+    // 1. Remove HTML tags
+    let cleanText = text.replace(/<[^>]*>/g, "");
 
-    const segments = shieldedText.split(/\*|-/);
+    // 2. Split by bullet points (*, -, •) or newlines
+    // This allows us to reconstruct the list items
+    const items = cleanText.split(/[*•\-\n]/).map(item => item.trim()).filter(item => item.length > 0);
 
-    return segments.map((seg, idx) => {
-      let content = seg.trim();
-      if (!content && idx === 0) return null;
+    // 3. Take the first 3 items to keep card height consistent
+    const displayItems = items.slice(0, 3);
 
-      const restored = content
-        .split(new RegExp(`(${BOLD_PH}\\d+${BOLD_PH})`, "g"))
-        .map((part, pIdx) => {
-          if (part.startsWith(BOLD_PH)) {
-            const index = parseInt(part.replace(new RegExp(BOLD_PH, "g"), ""));
-            const rawBold = boldContents[index];
-            return (
-              <strong key={pIdx} className="fw-bold">
-                {rawBold.slice(2, -2)}
-              </strong>
-            );
-          }
-          return part;
-        });
-
-      if (idx === 0 && !processed.startsWith("*") && !processed.startsWith("-")) {
-        return (
-          <div key={idx} className="mb-2">
-            {restored}
+    return (
+      <div className="d-flex flex-column gap-1">
+        {displayItems.map((item, idx) => (
+          <div key={idx} className="d-flex align-items-start">
+            <span className="me-2 text-warning" style={{ lineHeight: "1.4" }}>•</span>
+            <span style={{ fontSize: "0.85rem", lineHeight: "1.4" }}>{item}</span>
           </div>
-        );
-      }
-
-      return (
-        <div key={idx} className="d-flex mb-1 align-items-start">
-          <span className="me-2 text-dark" style={{ fontSize: "1.4rem", lineHeight: "1" }}>
-            •
-          </span>
-          <span>{restored}</span>
-        </div>
-      );
-    });
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -175,14 +146,10 @@ const Services = () => {
                         {service.title}
                       </h3>
                       <div className="text-secondary mb-3 flex-grow-1" style={{ 
-                        fontSize: "0.85rem", 
-                        lineHeight: "1.5",
-                        display: "-webkit-box",
-                        WebkitLineClamp: "1",
-                        WebkitBoxOrient: "vertical",
+                        display: "block",
                         overflow: "hidden"
                       }}>
-                        {renderFormattedDescription(service.description, 40)}
+                        {renderFormattedDescription(service.description)}
                       </div>
                       <div className="mt-auto pt-2 border-top border-light">
                         <span className="fw-bold text-uppercase" style={{ fontSize: "0.8rem", color: "#D4AF37", letterSpacing: "1px" }}>

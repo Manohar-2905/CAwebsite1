@@ -174,7 +174,7 @@ const CareerDetail = () => {
                 {!career.content && (
                   <div className="mt-5">
                     <h4 className="fw-bold" style={{ color: "#002147" }}>Requirements</h4>
-                    <ul className="text-secondary mt-3 ps-3" style={{ fontSize: "1rem", lineHeight: "1.7" }}>
+                    <ul className="text-secondary mt-3 ps-3 gold-bullets" style={{ fontSize: "1rem", lineHeight: "1.7" }}>
                       <li className="mb-2">Demonstrate deep knowledge of regulatory standards and compliance.</li>
                       <li className="mb-2">Work collaboratively with cross-functional teams to deliver client success.</li>
                       <li className="mb-2">Excellent analytical, verbal, and written communication skills.</li>
