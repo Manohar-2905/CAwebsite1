@@ -89,13 +89,13 @@ const Home = () => {
         className="hero-section position-relative d-flex align-items-center"
         style={{
           backgroundImage: `url('${
-            isMobile ? "/mobile-bg-final.png?v=5" : "/desktop-bg-final-v2.png?v=5"
+            isMobile ? "/mobile-bg-final.png?v=6" : "/desktop-bg-final-v2.png?v=6"
           }')`,
           backgroundAttachment: "fixed",
           backgroundPosition: isMobile ? "center" : "center 76px",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          minHeight: "100vh",
+          minHeight: isMobile ? "50vh" : "100vh",
           marginTop: "-76px",
           paddingTop: "76px",
           overflow: "hidden",
