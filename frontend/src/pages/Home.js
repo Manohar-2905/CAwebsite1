@@ -89,13 +89,13 @@ const Home = () => {
         className="hero-section position-relative d-flex align-items-center"
         style={{
           backgroundImage: `url('${
-            isMobile ? "/mobile-bg-final.png?v=6" : "/desktop-bg-final-v2.png?v=6"
+            isMobile ? "/mobile-bg-final-v4.jpg?v=15" : "/desktop-bg-final-v2.png?v=15"
           }')`,
-          backgroundAttachment: "fixed",
-          backgroundPosition: isMobile ? "center" : "center 76px",
-          backgroundSize: "cover",
+          backgroundAttachment: isMobile ? "scroll" : "fixed",
+          backgroundPosition: "center 76px",
+          backgroundSize: isMobile ? "100% 100%" : "cover",
           backgroundRepeat: "no-repeat",
-          minHeight: isMobile ? "50vh" : "100vh",
+          minHeight: isMobile ? "120vw" : "100vh",
           marginTop: "-76px",
           paddingTop: "76px",
           overflow: "hidden",
