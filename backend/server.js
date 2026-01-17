@@ -1,4 +1,4 @@
-require("dotenv").config(); // MUST BE TOP
+require("dotenv").config({ path: require('path').resolve(__dirname, '../.env') }); // MUST BE TOP
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
