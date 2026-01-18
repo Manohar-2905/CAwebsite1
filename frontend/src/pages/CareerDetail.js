@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Container, Row, Col, Spinner, Button, Form, Modal, Alert, Card } from 'react-bootstrap';
+import { Container, Row, Col, Spinner, Button, Form, Modal, Alert } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import api from '../utils/api';
 
@@ -21,12 +21,7 @@ const CareerDetail = () => {
     resume: null
   });
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchCareer();
-  }, [slug]);
-
-  const fetchCareer = async () => {
+  const fetchCareer = useCallback(async () => {
     try {
       const response = await api.get(`/careers/${slug}`);
       setCareer(response.data);
@@ -36,7 +31,12 @@ const CareerDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [slug, navigate]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    fetchCareer();
+  }, [fetchCareer]);
 
   const handleApplicationSubmit = async (e) => {
     e.preventDefault();
@@ -167,7 +167,7 @@ const CareerDetail = () => {
                 </h3>
                 <div
                   className="career-content"
-                  style={{ fontSize: "1.05rem", lineHeight: "1.8", color: "#444" }}
+                  style={{ fontSize: "1.05rem", lineHeight: "1.8", color: "#444", overflowWrap: "break-word", wordBreak: "break-word" }}
                   dangerouslySetInnerHTML={{ __html: (career.content || career.description).replace(/\n/g, '<br />') }}
                 />
 

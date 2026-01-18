@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { toast } from 'react-toastify';
@@ -14,6 +14,22 @@ const Contact = () => {
         message: ''
     });
     const [loading, setLoading] = useState(false);
+    const [services, setServices] = useState([]);
+
+    useEffect(() => {
+        const fetchServices = async () => {
+             try {
+                 const res = await api.get('/services');
+                 setServices(res.data);
+             } catch (err) {
+                 console.error('Failed to fetch services', err);
+             }
+        };
+        fetchServices();
+    }, []);
+
+    // Debugging: Verify version in console
+    console.log('Contact Page Component Loaded - Version: FINAL OFFICE UPDATE');
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -112,27 +128,31 @@ const Contact = () => {
                                         </div>
 
                                         <div className="mb-4">
-                                            <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Headquarters</h6>
-                                            <p className="text-muted mb-0">
-                                                123 Business Avenue, Suite 400<br />
-                                                Kolkata, West Bengal 700001
-                                            </p>
+                                            <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Office</h6>
+                                            <div className="text-muted mb-0">
+                                                Flat B1, AC 229, Street 39, Classic Apartments<br />
+                                                Action Area 1, New Town, Kolkata – 700156
+                                            </div>
                                         </div>
 
-                                        <div className="mb-4">
-                                            <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Branch Offices</h6>
-                                            <p className="text-muted mb-0">
-                                                New Delhi • Mumbai • Bangalore
-                                            </p>
-                                        </div>
+
 
                                         <div className="mb-5">
                                             <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Direct Contact</h6>
                                             <p className="text-muted mb-1">
-                                                <i className="fas fa-phone-alt me-2 text-warning"></i> +91 33 1234 5678
+                                                <i className="fas fa-phone-alt me-2 text-warning"></i> 
+                                                <a href="tel:+919874300074" className="text-decoration-none text-muted">+91 98743 00074</a>
+                                                <span> / </span>
+                                                <a href="tel:+918961401688" className="text-decoration-none text-muted">+91 89614 01688</a>
                                             </p>
                                             <p className="text-muted mb-0">
-                                                <i className="fas fa-envelope me-2 text-warning"></i> contact@dma-ca.com
+                                                <i className="fas fa-envelope me-2 text-warning"></i> 
+                                                <a href="mailto:admin@dma-caoffice.in" className="text-decoration-none text-muted">admin@dma-caoffice.in</a>
+                                            </p>
+                                            <p className="text-muted mb-0 mt-1">
+                                                <a href="https://in.linkedin.com/in/dasgupta-maiti-and-associates-07538a372" target="_blank" rel="noopener noreferrer" className="text-decoration-none text-muted">
+                                                    <i className="fab fa-linkedin me-2 text-warning"></i> LinkedIn Profile
+                                                </a>
                                             </p>
                                         </div>
 
@@ -205,9 +225,9 @@ const Contact = () => {
                                                             style={{ borderBottom: '1px solid #ddd' }}
                                                         >
                                                             <option value="">General Inquiry</option>
-                                                            <option value="Audit">Audit Service</option>
-                                                            <option value="Tax">Tax Consultation</option>
-                                                            <option value="Advisory">Financial Advisory</option>
+                                                            {services.slice(0, 3).map(service => (
+                                                                <option key={service._id} value={service.title}>{service.title}</option>
+                                                            ))}
                                                         </Form.Select>
                                                     </Form.Group>
                                                 </Col>

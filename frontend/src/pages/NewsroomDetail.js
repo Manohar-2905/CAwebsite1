@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Container, Row, Col, Spinner, Button } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import api from '../utils/api';
 
 const NewsroomDetail = () => {
@@ -10,11 +10,7 @@ const NewsroomDetail = () => {
   const [newsroom, setNewsroom] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchNewsroom();
-  }, [slug]);
-
-  const fetchNewsroom = async () => {
+  const fetchNewsroom = useCallback(async () => {
     try {
       const response = await api.get(`/newsroom/${slug}`);
       setNewsroom(response.data);
@@ -24,7 +20,11 @@ const NewsroomDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [slug, navigate]);
+
+  useEffect(() => {
+    fetchNewsroom();
+  }, [fetchNewsroom]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);

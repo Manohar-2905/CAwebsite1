@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Button, Card, Table, Modal, Form, Alert, Badge } from 'react-bootstrap';
+import { Row, Col, Button, Card, Table, Modal, Form, Badge } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md';
@@ -59,17 +59,12 @@ const AdminDashboard = () => {
   const [passwordForm, setPasswordForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
   const [showPassword, setShowPassword] = useState({ current: false, new: false, confirm: false });
 
-  useEffect(() => {
-    checkAuth();
-    fetchData();
-  }, []);
-
-  const checkAuth = () => {
+  const checkAuth = useCallback(() => {
     const token = localStorage.getItem('adminToken');
     if (!token) navigate('/admin/login');
-  };
+  }, [navigate]);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const [servicesRes, publicationsRes, newsroomRes, careersRes, sectorsRes] = await Promise.all([
         api.get('/services'),
@@ -89,7 +84,12 @@ const AdminDashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [navigate]);
+
+  useEffect(() => {
+    checkAuth();
+    fetchData();
+  }, [checkAuth, fetchData]);
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
@@ -148,26 +148,37 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleDelete = async (type, id) => {
-    // Debugging: Force visual feedback immediately
-    // if (!window.confirm('Are you sure?')) return; 
-    
-    alert(`DEBUG: Clicking Delete for ${type} ${id}. Check Console for logs.`);
-    console.log(`[DEBUG] Attempting to delete ${type} with ID: ${id}`);
-    toast.info('Processing delete...'); // Immediate feedback
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
+
+  // ... (rest of code) ...
+
+  const handleDelete = (type, id) => {
+    setItemToDelete({ type, id });
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!itemToDelete) return;
+    const { type, id } = itemToDelete;
+
     try {
       await api.delete(`/${type}/${id}`);
       toast.success('Deleted successfully');
-      fetchData();
+      
+      // Update local state without refetching everything
+      if (type === 'services') setServices(prev => prev.filter(item => item._id !== id));
+      if (type === 'publications') setPublications(prev => prev.filter(item => item._id !== id));
+      if (type === 'newsroom') setNewsroom(prev => prev.filter(item => item._id !== id));
+      if (type === 'careers') setCareers(prev => prev.filter(item => item._id !== id));
+      if (type === 'sectors') setSectors(prev => prev.filter(item => item._id !== id));
+
+      setShowDeleteModal(false);
+      setItemToDelete(null);
     } catch (error) {
       console.error('Delete error:', error);
-      
-      // Serialize for better debug visibility
-      const debugError = error.response?.data ? JSON.stringify(error.response.data) : error.message;
-      console.log('Delete Failure Details:', debugError);
-
-      const errorMsg = error.response?.data?.message || error.message || 'Error deleting item';
-      toast.error(`Failed: ${errorMsg}`);
+      const errorMsg = error.response?.data?.message || 'Error deleting item';
+      toast.error(errorMsg);
       
       if (error.response?.status === 401) {
           navigate('/admin/login');
@@ -674,55 +685,121 @@ const AdminDashboard = () => {
         </Modal.Body>
       </Modal>
 
-      <Modal show={showPasswordModal} onHide={() => setShowPasswordModal(false)}>
-        <Modal.Header closeButton><Modal.Title>Change Password</Modal.Title></Modal.Header>
-        <Modal.Body>
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
+        <Modal.Header closeButton style={{ borderBottom: 'none' }}>
+          <Modal.Title className="text-danger fw-bold"><i className="fas fa-exclamation-triangle me-2"></i> Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center py-4">
+          <p className="lead mb-0">Are you sure you want to delete this item?</p>
+          <p className="text-muted small">This action cannot be undone.</p>
+        </Modal.Body>
+        <Modal.Footer style={{ borderTop: 'none', justifyContent: 'center' }}>
+          <Button variant="secondary" onClick={() => setShowDeleteModal(false)} className="px-4 rounded-pill">Cancel</Button>
+          <Button variant="danger" onClick={confirmDelete} className="px-4 rounded-pill">Delete Permanently</Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showPasswordModal} onHide={() => setShowPasswordModal(false)} centered className="fade-in-up">
+        <Modal.Header closeButton className="border-0 pb-0">
+          <Modal.Title className="fw-bold" style={{ color: '#002147' }}>Change Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="p-4">
+          <div className="text-center mb-4">
+            <div className="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{ width: '60px', height: '60px' }}>
+              <i className="fas fa-lock fa-lg text-warning"></i>
+            </div>
+            <p className="text-muted small">
+              Secure your account by updating your password. <br /> Use a strong password for better security.
+            </p>
+          </div>
+
           <Form onSubmit={handlePasswordSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Current Password</Form.Label>
-              <div className="input-group">
+            <Form.Group className="mb-4">
+              <label className="d-block mb-2 text-uppercase fw-bold small" style={{ letterSpacing: '1px', color: '#666', fontSize: '0.75rem' }}>Current Password</label>
+              <div className="position-relative">
                 <Form.Control
                   type={showPassword.current ? "text" : "password"}
                   value={passwordForm.currentPassword}
                   onChange={e => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
                   required
+                  placeholder="Enter current password"
+                  className="form-control-lg bg-light ps-3 pe-5"
+                  style={{ fontSize: '0.95rem', borderRadius: '8px', border: '1px solid #e9ecef', boxShadow: 'none' }}
                 />
-                <Button variant="outline-secondary" onClick={() => setShowPassword(prev => ({ ...prev, current: !prev.current }))}>
+                <div
+                  className="position-absolute cursor-pointer text-muted"
+                  style={{ top: '12px', right: '15px', zIndex: 10 }}
+                  onClick={() => setShowPassword(prev => ({ ...prev, current: !prev.current }))}
+                >
                   <i className={`fas ${showPassword.current ? 'fa-eye-slash' : 'fa-eye'}`}></i>
-                </Button>
+                </div>
               </div>
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>New Password</Form.Label>
-              <div className="input-group">
+
+            <Form.Group className="mb-4">
+              <label className="d-block mb-2 text-uppercase fw-bold small" style={{ letterSpacing: '1px', color: '#666', fontSize: '0.75rem' }}>New Password</label>
+              <div className="position-relative">
                 <Form.Control
                   type={showPassword.new ? "text" : "password"}
                   value={passwordForm.newPassword}
                   onChange={e => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
                   required
                   minLength={6}
+                  placeholder="Enter new password (min. 6 chars)"
+                  className="form-control-lg bg-light ps-3 pe-5"
+                  style={{ fontSize: '0.95rem', borderRadius: '8px', border: '1px solid #e9ecef', boxShadow: 'none' }}
                 />
-                <Button variant="outline-secondary" onClick={() => setShowPassword(prev => ({ ...prev, new: !prev.new }))}>
+                <div
+                  className="position-absolute cursor-pointer text-muted"
+                  style={{ top: '12px', right: '15px', zIndex: 10 }}
+                  onClick={() => setShowPassword(prev => ({ ...prev, new: !prev.new }))}
+                >
                   <i className={`fas ${showPassword.new ? 'fa-eye-slash' : 'fa-eye'}`}></i>
-                </Button>
+                </div>
               </div>
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Confirm New Password</Form.Label>
-              <div className="input-group">
+
+            <Form.Group className="mb-4">
+              <label className="d-block mb-2 text-uppercase fw-bold small" style={{ letterSpacing: '1px', color: '#666', fontSize: '0.75rem' }}>Confirm New Password</label>
+              <div className="position-relative">
                 <Form.Control
                   type={showPassword.confirm ? "text" : "password"}
                   value={passwordForm.confirmPassword}
                   onChange={e => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
                   required
                   minLength={6}
+                  placeholder="Re-enter new password"
+                  className="form-control-lg bg-light ps-3 pe-5"
+                  style={{ fontSize: '0.95rem', borderRadius: '8px', border: '1px solid #e9ecef', boxShadow: 'none' }}
                 />
-                <Button variant="outline-secondary" onClick={() => setShowPassword(prev => ({ ...prev, confirm: !prev.confirm }))}>
+                <div
+                  className="position-absolute cursor-pointer text-muted"
+                  style={{ top: '12px', right: '15px', zIndex: 10 }}
+                  onClick={() => setShowPassword(prev => ({ ...prev, confirm: !prev.confirm }))}
+                >
                   <i className={`fas ${showPassword.confirm ? 'fa-eye-slash' : 'fa-eye'}`}></i>
-                </Button>
+                </div>
               </div>
             </Form.Group>
-            <div className="text-end"><Button variant="secondary" className="me-2" onClick={() => setShowPasswordModal(false)}>Cancel</Button><Button type="submit" className="btn-add">Update Password</Button></div>
+
+            <div className="d-grid mt-4">
+              <Button
+                type="submit"
+                size="lg"
+                className="py-3 fw-bold"
+                style={{
+                  backgroundColor: '#002147',
+                  border: 'none',
+                  borderRadius: '8px',
+                   boxShadow: '0 4px 12px rgba(0,33,71,0.2)'
+                }}
+              >
+                Update Password
+              </Button>
+            </div>
+             <div className="text-center mt-3">
+               <button type="button" className="btn btn-link text-muted text-decoration-none small" onClick={() => setShowPasswordModal(false)}>Cancel</button>
+             </div>
           </Form>
         </Modal.Body>
       </Modal>

@@ -7,7 +7,12 @@
 npm install
 ```
 
-2. Create `.env` file with required variables (see `.env.example`)
+2. Create `.env` file in the root directory with the following required variables:
+   - `MONGODB_URI` - MongoDB connection string
+   - `JWT_SECRET` - Secret key for JWT tokens
+   - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `ADMIN_EMAIL` - Email configuration
+   - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` - Cloudinary config (for file uploads)
+   - Optional: `FRONTEND_URL`, `BASE_URL`, `PORT`, `NODE_ENV`
 
 3. Start development server:
 ```bash

@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Container, Row, Col, Card, Button, Carousel } from "react-bootstrap";
 import api from "../utils/api";
-import Loading from "../components/Loading";
+import sandipImg from "../assets/images/team/sandip_dasgupta.png";
+import santanuImg from "../assets/images/team/santanu_chatterjee.png";
+import krishnenduImg from "../assets/images/team/krishnendu_maiti.png";
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -101,16 +103,15 @@ const Home = () => {
       <section
         className="hero-section position-relative d-flex align-items-center"
         style={{
-          backgroundImage: `url('${
-            isMobile ? "/mobile-bg-final-v4.jpg?v=15" : "/home-bg-new.png"
-          }')`,
+          backgroundImage: `url('${process.env.PUBLIC_URL}/${isMobile ? "mobile_hero_bg_v3.jpg" : "home_bg_new.png"
+            }?v=${new Date().getTime()}')`,
           backgroundAttachment: isMobile ? "scroll" : "fixed",
-          backgroundPosition: "center 76px",
-          backgroundSize: isMobile ? "100% 100%" : "cover",
+          backgroundPosition: "center top",
+          backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          minHeight: isMobile ? "120vw" : "100vh",
-          marginTop: "-76px",
-          paddingTop: "76px",
+          minHeight: isMobile ? "95vw" : "100vh",
+          marginTop: isMobile ? "0px" : "-76px",
+          paddingTop: isMobile ? "0px" : "76px",
           overflow: "hidden",
         }}
       >
@@ -134,22 +135,21 @@ const Home = () => {
             <Col md={9} lg={6}>
               {/* Professional White Card for Content */}
               <div
-                className="hero-card shadow-lg rounded-0 p-4 p-lg-5 d-none d-md-block"
+                className="hero-card p-4 d-none d-md-block"
                 style={{
-                  backgroundColor: isMobile
-                    ? "rgba(255, 255, 255, 0.85)"
-                    : "white", // Glassmorphism on mobile
-                  backdropFilter: isMobile ? "blur(10px)" : "none", // Blur effect
-                  borderLeft: "5px solid #D4AF37", // Gold accent
-                  opacity: 0.98,
-                  margin: isMobile ? "120px 15px 10px" : "0", // Adjusted margin
-                  maxWidth: isMobile ? "95%" : "100%",
+                  backgroundColor: "#ffffff", // Solid White
+                  borderRadius: "0px", // Sharp corners
+                  boxShadow: "0 8px 32px 0 rgba(0, 33, 71, 0.2)", // Dark blue shadow
+                  border: "1px solid rgba(255, 255, 255, 0.3)", // Glass border
+                  borderLeft: "5px solid #D4AF37", // Keep Gold accent
+                  margin: isMobile ? "120px 15px 10px" : "0",
+                  maxWidth: isMobile ? "95%" : "480px",
                 }}
               >
                 {/* Tag Removed */}
 
                 <h1
-                  className="fw-bold mb-4 font-heading fade-in-up delay-1 hero-title"
+                  className="fw-bold mb-3 font-heading fade-in-up delay-1 hero-title"
                   style={{
                     color: "#002147",
                     lineHeight: "1.1",
@@ -161,7 +161,7 @@ const Home = () => {
                 </h1>
 
                 <p
-                  className="lead mb-4 fade-in-up delay-2"
+                  className="lead mb-3 fade-in-up delay-2"
                   style={{
                     color: "#444",
                     fontSize: isMobile ? "0.95rem" : "1.25rem", // Adjust text size
@@ -178,17 +178,15 @@ const Home = () => {
                       : "d-flex gap-3 fade-in-up delay-3"
                   }
                 >
-                  <Button
-                    as={Link}
+                  <Link
                     to="/contact"
-                    className="text-uppercase fw-bold border-0"
+                    className="text-uppercase fw-bold text-decoration-none home-hero-btn-custom"
                     style={{
                       backgroundColor: "#002147",
                       color: "white",
-                      fontSize: isMobile ? "0.75rem" : "0.9rem",
-                      padding: isMobile ? "10px 20px" : "12px 16px",
-                      borderRadius: "25px",
-                      whiteSpace: "nowrap",
+                      letterSpacing: "1px",
+                      fontWeight: "600",
+                      border: "1px solid #002147",
                     }}
                   >
                     Contact Us{" "}
@@ -196,19 +194,16 @@ const Home = () => {
                       className="fas fa-chevron-right ms-2"
                       style={{ fontSize: "0.8em" }}
                     ></i>
-                  </Button>
-                  <Button
-                    as={Link}
+                  </Link>
+                  <Link
                     to="/services"
-                    className="text-uppercase fw-bold"
+                    className="text-uppercase fw-bold text-decoration-none home-hero-btn-custom"
                     style={{
                       backgroundColor: "transparent",
                       color: "#002147",
-                      border: "2px solid #002147",
-                      fontSize: isMobile ? "0.75rem" : "0.9rem",
-                      padding: isMobile ? "10px 20px" : "12px 16px",
-                      borderRadius: "25px",
-                      whiteSpace: "nowrap",
+                      border: "1px solid #002147",
+                      letterSpacing: "1px",
+                      fontWeight: "600",
                     }}
                   >
                     Our Services{" "}
@@ -216,7 +211,7 @@ const Home = () => {
                       className="fas fa-chevron-right ms-2"
                       style={{ fontSize: "0.8em" }}
                     ></i>
-                  </Button>
+                  </Link>
                 </div>
               </div>
             </Col>
@@ -468,25 +463,29 @@ const Home = () => {
           )}
 
           <div className="text-center mt-3 mt-lg-5">
-            <Button
-              as={Link}
+            <Link
               to="/services"
-              className="px-5 py-3 fw-bold text-uppercase"
+              className="btn btn-primary rounded-pill shadow-sm text-uppercase fw-bold mobile-btn-small"
               style={{
-                backgroundColor: "transparent",
-                color: "#002147",
-                border: "2px solid #002147",
-                fontSize: isMobile ? "0.75rem" : "0.9rem",
-                borderRadius: "25px",
+                backgroundColor: "#002147",
+                borderColor: "#002147",
                 letterSpacing: "1px",
+                transition: "all 0.3s ease"
+              }}
+              onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = "#D4AF37";
+                  e.target.style.borderColor = "#D4AF37";
+                  e.target.style.transform = "translateY(-3px)";
+              }}
+              onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = "#002147";
+                  e.target.style.borderColor = "#002147";
+                  e.target.style.transform = "translateY(0)";
               }}
             >
               View All Services{" "}
-              <i
-                className="fas fa-chevron-right ms-2"
-                style={{ fontSize: "0.8em" }}
-              ></i>
-            </Button>
+              <i className="fas fa-chevron-right ms-2 small"></i>
+            </Link>
           </div>
         </Container>
       </section>
@@ -497,6 +496,29 @@ const Home = () => {
         .hero-card { padding: 3rem; }
         .hero-desc { font-size: 1.1rem; }
         
+        /* Custom Button Sizing */
+        .mobile-btn-small {
+            padding: 1rem 3rem; /* Desktop Default (was px-5 py-3 approx) */
+            font-size: 1rem;
+        }
+
+        /* Custom Hero Button Styling */
+        .home-hero-btn-custom {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 8px 24px !important;
+            font-size: 0.8rem !important;
+            border-radius: 50px !important;
+            min-width: auto !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .home-hero-btn-custom:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
         @media (max-width: 1200px) {
             .hero-title { font-size: 2rem; }
             .hero-card { padding: 1.5rem; }
@@ -504,6 +526,11 @@ const Home = () => {
         
         @media (max-width: 992px) {
              .hero-title { font-size: 2rem; }
+             /* Mobile/Tablet Button Size */
+             .mobile-btn-small {
+                 padding: 0.6rem 1.5rem !important;
+                 font-size: 0.8rem !important;
+             }
         }
 
         @media (max-width: 768px) {
@@ -547,7 +574,7 @@ const Home = () => {
             <div className="text-center py-5">Loading publications...</div>
           ) : publications.length > 0 ? (
             <Row className="g-4">
-              {publications.map((publication, index) => (
+              {(isMobile ? publications.slice(0, 1) : publications).map((publication, index) => (
                 <Col
                   md={6}
                   lg={4}
@@ -650,74 +677,95 @@ const Home = () => {
           ) : (
             <div className="text-center text-muted">No publications found.</div>
           )}
-          <div className="text-center mt-3 mt-lg-5">
-            <Button
-              as={Link}
-              to="/publications"
-              className="px-5 py-3 fw-bold text-uppercase"
-              style={{
-                backgroundColor: "transparent",
-                color: "#002147",
-                border: "2px solid #002147",
-                fontSize: isMobile ? "0.75rem" : "0.9rem",
-                borderRadius: "25px",
-                letterSpacing: "1px",
-              }}
-            >
-              View All Publications{" "}
-              <i
-                className="fas fa-chevron-right ms-2"
-                style={{ fontSize: "0.8em" }}
-              ></i>
-            </Button>
-          </div>
+            <div className="text-center mt-3 mt-lg-5">
+              <Link
+                to="/publications"
+                className="btn btn-primary rounded-pill shadow-sm text-uppercase fw-bold mobile-btn-small"
+                style={{
+                  backgroundColor: "transparent",
+                  color: "#002147",
+                  borderColor: "#002147",
+                  borderWidth: "2px", // Explicitly added to match previous style visually if it was there
+                  letterSpacing: "1px",
+                  transition: "all 0.3s ease"
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = "#D4AF37";
+                  e.target.style.borderColor = "#D4AF37";
+                  e.target.style.color = "#fff"; // Assuming hover effect wants white text
+                  e.target.style.transform = "translateY(-3px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = "transparent";
+                  e.target.style.borderColor = "#002147";
+                   e.target.style.color = "#002147";
+                  e.target.style.transform = "translateY(0)";
+                }}
+              >
+                View All Publications{" "}
+                <i className="fas fa-chevron-right ms-2 small"></i>
+              </Link>
+            </div>
         </Container>
       </section>
 
       {/* Our Team Section - Replaced About Us */}
       <section className="section-padding team-section" style={{ backgroundColor: "#F9FAFB" }}>
         <Container>
-           <div className="text-center mb-5">
-              <h3 className="h2 fw-bold" style={{ color: "#002147" }}>Our Team</h3>
-              <p className="text-muted">Partners</p>
-           </div>
-           
-           <Row className="g-4 justify-content-center">
-              {[
-                 { 
-                   name: "CA Sandip Dasgupta", 
-                   title: "Partner",
-                   bio: "Over 25 years of diversified experience in Banking, Infrastructure, Real Estate & Construction, Manufacturing, and Audit & Assurance with extensive audit and advisory exposure." 
-                 },
-                 { 
-                   name: "CA Santanu Chatterjee", 
-                   title: "Partner",
-                   bio: "Over 25 years of professional experience in the FMCG sectors." 
-                 },
-                 { 
-                   name: "CA Krishnendu Maiti", 
-                   title: "Partner",
-                   bio: "5 years of experience in Accounting, Finance, Direct & Indirect Taxation, and MCA matters. Also, a DISA (ICAI) qualified professional." 
-                 }
-              ].map((partner, idx) => (
-                <Col md={4} key={idx} className="fade-in-up" style={{ animationDelay: `${0.1 * idx}s` }}>
-                   <div className="bg-white border rounded shadow-sm h-100 overflow-hidden">
-                      {/* Simple Gray Placeholder */}
-                      <div className="d-flex align-items-center justify-content-center bg-light" style={{ height: "300px" }}>
+          <div className="text-center mb-5">
+            <h3 className="h2 fw-bold" style={{ color: "#002147" }}>Our Team</h3>
+            <p className="text-muted">Partners</p>
+          </div>
+
+          <Row className="g-4 justify-content-center">
+            {[
+              {
+                name: "CFA Sandip Dasgupta",
+                title: "Partner",
+                image: sandipImg,
+                bio: "Over 25 years of diversified experience in Banking, Infrastructure, Real Estate & Construction, Manufacturing, and Audit & Assurance with extensive audit and advisory exposure."
+              },
+              {
+                name: "ACA Santanu Chatterjee",
+                title: "Partner",
+                image: santanuImg,
+                bio: "Over 25 years of professional experience in the FMCG sectors."
+              },
+              {
+                name: "ACA Krishnendu Maiti",
+                title: "Partner",
+                image: krishnenduImg,
+                bio: "5 years of experience in Accounting, Finance, Direct & Indirect Taxation, and MCA matters. Also, a DISA (ICAI) qualified professional."
+              }
+            ].map((partner, idx) => (
+              <Col md={4} key={idx} className="fade-in-up" style={{ animationDelay: `${0.1 * idx}s` }}>
+                <div className="bg-white border rounded shadow-sm h-100 overflow-hidden">
+                   {partner.image ? (
+                      <div style={{ height: "450px", overflow: "hidden" }}>
+                         <img 
+                            src={partner.image} 
+                            alt={partner.name} 
+                            className="w-100 h-100"
+                            style={{ objectFit: "cover", objectPosition: "top" }} 
+                         />
+                      </div>
+                   ) : (
+                      <div className="d-flex align-items-center justify-content-center bg-light" style={{ height: "450px" }}>
                           <i className="fas fa-user text-secondary opacity-25 fa-5x"></i>
                       </div>
-                      
-                      <div className="p-4 text-center">
-                         <h5 className="fw-bold mb-1" style={{ color: "#002147" }}>{partner.name}</h5>
-                         <span className="text-uppercase text-muted small fw-bold">{partner.title}</span>
-                         <p className="text-muted small mt-3 mb-0">
-                           {partner.bio}
-                         </p>
-                      </div>
-                   </div>
-                </Col>
-              ))}
-           </Row>
+                   )}
+
+                  <div className="p-3 text-center">
+                    <h5 className="fw-bold mb-1" style={{ color: "#002147" }}>{partner.name}</h5>
+                    <span className="text-uppercase text-muted small fw-bold">{partner.title}</span>
+                    <p className="text-muted small mt-2 mb-0">
+                      {partner.bio}
+                    </p>
+                  </div>
+                </div>
+              </Col>
+            ))}
+          </Row>
         </Container>
       </section>
 
@@ -751,14 +799,12 @@ const Home = () => {
           <Button
             as={Link}
             to="/contact"
-            size={isMobile ? "md" : "lg"}
+            className="mobile-btn-small"
             style={{
               backgroundColor: "#164B7A",
               color: "white",
               border: "none",
-              padding: isMobile ? "10px 30px" : "12px 40px",
               fontWeight: "600",
-              fontSize: isMobile ? "0.9rem" : "1.1rem",
             }}
           >
             Contact Us Today

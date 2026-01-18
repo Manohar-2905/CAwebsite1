@@ -1,5 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { Container, Row, Col } from "react-bootstrap";
+import sandipImg from "../assets/images/team/sandip_dasgupta.png";
+import santanuImg from "../assets/images/team/santanu_chatterjee.png";
+import krishnenduImg from "../assets/images/team/krishnendu_maiti.png";
 
 const About = () => {
   return (
@@ -49,33 +52,46 @@ const About = () => {
 
              <Row className="g-4 justify-content-center mb-5">
                 {[
+                     { 
+                       name: "CFA Sandip Dasgupta", 
+                       title: "Partner",
+                       image: sandipImg,
+                       bio: "Over 25 years of diversified experience in Banking, Infrastructure, Real Estate & Construction, Manufacturing, and Audit & Assurance with extensive audit and advisory exposure." 
+                     },
                    { 
-                     name: "CA Sandip Dasgupta", 
+                     name: "ACA Santanu Chatterjee", 
                      title: "Partner",
-                     bio: "Over 25 years of diversified experience in Banking, Infrastructure, Real Estate & Construction, Manufacturing, and Audit & Assurance with extensive audit and advisory exposure." 
-                   },
-                   { 
-                     name: "CA Santanu Chatterjee", 
-                     title: "Partner",
+                     image: santanuImg,
                      bio: "Over 25 years of professional experience in the FMCG sectors." 
                    },
                    { 
-                     name: "CA Krishnendu Maiti", 
+                     name: "ACA Krishnendu Maiti", 
                      title: "Partner",
+                     image: krishnenduImg,
                      bio: "5 years of experience in Accounting, Finance, Direct & Indirect Taxation, and MCA matters. Also, a DISA (ICAI) qualified professional." 
                    }
                 ].map((partner, idx) => (
                   <Col md={4} key={idx}>
                      <div className="bg-white border rounded shadow-sm h-100 overflow-hidden">
-                        {/* Simple Gray Placeholder */}
-                        <div className="d-flex align-items-center justify-content-center bg-light" style={{ height: "300px" }}>
-                            <i className="fas fa-user text-secondary opacity-25 fa-5x"></i>
-                        </div>
+                        {partner.image ? (
+                           <div style={{ height: "450px", overflow: "hidden" }}>
+                              <img 
+                                 src={partner.image} 
+                                 alt={partner.name} 
+                                 className="w-100 h-100"
+                                 style={{ objectFit: "cover", objectPosition: "top" }} 
+                              />
+                           </div>
+                        ) : (
+                           <div className="d-flex align-items-center justify-content-center bg-light" style={{ height: "450px" }}>
+                               <i className="fas fa-user text-secondary opacity-25 fa-5x"></i>
+                           </div>
+                        )}
                         
-                        <div className="p-4 text-center">
+                        <div className="p-3 text-center">
                            <h5 className="fw-bold mb-1" style={{ color: "#002147" }}>{partner.name}</h5>
                            <span className="text-uppercase text-muted small fw-bold">{partner.title}</span>
-                           <p className="text-muted small mt-3 mb-0">
+                           <p className="text-muted small mt-2 mb-0">
                              {partner.bio}
                            </p>
                         </div>
@@ -84,46 +100,7 @@ const About = () => {
                 ))}
              </Row>
 
-             <div className="text-center mb-5">
-                <p className="text-muted h4">Consultants</p>
-             </div>
 
-             <Row className="g-4 justify-content-center">
-                {[
-                   { 
-                     name: "Tapas Chakraborty", 
-                     title: "Certified Financial Planner",
-                     bio: "Certified Financial Planner with decades of experience in investments, financial planning, and capital markets." 
-                   },
-                   { 
-                     name: "Phalguni Chakraborty", 
-                     title: "Company Secretary",
-                     bio: "Company Secretary with over 10 years of experience in corporate law compliance and secretarial practice." 
-                   },
-                   { 
-                     name: "Tridib Lahiri", 
-                     title: "Cost Accountant",
-                     bio: "Cost Accountant with 23 years of experience in Finance, Auditing, MIS, Fund Management, and Statutory Compliance." 
-                   }
-                ].map((consultant, idx) => (
-                  <Col md={4} key={idx}>
-                     <div className="bg-white border rounded shadow-sm h-100 overflow-hidden">
-                        {/* Simple Gray Placeholder */}
-                        <div className="d-flex align-items-center justify-content-center bg-light" style={{ height: "300px" }}>
-                            <i className="fas fa-briefcase text-secondary opacity-25 fa-5x"></i>
-                        </div>
-                        
-                        <div className="p-4 text-center">
-                           <h5 className="fw-bold mb-1" style={{ color: "#002147" }}>{consultant.name}</h5>
-                           <span className="text-uppercase text-muted small fw-bold">{consultant.title}</span>
-                           <p className="text-muted small mt-3 mb-0">
-                             {consultant.bio}
-                           </p>
-                        </div>
-                     </div>
-                  </Col>
-                ))}
-             </Row>
         </Container>
       </section>
     </>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import api from '../utils/api';
 import Loading from '../components/Loading';
 
@@ -95,7 +95,7 @@ const Newsroom = () => {
         className="position-relative d-flex align-items-center responsive-hero-section"
         style={{
            // Professional News/Media Background
-           backgroundImage: "url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2070&auto=format&fit=crop')",
+           backgroundImage: "url('/newsroom.jpg')",
            backgroundSize: "cover",
            backgroundPosition: "center",
            minHeight: "50vh",

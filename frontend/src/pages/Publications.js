@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import api from "../utils/api";
-import Loading from "../components/Loading";
 
 const Publications = () => {
   const [publications, setPublications] = useState([]);
@@ -35,10 +34,6 @@ const Publications = () => {
     });
   };
 
-  const navigate = useNavigate();
-
-  /* Removed unused handleDownload and handleView functions */
-
   return (
     <>
       <Helmet>
@@ -54,7 +49,7 @@ const Publications = () => {
         className="position-relative d-flex align-items-center responsive-hero-section"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop')", // Professional office/paper background
+            "url('/publications.jpg')", // Professional office/paper background
           backgroundSize: "cover",
           backgroundPosition: "center",
           minHeight: "50vh",

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Container, Row, Col, Button, Spinner, Card } from 'react-bootstrap';
+import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import api from '../utils/api';
@@ -12,11 +12,7 @@ const ServiceDetail = () => {
   const [service, setService] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchService();
-  }, [slug]);
-
-  const fetchService = async () => {
+  const fetchService = useCallback(async () => {
     try {
       const response = await api.get(`/services/${slug}`);
       setService(response.data);
@@ -26,7 +22,11 @@ const ServiceDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [slug, navigate]);
+
+  useEffect(() => {
+    fetchService();
+  }, [fetchService]);
 
   const handlePrint = async () => {
     if (service.fileURL) {
@@ -242,9 +242,9 @@ const ServiceDetail = () => {
                   For further inquiries or to schedule a consultation, please contact us.
                 </p>
                 <div style={{ fontSize: '18px', color: '#002147', fontWeight: 'bold', display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap' }}>
-                  <span>📞 +91 98765 43210</span>
-                  <span>✉️ contact@dma-ca.com</span>
-                  <span>🌐 www.dma-ca.com</span>
+                  <span>📞 <a href="tel:+919874300074" style={{ color: 'inherit', textDecoration: 'none' }}>+91 98743 00074</a> / <a href="tel:+918961401688" style={{ color: 'inherit', textDecoration: 'none' }}>+91 89614 01688</a></span>
+                  <span>✉️ <a href="mailto:admin@dma-caoffice.in" style={{ color: 'inherit', textDecoration: 'none' }}>admin@dma-caoffice.in</a></span>
+                  <span>🌐 <a href="http://www.dma-ca.com" style={{ color: 'inherit', textDecoration: 'none' }}>www.dma-ca.com</a></span>
                 </div>
             </div>
         </div>

@@ -5,18 +5,20 @@ const cors = require("cors");
 const path = require("path");
 
 const app = express();
-
-// Request Logger Middleware (Debug Mode)
-app.use((req, res, next) => {
-  const hasAuth = !!req.headers.authorization;
-  console.log(`[REQUEST] ${new Date().toISOString()} | ${req.method} ${req.url} | Auth: ${hasAuth} | Origin: ${req.headers.origin}`);
-  next();
-});
+console.log("---");
+console.log("SERVER VERSION: 2.0 (With Production-Only Static Serving)");
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("---");
 
 // Middleware
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "https://caweb.onrender.com",
+    origin: [
+      process.env.FRONTEND_URL,
+      "https://caweb.onrender.com",
+      "http://localhost:3000",
+      "http://localhost:5000"
+    ].filter(Boolean),
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: "Content-Type,Authorization"
@@ -57,10 +59,19 @@ mongoose
 
 const PORT = process.env.PORT || 5000;
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
-});
+// Serve static files from React app in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+  
+  // Catch-all handler: send back React's index.html file for non-API routes
+  app.get("*", (req, res) => {
+    // Don't serve index.html for API routes
+    if (req.path.startsWith("/api/") || req.path.startsWith("/sitemap.xml")) {
+      return res.status(404).json({ message: "Not found" });
+    }
+    res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

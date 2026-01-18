@@ -15,36 +15,12 @@ const Footer = () => {
             </p>
             <div className="mt-4 d-flex gap-3">
               <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white opacity-75 hover-opacity-100 transition-all"
-              >
-                <i className="fab fa-facebook-f fa-lg"></i>
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white opacity-75 hover-opacity-100 transition-all"
-              >
-                <i className="fab fa-twitter fa-lg"></i>
-              </a>
-              <a
-                href="https://linkedin.com"
+                href="https://in.linkedin.com/in/dasgupta-maiti-and-associates-07538a372"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white opacity-75 hover-opacity-100 transition-all"
               >
                 <i className="fab fa-linkedin-in fa-lg"></i>
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white opacity-75 hover-opacity-100 transition-all"
-              >
-                <i className="fab fa-instagram fa-lg"></i>
               </a>
             </div>
           </Col>
@@ -89,22 +65,24 @@ const Footer = () => {
             <h6 className="mb-3 fw-bold text-uppercase" style={{ fontSize: "0.85rem", letterSpacing: "1px", color: "#D4AF37" }}>Contact</h6>
             <p className="mb-2 opacity-75">
               <i className="fas fa-envelope me-2 text-warning"></i>
-              info@dma-ca.com
+              <a href="mailto:admin@dma-caoffice.in" className="text-white text-decoration-none">admin@dma-caoffice.in</a>
             </p>
             <p className="mb-2 opacity-75">
               <i className="fas fa-phone me-2 text-warning"></i>
-              +91-9876543210
+              <a href="tel:+919874300074" className="text-white text-decoration-none">+91 98743 00074</a>
+              <span> / </span>
+              <a href="tel:+918961401688" className="text-white text-decoration-none">+91 89614 01688</a>
             </p>
             <p className="mb-2">
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Flat+B1,+AC+229,Street+39,+Classic+Apartments,+Action+Area+1,+New+Town+,+Kolkata+%E2%80%93+700156"
+                href="https://www.google.com/maps/dir//Premise+No.18,+Flat-1A,+Plot+No.CE%2F1%2FC%2F122,+Street+Number+206,+Rajarhat,+New+Town,+Kolkata,+West+Bengal+700107/@22.577152,88.4670464,15z/data=!3m1!4b1!4m8!4m7!1m0!1m5!1m1!1s0x3a0275871e887679:0x6171f8c8e8e0865d!2m2!1d88.4618394!2d22.5767342?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-decoration-none"
                 style={{ color: "white", opacity: 0.9 }}
               >
                 <i className="fas fa-map-marker-alt me-2"></i>
-                Flat B1, AC 229,Street 39, Classic Apartments, Action Area 1, New Town , Kolkata – 700156
+                Flat B1, AC 229, Street 39, Classic Apartments, Action Area 1, New Town, Kolkata – 700156
               </a>
             </p>
           </Col>
@@ -122,8 +100,8 @@ const Footer = () => {
             </Col>
             <Col md={6} className="text-center text-md-end">
               <small>
-                <Link to="/privacy" className="text-decoration-none text-white opacity-50 hover-opacity-100 me-3">Privacy</Link>
-                <Link to="/terms" className="text-decoration-none text-white opacity-50 hover-opacity-100">Terms</Link>
+                <span className="text-white opacity-50 me-3">Privacy</span>
+                <span className="text-white opacity-50">Terms</span>
               </small>
             </Col>
           </Row>

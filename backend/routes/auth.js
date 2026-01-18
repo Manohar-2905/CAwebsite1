@@ -7,6 +7,11 @@ const auth = require('../middleware/auth');
 // Register admin (first time setup only)
 router.post('/register', async (req, res) => {
   try {
+    // Check if JWT_SECRET is configured
+    if (!process.env.JWT_SECRET) {
+      return res.status(500).json({ message: 'Server configuration error: JWT_SECRET not set' });
+    }
+
     const { username, email, password } = req.body;
 
     // Check if admin already exists
@@ -33,6 +38,11 @@ router.post('/register', async (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
   try {
+    // Check if JWT_SECRET is configured
+    if (!process.env.JWT_SECRET) {
+      return res.status(500).json({ message: 'Server configuration error: JWT_SECRET not set' });
+    }
+
     const { email, password } = req.body;
 
     const admin = await Admin.findOne({ email });

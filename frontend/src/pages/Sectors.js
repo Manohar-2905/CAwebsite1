@@ -24,6 +24,7 @@ const Sectors = () => {
       }
     } catch (error) {
       console.error('Error fetching sectors:', error);
+      setSectors([]); // Ensure sectors is reset on error
     } finally {
       setLoading(false);
     }
@@ -51,7 +52,7 @@ const Sectors = () => {
       <section
         className="position-relative d-flex align-items-center responsive-hero-section"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop')",
+          backgroundImage: "url('/sector.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           minHeight: "50vh",

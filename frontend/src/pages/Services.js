@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import api from '../utils/api';
-import Loading from '../components/Loading';
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -61,7 +60,7 @@ const Services = () => {
         className="position-relative d-flex align-items-center responsive-hero-section"
         style={{
            // Professional Business Background
-           backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')",
+           backgroundImage: "url('/services.jpg')",
            backgroundSize: "cover",
            backgroundPosition: "center",
            minHeight: "50vh", // Increased height for better image visibility

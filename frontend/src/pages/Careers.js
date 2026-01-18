@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Container, Row, Col, Button, Badge } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import api from '../utils/api';
 import Loading from '../components/Loading';
 

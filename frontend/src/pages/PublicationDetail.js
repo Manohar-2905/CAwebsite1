@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Container, Row, Col, Button, Spinner, Embed } from 'react-bootstrap';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import api from '../utils/api';
 
 const PublicationDetail = () => {
@@ -13,11 +11,7 @@ const PublicationDetail = () => {
   const [loading, setLoading] = useState(true);
   const [pdfEmbedUrl, setPdfEmbedUrl] = useState('');
 
-  useEffect(() => {
-    fetchPublication();
-  }, [slug]);
-
-  const fetchPublication = async () => {
+  const fetchPublication = useCallback(async () => {
     try {
       const response = await api.get(`/publications/${slug}`);
       setPublication(response.data);
@@ -31,39 +25,11 @@ const PublicationDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [slug, navigate]);
 
-  const handlePrint = async () => {
-    const element = document.getElementById('publication-content');
-    if (!element) return;
-
-    const canvas = await html2canvas(element, {
-      scale: 2,
-      useCORS: true,
-      logging: false
-    });
-
-    const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const imgWidth = 210;
-    const pageHeight = 295;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    let heightLeft = imgHeight;
-
-    let position = 0;
-
-    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
-
-    pdf.save(`${publication.title.replace(/\s+/g, '-')}.pdf`);
-  };
+  useEffect(() => {
+    fetchPublication();
+  }, [fetchPublication]);
 
   if (loading) {
     return (
