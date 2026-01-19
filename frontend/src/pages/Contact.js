@@ -141,8 +141,10 @@ const Contact = () => {
                                                 Flat-1A, Premise No. 18-0206, Plot No. CE/1/C/122<br />
                                                 Newtown, Rajarhat, Kolkata – 700156<br />
                                                 <span className="fw-bold">Santanu Chatterjee</span><br />
-                                                Phone: <a href="tel:+919051079796" className="text-decoration-none text-muted">+91 90510 79796</a><br />
-                                                Email: <a href="mailto:santanu.chatterjee@dma-caoffice.in" className="text-decoration-none text-muted">santanu.chatterjee@dma-caoffice.in</a>
+                                                <i className="fas fa-phone-alt me-2 text-warning small"></i>
+                                                <a href="tel:+919051079796" className="text-decoration-none text-muted">+91 90510 79796</a><br />
+                                                <i className="fas fa-envelope me-2 text-warning small"></i>
+                                                <a href="mailto:santanu.chatterjee@dma-caoffice.in" className="text-decoration-none text-muted">santanu.chatterjee@dma-caoffice.in</a>
                                             </div>
                                         </div>
 

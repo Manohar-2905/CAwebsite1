@@ -100,8 +100,14 @@ const Footer = () => {
               </a>
               <div className="mt-1 small" style={{ fontSize: "0.80rem" }}>
                 <span className="d-block text-white opacity-75">Santanu Chatterjee</span>
-                <span className="d-block"><a href="tel:+919051079796" className="text-white text-decoration-none opacity-75 hover-opacity-100">+91 90510 79796</a></span>
-                <span className="d-block"><a href="mailto:santanu.chatterjee@dma-caoffice.in" className="text-white text-decoration-none opacity-75 hover-opacity-100">santanu.chatterjee@dma-caoffice.in</a></span>
+                <span className="d-block">
+                    <i className="fas fa-phone me-1 text-warning" style={{ fontSize: '0.7rem' }}></i>
+                    <a href="tel:+919051079796" className="text-white text-decoration-none opacity-75 hover-opacity-100">+91 90510 79796</a>
+                </span>
+                <span className="d-block">
+                    <i className="fas fa-envelope me-1 text-warning" style={{ fontSize: '0.7rem' }}></i>
+                    <a href="mailto:santanu.chatterjee@dma-caoffice.in" className="text-white text-decoration-none opacity-75 hover-opacity-100">santanu.chatterjee@dma-caoffice.in</a>
+                </span>
               </div>
             </p>
             <p className="mb-2">
