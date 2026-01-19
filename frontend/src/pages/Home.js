@@ -720,7 +720,7 @@ const Home = () => {
           <Row className="g-4 justify-content-center">
             {[
               {
-                name: "CFA Sandip Dasgupta",
+                name: "FCA Sandip Dasgupta",
                 title: "Partner",
                 image: sandipImg,
                 bio: "Over 25 years of diversified experience in Banking, Infrastructure, Real Estate & Construction, Manufacturing, and Audit & Assurance with extensive audit and advisory exposure."
