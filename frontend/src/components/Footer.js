@@ -98,6 +98,11 @@ const Footer = () => {
                 <i className="fas fa-map-marker-alt me-2"></i>
                 Flat-1A, Premise No. 18-0206, Plot No. CE/1/C/122, Newtown, Rajarhat, Kolkata – 700156
               </a>
+              <div className="mt-1 small" style={{ fontSize: "0.80rem" }}>
+                <span className="d-block text-white opacity-75">Santanu Chatterjee</span>
+                <span className="d-block"><a href="tel:+919051079796" className="text-white text-decoration-none opacity-75 hover-opacity-100">+91 90510 79796</a></span>
+                <span className="d-block"><a href="mailto:santanu.chatterjee@dma-caoffice.in" className="text-white text-decoration-none opacity-75 hover-opacity-100">santanu.chatterjee@dma-caoffice.in</a></span>
+              </div>
             </p>
             <p className="mb-2">
               <span className="text-uppercase fw-bold d-block mb-1" style={{ fontSize: "0.75rem", color: "#D4AF37" }}>Branch Office 2</span>
