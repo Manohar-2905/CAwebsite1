@@ -99,6 +99,19 @@ const Footer = () => {
                 Flat-1A, Premise No. 18-0206, Plot No. CE/1/C/122, Newtown, Rajarhat, Kolkata – 700156
               </a>
             </p>
+            <p className="mb-2">
+              <span className="text-uppercase fw-bold d-block mb-1" style={{ fontSize: "0.75rem", color: "#D4AF37" }}>Branch Office 2</span>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=45E%2F14A+Gauri+Appartment+Moore+Avenue+Manick+Bandopadhyay+Sarani+Kolkata+700040"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-decoration-none"
+                style={{ color: "white", opacity: 0.9, fontSize: "0.9rem" }}
+              >
+                <i className="fas fa-map-marker-alt me-2"></i>
+                45E/14A - Gauri Appartment, Moore Avenue, Manick Bandopadhyay Sarani, Kolkata – 700040
+              </a>
+            </p>
           </Col>
         </Row>
       </Container>

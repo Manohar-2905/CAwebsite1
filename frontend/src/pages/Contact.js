@@ -143,6 +143,14 @@ const Contact = () => {
                                             </div>
                                         </div>
 
+                                        <div className="mb-4">
+                                            <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Branch Office 2</h6>
+                                            <div className="text-muted mb-0">
+                                                45E/14A - Gauri Appartment, Moore Avenue,<br />
+                                                Manick Bandopadhyay Sarani, Kolkata – 700040
+                                            </div>
+                                        </div>
+
 
 
                                         <div className="mb-5">
