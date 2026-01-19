@@ -139,7 +139,10 @@ const Contact = () => {
                                             <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Branch Office 1</h6>
                                             <div className="text-muted mb-0">
                                                 Flat-1A, Premise No. 18-0206, Plot No. CE/1/C/122<br />
-                                                Newtown, Rajarhat, Kolkata – 700156
+                                                Newtown, Rajarhat, Kolkata – 700156<br />
+                                                <span className="fw-bold">Santanu Chatterjee</span><br />
+                                                Phone: <a href="tel:+919051079796" className="text-decoration-none text-muted">+91 90510 79796</a><br />
+                                                Email: <a href="mailto:santanu.chatterjee@dma-caoffice.in" className="text-decoration-none text-muted">santanu.chatterjee@dma-caoffice.in</a>
                                             </div>
                                         </div>
 
