@@ -73,16 +73,30 @@ const Footer = () => {
               <span> / </span>
               <a href="tel:+918961401688" className="text-white text-decoration-none">+91 89614 01688</a>
             </p>
-            <p className="mb-2">
+            <p className="mb-3">
+              <span className="text-uppercase fw-bold d-block mb-1" style={{ fontSize: "0.75rem", color: "#D4AF37" }}>Head Office</span>
               <a
-                href="https://www.google.com/maps/dir//Premise+No.18,+Flat-1A,+Plot+No.CE%2F1%2FC%2F122,+Street+Number+206,+Rajarhat,+New+Town,+Kolkata,+West+Bengal+700107/@22.577152,88.4670464,15z/data=!3m1!4b1!4m8!4m7!1m0!1m5!1m1!1s0x3a0275871e887679:0x6171f8c8e8e0865d!2m2!1d88.4618394!2d22.5767342?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D"
+                href="https://www.google.com/maps/search/?api=1&query=Flat+B1,+AC+229,+Street+39,+Classic+Apartments,+Action+Area+1,+New+Town,+Kolkata+700156"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-decoration-none"
-                style={{ color: "white", opacity: 0.9 }}
+                style={{ color: "white", opacity: 0.9, fontSize: "0.9rem" }}
               >
                 <i className="fas fa-map-marker-alt me-2"></i>
-                Flat B1, AC 229, Street 39, Classic Apartments, Action Area 1, New Town, Kolkata – 700156
+                Flat B1, AC 229, Street 39, Classic Apartments, AA 1, New Town, Kolkata – 700156
+              </a>
+            </p>
+            <p className="mb-2">
+              <span className="text-uppercase fw-bold d-block mb-1" style={{ fontSize: "0.75rem", color: "#D4AF37" }}>Branch Office 1</span>
+              <a
+                href="https://www.google.com/maps/dir//Premise+No.18,+Flat-1A,+Plot+No.CE%2F1%2FC%2F122,+Street+Number+206,+Rajarhat,+New+Town,+Kolkata,+West+Bengal+700107"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-decoration-none"
+                style={{ color: "white", opacity: 0.9, fontSize: "0.9rem" }}
+              >
+                <i className="fas fa-map-marker-alt me-2"></i>
+                Flat-1A, Premise No. 18-0206, Plot No. CE/1/C/122, Newtown, Rajarhat, Kolkata – 700156
               </a>
             </p>
           </Col>

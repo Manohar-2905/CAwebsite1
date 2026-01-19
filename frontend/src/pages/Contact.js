@@ -128,10 +128,18 @@ const Contact = () => {
                                         </div>
 
                                         <div className="mb-4">
-                                            <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Office</h6>
+                                            <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Head Office</h6>
                                             <div className="text-muted mb-0">
                                                 Flat B1, AC 229, Street 39, Classic Apartments<br />
                                                 Action Area 1, New Town, Kolkata – 700156
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-4">
+                                            <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Branch Office 1</h6>
+                                            <div className="text-muted mb-0">
+                                                Flat-1A, Premise No. 18-0206, Plot No. CE/1/C/122<br />
+                                                Newtown, Rajarhat, Kolkata – 700156
                                             </div>
                                         </div>
 
