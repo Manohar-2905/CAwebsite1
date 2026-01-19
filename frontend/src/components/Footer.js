@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="shadow-lg border-top" style={{ backgroundColor: "#002147", color: "white" }}>
       <Container className="py-4 py-md-5">
         <Row className="gy-4">
-          <Col md={4} className="mb-4 mb-md-0">
+          <Col md={3} className="mb-4 mb-md-0">
             <h5 className="mb-4 fw-bold font-heading" style={{ color: "#D4AF37", letterSpacing: "1px" }}>
               DASGUPTA MAITI & ASSOCIATES
             </h5>
@@ -61,7 +61,7 @@ const Footer = () => {
             </ul>
           </Col>
 
-          <Col md={3}>
+          <Col md={4}>
             <h6 className="mb-3 fw-bold text-uppercase" style={{ fontSize: "0.85rem", letterSpacing: "1px", color: "#D4AF37" }}>Contact</h6>
             <p className="mb-2 opacity-75">
               <i className="fas fa-envelope me-2 text-warning"></i>
@@ -73,7 +73,7 @@ const Footer = () => {
               <span> / </span>
               <a href="tel:+918961401688" className="text-white text-decoration-none">+91 89614 01688</a>
             </p>
-            <p className="mb-3">
+            <p className="mb-4">
               <span className="text-uppercase fw-bold d-block mb-1" style={{ fontSize: "0.75rem", color: "#D4AF37" }}>Head Office</span>
               <a
                 href="https://www.google.com/maps/search/?api=1&query=Flat+B1,+AC+229,+Street+39,+Classic+Apartments,+Action+Area+1,+New+Town,+Kolkata+700156"
@@ -86,7 +86,7 @@ const Footer = () => {
                 Flat B1, AC 229, Street 39, Classic Apartments, AA 1, New Town, Kolkata – 700156
               </a>
             </p>
-            <p className="mb-2">
+            <p className="mb-4">
               <span className="text-uppercase fw-bold d-block mb-1" style={{ fontSize: "0.75rem", color: "#D4AF37" }}>Branch Office 1</span>
               <a
                 href="https://www.google.com/maps/dir//Premise+No.18,+Flat-1A,+Plot+No.CE%2F1%2FC%2F122,+Street+Number+206,+Rajarhat,+New+Town,+Kolkata,+West+Bengal+700107"
