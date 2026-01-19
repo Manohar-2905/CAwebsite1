@@ -51,8 +51,16 @@ const Footer = () => {
           <Col md={3} className="mb-4 mb-md-0">
             <h6 className="mb-3 fw-bold text-uppercase" style={{ fontSize: "0.85rem", letterSpacing: "1px", color: "#D4AF37" }}>Get in Touch</h6>
             <div className="mb-4 text-white opacity-75 small">
-               <p className="mb-2"><i className="fas fa-envelope me-2 text-warning"></i> admin@dma-caoffice.in</p>
-               <p className="mb-2"><i className="fas fa-phone me-2 text-warning"></i> +91 98743 00074</p>
+               <p className="mb-2">
+                 <a href="mailto:admin@dma-caoffice.in" className="text-white text-decoration-none hover-opacity-100">
+                   <i className="fas fa-envelope me-2 text-warning"></i> admin@dma-caoffice.in
+                 </a>
+               </p>
+               <p className="mb-2">
+                 <a href="tel:+919874300074" className="text-white text-decoration-none hover-opacity-100">
+                   <i className="fas fa-phone me-2 text-warning"></i> +91 98743 00074
+                 </a>
+               </p>
             </div>
             
             <h6 className="mb-3 fw-bold text-uppercase" style={{ fontSize: "0.85rem", letterSpacing: "1px", color: "#D4AF37" }}>Head Office</h6>
