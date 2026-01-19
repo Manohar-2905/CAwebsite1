@@ -85,8 +85,16 @@ const Footer = () => {
               <div className="mt-2 pt-2 border-top border-secondary">
                  <div className="fw-bold text-white small opacity-90 mb-1">Santanu Chatterjee</div>
                  <div className="opacity-75 small">
-                    <i className="fas fa-phone me-1 text-warning" style={{fontSize: '0.7rem'}}></i> +91 90510 79796<br/>
-                    <i className="fas fa-envelope me-1 text-warning" style={{fontSize: '0.7rem'}}></i> santanu.chatterjee@dma-caoffice.in
+                    <div className="mb-1">
+                        <a href="tel:+919051079796" className="text-white text-decoration-none opacity-75 hover-opacity-100">
+                           <i className="fas fa-phone me-1 text-warning" style={{fontSize: '0.7rem'}}></i> +91 90510 79796
+                        </a>
+                    </div>
+                    <div>
+                        <a href="mailto:santanu.chatterjee@dma-caoffice.in" className="text-white text-decoration-none opacity-75 hover-opacity-100">
+                           <i className="fas fa-envelope me-1 text-warning" style={{fontSize: '0.7rem'}}></i> santanu.chatterjee@dma-caoffice.in
+                        </a>
+                    </div>
                  </div>
               </div>
             </p>
