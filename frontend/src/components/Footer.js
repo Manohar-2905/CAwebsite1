@@ -102,7 +102,7 @@ const Footer = () => {
             <p className="mb-2">
               <span className="text-uppercase fw-bold d-block mb-1" style={{ fontSize: "0.75rem", color: "#D4AF37" }}>Branch Office 2</span>
               <a
-                href="https://www.google.com/maps/search/?api=1&query=45E%2F14A+Gauri+Appartment+Moore+Avenue+Manick+Bandopadhyay+Sarani+Kolkata+700040"
+                href="https://www.google.com/maps/dir//45e,+14a,+Moore+Avenue,+Vivekananda+Nagar,+Ashok+Nagar,+Tollygunge,+Kolkata,+West+Bengal+700040/@22.577152,88.4670464,15z/data=!3m1!4b1!4m8!4m7!1m0!1m5!1m1!1s0x3a02710cdea22a4b:0x80945328a7a3f4a0!2m2!1d88.3496963!2d22.4807219?hl=en&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-decoration-none"
