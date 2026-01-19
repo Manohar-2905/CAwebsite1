@@ -72,7 +72,10 @@ const Footer = () => {
                 className="text-decoration-none text-white opacity-75 hover-opacity-100"
                 style={{ lineHeight: '1.6' }}
               >
-                Flat B1, AC 229, Street 39,<br/>Classic Apartments, AA 1,<br/>New Town, Kolkata – 700156
+                <i className="fas fa-map-marker-alt me-2 text-warning"></i>
+                Flat B1, AC 229, Street 39,<br/>
+                <span className="ms-4">Classic Apartments, AA 1,</span><br/>
+                <span className="ms-4">New Town, Kolkata – 700156</span>
               </a>
             </p>
           </Col>
@@ -88,7 +91,10 @@ const Footer = () => {
                 className="text-decoration-none text-white opacity-75 hover-opacity-100"
                 style={{ lineHeight: '1.6' }}
               >
-                 Flat-1A, Premise No. 18-0206,<br/>Plot No. CE/1/C/122, Newtown,<br/>Rajarhat, Kolkata – 700156
+                 <i className="fas fa-map-marker-alt me-2 text-warning"></i>
+                 Flat-1A, Premise No. 18-0206,<br/>
+                 <span className="ms-4">Plot No. CE/1/C/122, Newtown,</span><br/>
+                 <span className="ms-4">Rajarhat, Kolkata – 700156</span>
               </a>
               <div className="mt-2 pt-2 border-top border-secondary">
                  <div className="fw-bold text-white small opacity-90 mb-1">Santanu Chatterjee</div>
@@ -116,7 +122,10 @@ const Footer = () => {
                 className="text-decoration-none text-white opacity-75 hover-opacity-100"
                 style={{ lineHeight: '1.6' }}
               >
-                45E/14A - Gauri Appartment,<br/>Moore Avenue, Manick Bandopadhyay Sarani,<br/>Kolkata – 700040
+                <i className="fas fa-map-marker-alt me-2 text-warning"></i>
+                45E/14A - Gauri Appartment,<br/>
+                <span className="ms-4">Moore Avenue, Manick Bandopadhyay Sarani,</span><br/>
+                <span className="ms-4">Kolkata – 700040</span>
               </a>
             </p>
           </Col>
