@@ -139,20 +139,20 @@ const Contact = () => {
                                             <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Branch Office 1</h6>
                                             <div className="text-muted mb-0">
                                                 Flat-1A, Premise No. 18-0206, Plot No. CE/1/C/122<br />
-                                                Newtown, Rajarhat, Kolkata – 700156<br />
-                                                <span className="fw-bold">Santanu Chatterjee</span><br />
-                                                <a href="tel:+919051079796" className="text-decoration-none text-muted">
-                                                    <i className="fas fa-phone-alt me-2 text-warning small"></i> +91 90510 79796
-                                                </a><br />
-                                                <a href="mailto:santanu.chatterjee@dma-caoffice.in" className="text-decoration-none text-muted">
-                                                    <i className="fas fa-envelope me-2 text-warning small"></i> santanu.chatterjee@dma-caoffice.in
-                                                </a>
+                                                Newtown, Rajarhat, Kolkata – 700156
                                             </div>
                                         </div>
 
                                         <div className="mb-4">
                                             <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Branch Office 2</h6>
                                             <div className="text-muted mb-0">
+                                                <span className="fw-bold">Santanu Chatterjee</span><br />
+                                                <a href="tel:+919051079796" className="text-decoration-none text-muted">
+                                                    <i className="fas fa-phone-alt me-2 text-warning small"></i> +91 90510 79796
+                                                </a><br />
+                                                <a href="mailto:santanu.chatterjee@dma-caoffice.in" className="text-decoration-none text-muted">
+                                                    <i className="fas fa-envelope me-2 text-warning small"></i> santanu.chatterjee@dma-caoffice.in
+                                                </a><br />
                                                 45E/14A - Gauri Appartment, Moore Avenue,<br />
                                                 Manick Bandopadhyay Sarani, Kolkata – 700040
                                             </div>

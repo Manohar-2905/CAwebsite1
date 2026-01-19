@@ -96,7 +96,12 @@ const Footer = () => {
                  <span className="ms-4">Plot No. CE/1/C/122, Newtown,</span><br/>
                  <span className="ms-4">Rajarhat, Kolkata – 700156</span>
               </a>
-              <div className="mt-2 pt-2 border-top border-secondary">
+
+            </p>
+
+            <h6 className="mb-3 fw-bold text-uppercase" style={{ fontSize: "0.85rem", letterSpacing: "1px", color: "#D4AF37" }}>Branch Office 2</h6>
+            <p className="mb-0 small">
+              <div className="mb-2 pb-2 border-bottom border-secondary">
                  <div className="fw-bold text-white small opacity-90 mb-1">Santanu Chatterjee</div>
                  <div className="opacity-75 small">
                     <div className="mb-1">
@@ -111,10 +116,6 @@ const Footer = () => {
                     </div>
                  </div>
               </div>
-            </p>
-
-            <h6 className="mb-3 fw-bold text-uppercase" style={{ fontSize: "0.85rem", letterSpacing: "1px", color: "#D4AF37" }}>Branch Office 2</h6>
-            <p className="mb-0 small">
               <a
                 href="https://www.google.com/maps/dir//45e,+14a,+Moore+Avenue,+Vivekananda+Nagar,+Ashok+Nagar,+Tollygunge,+Kolkata,+West+Bengal+700040/@22.577152,88.4670464,15z/data=!3m1!4b1!4m8!4m7!1m0!1m5!1m1!1s0x3a02710cdea22a4b:0x80945328a7a3f4a0!2m2!1d88.3496963!2d22.4807219?hl=en&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D"
                 target="_blank"
