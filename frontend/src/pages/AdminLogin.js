@@ -126,11 +126,11 @@ const AdminLogin = () => {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="btn btn-link position-absolute top-50 end-0 translate-middle-y text-secondary p-0 me-3"
-                      style={{ zIndex: 5, textDecoration: 'none' }}
+                      className="position-absolute top-50 end-0 translate-middle-y border-0 bg-transparent text-muted p-0 me-3"
+                      style={{ zIndex: 5, cursor: 'pointer', outline: 'none' }}
                       aria-label={showPassword ? "Hide password" : "Show password"}
                     >
-                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
                   </div>
                 </Form.Group>
