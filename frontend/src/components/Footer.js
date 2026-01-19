@@ -100,7 +100,7 @@ const Footer = () => {
             </p>
 
             <h6 className="mb-3 fw-bold text-uppercase" style={{ fontSize: "0.85rem", letterSpacing: "1px", color: "#D4AF37" }}>Branch Office 2</h6>
-            <p className="mb-0 small">
+            <div className="mb-0 small">
               <div className="mb-2 pb-2 border-bottom border-secondary">
                  <div className="fw-bold text-white small opacity-90 mb-1">Santanu Chatterjee</div>
                  <div className="opacity-75 small">
@@ -124,11 +124,12 @@ const Footer = () => {
                 style={{ lineHeight: '1.6' }}
               >
                 <i className="fas fa-map-marker-alt me-2 text-warning"></i>
-                45E/14A - Gauri Appartment,<br/>
-                <span className="ms-4">Moore Avenue, Manick Bandopadhyay Sarani,</span><br/>
+                45E/14A - Gauri Apartment,<br/>
+                <span className="ms-4">Moore Avenue,</span><br/>
+                <span className="ms-4">Manick Bandopadhyay Sarani,</span><br/>
                 <span className="ms-4">Kolkata – 700040</span>
               </a>
-            </p>
+            </div>
           </Col>
         </Row>
       </Container>

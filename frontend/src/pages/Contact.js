@@ -153,7 +153,7 @@ const Contact = () => {
                                                 <a href="mailto:santanu.chatterjee@dma-caoffice.in" className="text-decoration-none text-muted">
                                                     <i className="fas fa-envelope me-2 text-warning small"></i> santanu.chatterjee@dma-caoffice.in
                                                 </a><br />
-                                                45E/14A - Gauri Appartment, Moore Avenue,<br />
+                                                45E/14A - Gauri Apartment, Moore Avenue,<br />
                                                 Manick Bandopadhyay Sarani, Kolkata – 700040
                                             </div>
                                         </div>
