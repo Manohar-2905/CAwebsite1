@@ -1,138 +1,111 @@
-const nodemailer = require('nodemailer');
 const axios = require('axios');
 
 /**
  * Get Zoho Access Token using Refresh Token
+ * Uses the Zoho India (zoho.in) region by default
  */
 const getZohoAccessToken = async () => {
+    const clientId = process.env.ZOHO_CLIENT_ID;
+    const clientSecret = process.env.ZOHO_CLIENT_SECRET;
+    const refreshToken = process.env.ZOHO_REFRESH_TOKEN;
+
+    if (!clientId || !clientSecret || !refreshToken) {
+        throw new Error('Missing Zoho API credentials (Client ID, Secret, or Refresh Token)');
+    }
+
     try {
         const response = await axios.post('https://accounts.zoho.in/oauth/v2/token', null, {
             params: {
-                refresh_token: process.env.ZOHO_REFRESH_TOKEN,
-                client_id: process.env.ZOHO_CLIENT_ID,
-                client_secret: process.env.ZOHO_CLIENT_SECRET,
+                refresh_token: refreshToken,
+                client_id: clientId,
+                client_secret: clientSecret,
                 grant_type: 'refresh_token'
             }
         });
+        
+        if (!response.data.access_token) {
+            throw new Error('Access token not found in Zoho response');
+        }
+        
         return response.data.access_token;
     } catch (error) {
-        console.error('❌ Zoho OAuth Error:', error.response?.data || error.message);
-        throw new Error('Failed to refresh Zoho access token');
+        console.error('❌ Zoho OAuth Token Refresh Failed:', error.response?.data || error.message);
+        throw new Error(`Zoho Auth Error: ${error.response?.data?.error || error.message}`);
     }
 };
 
 /**
- * Send Email via Zoho REST API
+ * Send Email via Zoho Mail REST API
+ * This is the preferred method for Render.com as it bypasses SMTP port blocks.
  */
-const sendEmailZoho = async ({ to, subject, text, html, replyTo }) => {
-    const accessToken = await getZohoAccessToken();
-    const accountId = process.env.ZOHO_ACCOUNT_ID;
-    const fromAddress = process.env.ZOHO_EMAIL;
-
-    const url = `https://mail.zoho.in/api/accounts/${accountId}/messages`;
-
-    // Zoho API requires a specific structure
-    const emailData = {
-        fromAddress,
-        toAddress: to || process.env.ADMIN_EMAIL,
-        subject,
-        content: html || text,
-        mailFormat: html ? 'html' : 'text'
-    };
-
-    // Add replyTo if provided
-    if (replyTo) {
-        // Zoho API doesn't have a direct 'replyTo' in simple message create
-        // but we can append it to the body or use advanced params if needed.
-        // For now, we'll prefix the content.
-        emailData.content = `(Reply-To: ${replyTo})\n\n${emailData.content}`;
-    }
+const sendEmail = async ({ to, subject, text, html, replyTo, attachments }) => {
+    console.log(`Attempting to send email to ${to || process.env.ADMIN_EMAIL} via Zoho REST API...`);
 
     try {
+        const accessToken = await getZohoAccessToken();
+        const accountId = process.env.ZOHO_ACCOUNT_ID;
+        const fromAddress = process.env.ZOHO_EMAIL;
+
+        if (!accountId || !fromAddress) {
+            throw new Error('Missing ZOHO_ACCOUNT_ID or ZOHO_EMAIL in environment variables');
+        }
+
+        const url = `https://mail.zoho.in/api/accounts/${accountId}/messages`;
+
+        // Format content
+        let content = html || text;
+        if (replyTo) {
+            content = `<p><i>[Reply-to: ${replyTo}]</i></p>${content}`;
+        }
+
+        const emailData = {
+            fromAddress,
+            toAddress: to || process.env.ADMIN_EMAIL,
+            subject,
+            content: content,
+            mailFormat: html ? 'html' : 'text'
+        };
+
+        // Note: Zoho API attachment handling requires a multi-step process (upload first).
+        // For simplicity in the contact form, we'll log a warning if attachments are present.
+        if (attachments && attachments.length > 0) {
+            console.warn('⚠️ Zoho REST API implementation currently does not support direct attachments. Attachments were skipped.');
+        }
+
         const response = await axios.post(url, emailData, {
             headers: {
                 'Authorization': `Zoho-oauthtoken ${accessToken}`,
                 'Content-Type': 'application/json'
             }
         });
-        console.log('✅ Email sent via Zoho API:', response.data);
+
+        console.log('✅ Email sent successfully via Zoho API console!');
         return response.data;
-    } catch (error) {
-        console.error('❌ Zoho API Send Error:', error.response?.data || error.message);
-        throw error;
-    }
-};
 
-/**
- * SMTP Transporter (Fallback for local)
- */
-const createTransporter = () => {
-    const port = Number(process.env.SMTP_PORT) || 587;
-    return nodemailer.createTransport({
-        host: process.env.SMTP_HOST || 'smtp.zoho.com',
-        port: port,
-        secure: port === 465,
-        auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS
+    } catch (error) {
+        console.error('❌ Zoho API Error:', error.response?.data || error.message);
+        
+        // If it's a configuration issue, we want to know
+        if (error.message.includes('Missing')) {
+            throw error;
         }
-    });
-};
 
-/**
- * Main sendEmail function with Fallback
- */
-const sendEmail = async (params) => {
-    // If Zoho API credentials exist, use the API (Best for Render)
-    if (process.env.ZOHO_REFRESH_TOKEN && process.env.ZOHO_CLIENT_ID) {
-        console.log('Using Zoho REST API for email delivery...');
-        return await sendEmailZoho(params);
-    }
-
-    // Otherwise, fallback to SMTP (Best for local/legacy)
-    console.log('Using SMTP for email delivery...');
-    const transporter = createTransporter();
-    const mailOptions = {
-        from: `"Website Mailer" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
-        to: params.to || process.env.ADMIN_EMAIL,
-        replyTo: params.replyTo,
-        subject: params.subject,
-        text: params.text,
-        html: params.html,
-        attachments: params.attachments
-    };
-
-    try {
-        const info = await transporter.sendMail(mailOptions);
-        console.log('✅ Email sent via SMTP:', info.messageId);
-        return info;
-    } catch (error) {
-        console.error('❌ SMTP Email send failed:', error.message);
-        throw error;
+        throw new Error(`Failed to send email via Zoho API: ${error.response?.data?.summary || error.message}`);
     }
 };
 
 /**
- * Simple connection verification (checks SMTP or API availability)
+ * Verify Zoho API Connection
  */
 const verifyConnection = async () => {
-    if (process.env.ZOHO_REFRESH_TOKEN && process.env.ZOHO_CLIENT_ID) {
-        try {
-            await getZohoAccessToken();
-            console.log('✅ Zoho API Connection Verified');
-            return { success: true, method: 'API' };
-        } catch (error) {
-            return { success: false, error, method: 'API' };
-        }
-    } else {
-        const transporter = createTransporter();
-        try {
-            await transporter.verify();
-            console.log('✅ SMTP Connection Verified');
-            return { success: true, method: 'SMTP' };
-        } catch (error) {
-            return { success: false, error, method: 'SMTP' };
-        }
+    console.log('Verifying Zoho API connection...');
+    try {
+        await getZohoAccessToken();
+        console.log('✅ Zoho API connection verified successfully!');
+        return { success: true, method: 'ZOHO_API' };
+    } catch (error) {
+        console.error('❌ Zoho API verification failed.');
+        return { success: false, error: error.message, method: 'ZOHO_API' };
     }
 };
 
