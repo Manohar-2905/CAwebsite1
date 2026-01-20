@@ -14,7 +14,7 @@ const getZohoAccessToken = async () => {
     }
 
     try {
-        const response = await axios.post('https://accounts.zoho.in/oauth/v2/token', null, {
+        const response = await axios.post('https://accounts.zoho.com/oauth/v2/token', null, {
             params: {
                 refresh_token: refreshToken,
                 client_id: clientId,
@@ -23,14 +23,26 @@ const getZohoAccessToken = async () => {
             }
         });
         
+        // Handle cases where Zoho returns 200 OK but with an error JSON
+        if (response.data.error) {
+            console.error('❌ Zoho API returned error in JSON:', response.data);
+            throw new Error(`Zoho API Error: ${response.data.error}`);
+        }
+
         if (!response.data.access_token) {
+            console.error('❌ Zoho API response missing access_token:', response.data);
             throw new Error('Access token not found in Zoho response');
         }
         
         return response.data.access_token;
     } catch (error) {
-        console.error('❌ Zoho OAuth Token Refresh Failed:', error.response?.data || error.message);
-        throw new Error(`Zoho Auth Error: ${error.response?.data?.error || error.message}`);
+        // Log the actual response data if available
+        const errorData = error.response?.data || error.message;
+        console.error('❌ Zoho OAuth Token Refresh Failed:', errorData);
+        
+        // Propagate a clean error message
+        const message = error.response?.data?.error || error.message;
+        throw new Error(`Zoho Auth Error: ${message}`);
     }
 };
 
@@ -50,7 +62,7 @@ const sendEmail = async ({ to, subject, text, html, replyTo, attachments }) => {
             throw new Error('Missing ZOHO_ACCOUNT_ID or ZOHO_EMAIL in environment variables');
         }
 
-        const url = `https://mail.zoho.in/api/accounts/${accountId}/messages`;
+        const url = `https://mail.zoho.com/api/accounts/${accountId}/messages`;
 
         // Format content
         let content = html || text;
