@@ -1,47 +1,38 @@
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
-const nodemailer = require('nodemailer');
+const { verifyConnection, sendEmail } = require('./utils/email');
 
 const debugEmail = async () => {
-    const user = process.env.SMTP_USER || '';
-    const pass = process.env.SMTP_PASS || '';
-
     console.log('--- EMAIL CONFIGURATION DEBUG ---');
     console.log(`SMTP_HOST: ${process.env.SMTP_HOST}`);
     console.log(`SMTP_PORT: ${process.env.SMTP_PORT}`);
-    console.log(`SMTP_USER: ${user.substring(0, 3)}*** (${user.length} chars)`);
-    console.log(`SMTP_PASS: ${pass.substring(0, 2)}***${pass.substring(pass.length - 2)} (${pass.length} chars)`);
+    console.log(`ZOHO_EMAIL: ${process.env.ZOHO_EMAIL}`);
+    console.log(`ZOHO_ACCOUNT_ID: ${process.env.ZOHO_ACCOUNT_ID}`);
+    console.log(`USING_API: ${!!(process.env.ZOHO_REFRESH_TOKEN && process.env.ZOHO_CLIENT_ID)}`);
     console.log('---------------------------------');
 
-    if (!user || !pass) {
-        console.error('❌ SMTP_USER or SMTP_PASS is missing');
-        return;
-    }
-
-    console.log('Creating transporter for STARTTLS (587)...');
-
-    const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST || 'smtp.zoho.in',
-        port: 587,
-        secure: false, // REQUIRED for 587
-        auth: {
-            user: user,
-            pass: pass
-        },
-        connectionTimeout: 60000,
-        greetingTimeout: 60000,
-        socketTimeout: 60000,
-        logger: true,
-        debug: true
-    });
-
     try {
-        console.log('Attempting verify()...');
-        await transporter.verify();
-        console.log('✅ SUCCESS: SMTP Connection Verified!');
+        console.log('Step 1: Verifying Connection...');
+        const result = await verifyConnection();
+        
+        if (result.success) {
+            console.log(`✅ SUCCESS: Connection Verified via ${result.method}!`);
+            
+            console.log('\nStep 2: Sending Test Email...');
+            await sendEmail({
+                to: process.env.ADMIN_EMAIL,
+                subject: `DEBUG TEST - ${result.method}`,
+                text: `This is a debug test email sent via ${result.method}.`,
+                html: `<h1>Debug Test</h1><p>Sent via <b>${result.method}</b></p>`
+            });
+            console.log('✅ SUCCESS: Test Email Sent!');
+        } else {
+            console.error(`❌ FAILURE: Connection Failed via ${result.method}`);
+            console.error(result.error?.message || result.error);
+        }
     } catch (error) {
-        console.error('❌ FAILURE: SMTP Verification Failed');
-        console.error(error.message); // show exact cause
+        console.error('❌ UNEXPECTED ERROR during debug:');
+        console.error(error);
     }
 };
 
