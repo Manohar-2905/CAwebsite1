@@ -9,9 +9,10 @@ const createTransporter = () => {
     );
 
     return nodemailer.createTransport({
-        host: process.env.SMTP_HOST || 'smtp.zoho.in',
+        host: process.env.SMTP_HOST || 'smtp.zoho.com',
         port: port,
-        secure: false, // MUST be false for 587
+        secure: false, // STARTTLS requires secure: false
+        requireTLS: true,
         auth: {
             user: process.env.SMTP_USER,
             pass: process.env.SMTP_PASS
@@ -22,6 +23,7 @@ const createTransporter = () => {
         logger: true,
         debug: true
     });
+
 };
 
 const sendEmail = async ({ to, subject, text, html, replyTo, attachments }) => {
