@@ -51,7 +51,7 @@ const Services = () => {
   return (
     <>
       <Helmet>
-        <title>Our Services - CA Consultancy</title>
+        <title>Our Services - DASGUPTA MAITI & ASSOCIATES</title>
         <meta name="description" content="Comprehensive CA services including Audit & Assurance, Tax, GST, ROC Compliance, and Financial Consulting." />
       </Helmet>
 

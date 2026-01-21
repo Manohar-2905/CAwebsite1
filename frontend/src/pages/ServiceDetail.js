@@ -181,6 +181,26 @@ const ServiceDetail = () => {
         {service.imageURL && <meta property="og:image" content={service.imageURL} />}
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
+      
+      <style>{`
+        .mobile-pdf-btn {
+          transition: all 0.3s ease;
+        }
+        @media (max-width: 768px) {
+          .mobile-pdf-btn {
+            padding: 8px 20px !important;
+            font-size: 0.75rem !important;
+            border-radius: 50px !important;
+            border-width: 1px !important;
+            width: fit-content !important;
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+          }
+        }
+      `}</style>
 
       {/* --- HIDDEN PDF TEMPLATE (Off-screen to ensure images load) --- */}
       <div id="pdf-template" style={{ position: 'absolute', left: '-9999px', top: 0, width: '1000px', background: 'white', padding: '40px', fontFamily: '"Times New Roman", Times, serif', zIndex: -1000 }}>
@@ -206,7 +226,7 @@ const ServiceDetail = () => {
                         CHARTERED ACCOUNTANTS
                     </h2>
                     <p style={{ color: '#000', margin: '5px 0 0 0', fontSize: '14px', fontWeight: 'bold' }}>
-                        Flat B1, AC 229,Street 39, Classic Apartments, Action Area 1, New Town , Kolkata – 700156
+                        Flat B1, AC 229, Street 39, Classic Apartments, AA 1, New Town, Kolkata – 700156
                     </p>
                 </div>
             </div>
@@ -244,7 +264,7 @@ const ServiceDetail = () => {
                 <div style={{ fontSize: '18px', color: '#002147', fontWeight: 'bold', display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap' }}>
                   <span>📞 <a href="tel:+919874300074" style={{ color: 'inherit', textDecoration: 'none' }}>+91 98743 00074</a> / <a href="tel:+918961401688" style={{ color: 'inherit', textDecoration: 'none' }}>+91 89614 01688</a></span>
                   <span>✉️ <a href="mailto:admin@dma-caoffice.in" style={{ color: 'inherit', textDecoration: 'none' }}>admin@dma-caoffice.in</a></span>
-                  <span>🌐 <a href="http://www.dma-ca.com" style={{ color: 'inherit', textDecoration: 'none' }}>www.dma-ca.com</a></span>
+                  <span>🌐 <a href="https://www.dma-caoffice.in" style={{ color: 'inherit', textDecoration: 'none' }}>www.dma-caoffice.in</a></span>
                 </div>
             </div>
         </div>
@@ -270,7 +290,7 @@ const ServiceDetail = () => {
                 <Button
                   onClick={handlePrint}
                   variant="outline-primary"
-                  className="px-4 py-2 border-2 fw-bold text-uppercase d-print-none"
+                  className="px-4 py-2 border-2 fw-bold text-uppercase d-print-none mobile-pdf-btn"
                   style={{ fontSize: "0.85rem", borderColor: "#002147", color: "#002147" }}
                   onMouseEnter={(e) => { e.target.style.backgroundColor = "#002147"; e.target.style.color = "white"; }}
                   onMouseLeave={(e) => { e.target.style.backgroundColor = "transparent"; e.target.style.color = "#002147"; }}

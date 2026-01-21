@@ -52,7 +52,7 @@ const PublicationDetail = () => {
     description: publication.description,
     author: {
       '@type': 'Organization',
-      name: 'CA Consultancy'
+      name: 'DASGUPTA MAITI & ASSOCIATES'
     }
   };
 
@@ -61,13 +61,39 @@ const PublicationDetail = () => {
   return (
     <>
       <Helmet>
-        <title>{publication.title} - CA Consultancy</title>
+        <title>{publication.title} - DASGUPTA MAITI & ASSOCIATES</title>
         <meta name="description" content={publication.description.substring(0, 160)} />
         <meta name="keywords" content={publication.keywords.join(', ')} />
         <meta property="og:title" content={publication.title} />
         <meta property="og:description" content={publication.description.substring(0, 160)} />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
+
+      <style>{`
+        .mobile-pdf-btn {
+          transition: all 0.3s ease;
+        }
+        @media (max-width: 768px) {
+          .mobile-pdf-btn {
+            padding: 8px 20px !important;
+            font-size: 0.75rem !important;
+            border-radius: 50px !important;
+            border-width: 1px !important;
+            width: fit-content !important;
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+            margin: 0 auto; /* Center if needed, or just keep left */
+          }
+          .mobile-btn-container {
+            display: flex !important;
+            justify-content: flex-start !important;
+            align-items: center !important;
+          }
+        }
+      `}</style>
 
       <section className="section-padding">
         <Container>
@@ -82,11 +108,11 @@ const PublicationDetail = () => {
                 {pdfUrl && (
                   <div className="mt-4">
                     {/* Action Buttons */}
-                    <div className="mb-4 d-flex gap-3">
+                    <div className="mb-4 d-flex gap-3 mobile-btn-container">
                       <Button 
                         variant="primary" 
                         size="lg"
-                        className="px-4"
+                        className="px-4 mobile-pdf-btn"
                         onClick={() => {
                           const link = document.createElement('a');
                            link.href = pdfUrl;

@@ -34,7 +34,7 @@ app.use("/api/publications", require("./routes/publications"));
 app.use("/api/newsroom", require("./routes/newsroom"));
 app.use("/api/careers", require("./routes/careers"));
 app.use("/api/career-applications", require("./routes/careerApplications"));
-app.use("/api/sectors", require("./routes/sectors"));
+
 app.use("/api/homepage-files", require("./routes/homepageFiles"));
 app.use("/api/contact", require("./routes/contact"));
 app.use("/api/search", require("./routes/search"));

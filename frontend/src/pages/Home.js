@@ -526,10 +526,14 @@ const Home = () => {
         
         @media (max-width: 992px) {
              .hero-title { font-size: 2rem; }
-             /* Mobile/Tablet Button Size */
+             /* Mobile/Tablet Button Size - Refined for sleek look */
              .mobile-btn-small {
-                 padding: 0.6rem 1.5rem !important;
-                 font-size: 0.8rem !important;
+                 padding: 8px 20px !important;
+                 font-size: 0.75rem !important;
+                 border-radius: 50px !important;
+                 width: fit-content !important;
+                 margin-left: auto;
+                 margin-right: auto;
              }
         }
 

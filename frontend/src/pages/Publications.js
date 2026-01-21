@@ -37,7 +37,7 @@ const Publications = () => {
   return (
     <>
       <Helmet>
-        <title>Publications - CA Consultancy</title>
+        <title>Publications - DASGUPTA MAITI & ASSOCIATES</title>
         <meta
           name="description"
           content="Browse our latest publications, insights, and industry updates."

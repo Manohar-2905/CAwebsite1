@@ -2,12 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Row, Col, Button, Card, Table, Modal, Form, Badge } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import * as FaIcons from 'react-icons/fa';
-import * as MdIcons from 'react-icons/md';
 import api from '../utils/api';
 
-const ALL_ICONS = { ...FaIcons, ...MdIcons };
-const ALL_ICON_NAMES = Object.keys(ALL_ICONS);
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -16,7 +12,7 @@ const AdminDashboard = () => {
   const [publications, setPublications] = useState([]);
   const [newsroom, setNewsroom] = useState([]);
   const [careers, setCareers] = useState([]);
-  const [sectors, setSectors] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
   // Modals
@@ -24,38 +20,17 @@ const AdminDashboard = () => {
   const [showPublicationModal, setShowPublicationModal] = useState(false);
   const [showNewsroomModal, setShowNewsroomModal] = useState(false);
   const [showCareerModal, setShowCareerModal] = useState(false);
-  const [showSectorModal, setShowSectorModal] = useState(false);
+
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
-
-  // Icon Search State
-  const [iconSearch, setIconSearch] = useState('');
-  const [filteredIcons, setFilteredIcons] = useState([]);
-  const [visibleIcons, setVisibleIcons] = useState(100);
-
-  useEffect(() => {
-    if (showSectorModal) {
-      if (!iconSearch) {
-        setFilteredIcons(ALL_ICON_NAMES);
-      } else {
-        const lowerSearch = iconSearch.toLowerCase();
-        const results = ALL_ICON_NAMES.filter(name => name.toLowerCase().includes(lowerSearch));
-        setFilteredIcons(results);
-      }
-      setVisibleIcons(100);
-    }
-  }, [iconSearch, showSectorModal]);
-
-  const loadMoreIcons = () => {
-    setVisibleIcons(prev => prev + 100);
-  };
 
   // Form states
   const [serviceForm, setServiceForm] = useState({ title: '', description: '', seoTitle: '', seoDescription: '', keywords: '', image: null });
   const [publicationForm, setPublicationForm] = useState({ title: '', description: '', keywords: '', file: null, image: null });
   const [newsroomForm, setNewsroomForm] = useState({ title: '', description: '', content: '', date: '', keywords: '', image: null });
   const [careerForm, setCareerForm] = useState({ title: '', description: '', content: '', location: '', department: '', type: 'Full-time', keywords: '', isActive: true, image: null });
-  const [sectorForm, setSectorForm] = useState({ title: '', description: '', icon: 'Landmark', order: 0, image: null });
+
+
   const [passwordForm, setPasswordForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
   const [showPassword, setShowPassword] = useState({ current: false, new: false, confirm: false });
 
@@ -66,18 +41,16 @@ const AdminDashboard = () => {
 
   const fetchData = useCallback(async () => {
     try {
-      const [servicesRes, publicationsRes, newsroomRes, careersRes, sectorsRes] = await Promise.all([
+      const [servicesRes, publicationsRes, newsroomRes, careersRes] = await Promise.all([
         api.get('/services'),
         api.get('/publications'),
         api.get('/newsroom'),
-        api.get('/careers'),
-        api.get('/sectors')
+        api.get('/careers')
       ]);
       setServices(servicesRes.data);
       setPublications(publicationsRes.data);
       setNewsroom(newsroomRes.data);
       setCareers(careersRes.data);
-      setSectors(sectorsRes.data);
     } catch (error) {
       console.error('Error fetching data:', error);
       if (error.response?.status === 401) navigate('/admin/login');
@@ -102,8 +75,7 @@ const AdminDashboard = () => {
   const handleNewsroomSubmit = async (e) => { e.preventDefault(); await handleSubmit('newsroom', newsroomForm, editingItem, setShowNewsroomModal, resetNewsroomForm); };
   const handleCareerSubmit = async (e) => { e.preventDefault(); await handleSubmit('careers', careerForm, editingItem, setShowCareerModal, resetCareerForm); };
 
-  // Note: isMultipart = false for Sectors now as we support icons instead of images
-  const handleSectorSubmit = async (e) => { e.preventDefault(); await handleSubmit('sectors', sectorForm, editingItem, setShowSectorModal, resetSectorForm, false); };
+
 
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
@@ -171,7 +143,7 @@ const AdminDashboard = () => {
       if (type === 'publications') setPublications(prev => prev.filter(item => item._id !== id));
       if (type === 'newsroom') setNewsroom(prev => prev.filter(item => item._id !== id));
       if (type === 'careers') setCareers(prev => prev.filter(item => item._id !== id));
-      if (type === 'sectors') setSectors(prev => prev.filter(item => item._id !== id));
+
 
       setShowDeleteModal(false);
       setItemToDelete(null);
@@ -191,7 +163,7 @@ const AdminDashboard = () => {
   const resetPublicationForm = () => { setPublicationForm({ title: '', description: '', keywords: '', file: null, image: null }); setEditingItem(null); };
   const resetNewsroomForm = () => { setNewsroomForm({ title: '', description: '', content: '', date: '', keywords: '', image: null }); setEditingItem(null); };
   const resetCareerForm = () => { setCareerForm({ title: '', description: '', content: '', location: '', department: '', type: 'Full-time', keywords: '', isActive: true, image: null }); setEditingItem(null); };
-  const resetSectorForm = () => { setSectorForm({ title: '', description: '', icon: 'FaLandmark', order: 0 }); setEditingItem(null); setIconSearch(''); };
+
 
   // Open Edit Modals
   const openEditModal = (type, item) => {
@@ -200,7 +172,7 @@ const AdminDashboard = () => {
     if (type === 'publication') { setPublicationForm({ ...item, image: null, file: null }); setShowPublicationModal(true); }
     if (type === 'newsroom') { setNewsroomForm({ ...item, date: item.date ? new Date(item.date).toISOString().split('T')[0] : '', image: null }); setShowNewsroomModal(true); }
     if (type === 'career') { setCareerForm({ ...item, image: null }); setShowCareerModal(true); }
-    if (type === 'sector') { setSectorForm({ ...item }); setShowSectorModal(true); }
+
   }
 
 
@@ -286,9 +258,7 @@ const AdminDashboard = () => {
           <div className={`menu-item ${activeTab === 'careers' ? 'active' : ''}`} onClick={() => { setActiveTab('careers'); setShowSidebar(false); }}>
             <i className="fas fa-user-tie"></i> Careers
           </div>
-          <div className={`menu-item ${activeTab === 'sectors' ? 'active' : ''}`} onClick={() => { setActiveTab('sectors'); setShowSidebar(false); }}>
-            <i className="fas fa-landmark"></i> Sectors
-          </div>
+
           <div className="menu-item mt-5 text-danger" onClick={handleLogout}>
             <i className="fas fa-sign-out-alt"></i> Logout
           </div>
@@ -308,12 +278,12 @@ const AdminDashboard = () => {
             <div>
               <h2 className="fw-bold mb-0 d-none d-sm-block" style={{ color: "#002147" }}>
                 {activeTab === 'overview' ? 'Dashboard Overview' :
-                  activeTab === 'sectors' ? 'Sectors' :
+
                     activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
               </h2>
               <h4 className="fw-bold mb-0 d-sm-none" style={{ color: "#002147" }}>
                  {activeTab === 'overview' ? 'Dashboard' :
-                  activeTab === 'sectors' ? 'Sectors' :
+
                    activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
               </h4>
               <p className="text-muted small mb-0 d-none d-sm-block">Manage your website content efficiently.</p>
@@ -513,38 +483,7 @@ const AdminDashboard = () => {
           </Card>
         )}
 
-        {/* Sectors Tab */}
-        {activeTab === 'sectors' && (
-          <Card className="content-card">
-            <Card.Body>
-              <div className="d-flex justify-content-between mb-4">
-                <h5 className="fw-bold">Sectors</h5>
-                <Button className="btn-add" onClick={() => { resetSectorForm(); setShowSectorModal(true); }}><i className="fas fa-plus me-2"></i> Add Sector</Button>
-              </div>
-              <Table className="table-custom" hover responsive>
-                <thead><tr><th>Title</th><th>Order</th><th>Image</th><th>Actions</th></tr></thead>
-                <tbody>
-                  {sectors.map(item => (
-                    <tr key={item._id}>
-                      <td><div className="fw-bold">{item.title}</div></td>
-                      <td>{item.order}</td>
-                      <td>
-                        {(() => {
-                          const IconComponent = ALL_ICONS[item.icon] || FaIcons.FaBriefcase;
-                          return <IconComponent size={24} color="#002147" />;
-                        })()}
-                      </td>
-                      <td>
-                        <Button size="sm" variant="light" className="me-2 text-primary" onClick={() => openEditModal('sector', item)}><i className="fas fa-edit"></i></Button>
-                        <Button size="sm" variant="light" className="text-danger" onClick={() => handleDelete('sectors', item._id)}><i className="fas fa-trash"></i></Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </Card.Body>
-          </Card>
-        )}
+
 
       </div>
 
@@ -637,53 +576,7 @@ const AdminDashboard = () => {
         </Modal.Body>
       </Modal>
 
-      <Modal show={showSectorModal} onHide={() => setShowSectorModal(false)} size="lg">
-        <Modal.Header closeButton><Modal.Title>{editingItem ? 'Edit' : 'Add'} Sector</Modal.Title></Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSectorSubmit}>
-            <Form.Group className="mb-3"><Form.Label>Sector Title</Form.Label><Form.Control type="text" value={sectorForm.title} onChange={e => setSectorForm({ ...sectorForm, title: e.target.value })} required /></Form.Group>
-            <Form.Group className="mb-3"><Form.Label>Description</Form.Label><Form.Control as="textarea" rows={2} value={sectorForm.description} onChange={e => setSectorForm({ ...sectorForm, description: e.target.value })} /></Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Select Icon (Search for any icon)</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Search icons (e.g., 'user', 'bank', 'wifi')..."
-                value={iconSearch}
-                onChange={(e) => setIconSearch(e.target.value)}
-                className="mb-2"
-              />
-              <div className="d-flex flex-wrap gap-2 border p-3 rounded" style={{ maxHeight: '350px', overflowY: 'auto' }}>
-                {filteredIcons.slice(0, visibleIcons).map(iconName => {
-                  const Icon = ALL_ICONS[iconName];
-                  if (!Icon) return null;
-                  return (
-                    <div
-                      key={iconName}
-                      onClick={() => setSectorForm({ ...sectorForm, icon: iconName })}
-                      className={`p-2 rounded cursor-pointer d-flex align-items-center justify-content-center ${sectorForm.icon === iconName ? 'bg-primary text-white' : 'bg-light text-dark'}`}
-                      style={{ width: '50px', height: '50px', cursor: 'pointer', transition: 'all 0.2s' }}
-                      title={iconName}
-                    >
-                      <Icon size={24} />
-                    </div>
-                  );
-                })}
-                {filteredIcons.length === 0 && <div className="text-muted small w-100 text-center">No icons found.</div>}
-
-                {visibleIcons < filteredIcons.length && (
-                  <div className="w-100 text-center mt-2">
-                    <Button variant="outline-primary" size="sm" onClick={loadMoreIcons}>Current: {visibleIcons} / {filteredIcons.length} - Load More</Button>
-                  </div>
-                )}
-              </div>
-            </Form.Group>
-
-            <Form.Group className="mb-3"><Form.Label>Display Order</Form.Label><Form.Control type="number" value={sectorForm.order} onChange={e => setSectorForm({ ...sectorForm, order: e.target.value })} /></Form.Group>
-            <div className="text-end"><Button variant="secondary" className="me-2" onClick={() => setShowSectorModal(false)}>Cancel</Button><Button type="submit" className="btn-add">Save</Button></div>
-          </Form>
-        </Modal.Body>
-      </Modal>
 
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
         <Modal.Header closeButton style={{ borderBottom: 'none' }}>

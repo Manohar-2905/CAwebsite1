@@ -9,7 +9,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import ServiceDetail from './pages/ServiceDetail';
-import Sectors from './pages/Sectors';
+
 import Publications from './pages/Publications';
 import PublicationDetail from './pages/PublicationDetail';
 import Newsroom from './pages/Newsroom';
@@ -33,7 +33,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:slug" element={<ServiceDetail />} />
-          <Route path="/sectors" element={<Sectors />} />
+
           <Route path="/publications" element={<Publications />} />
           <Route path="/publications/:slug" element={<PublicationDetail />} />
           <Route path="/newsroom" element={<Newsroom />} />

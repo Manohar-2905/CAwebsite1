@@ -32,7 +32,7 @@ const SearchResults = () => {
   return (
     <>
       <Helmet>
-        <title>Search Results{query ? `: ${query}` : ''} - CA Consultancy</title>
+        <title>Search Results{query ? `: ${query}` : ''} - DASGUPTA MAITI & ASSOCIATES</title>
       </Helmet>
 
       <section className="section-padding">

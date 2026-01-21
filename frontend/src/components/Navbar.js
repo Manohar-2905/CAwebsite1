@@ -212,7 +212,7 @@ const Navbar = () => {
                   { path: "/", label: "Home" },
                   { path: "/about", label: "About" },
                   { path: "/services", label: "Services", isDropdown: true },
-                  { path: "/sectors", label: "Sectors" },
+
                   { path: "/publications", label: "Publications" },
                   { path: "/newsroom", label: "Newsroom" },
                   { path: "/careers", label: "Career" },

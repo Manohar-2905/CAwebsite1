@@ -120,74 +120,39 @@ const Contact = () => {
                         <Col lg={11} xl={10}>
                             <Card className="border-0 shadow-lg overflow-hidden fade-in-up delay-2" style={{ borderRadius: '4px' }}>
                                 <Row className="g-0">
-                                    {/* LEFT SIDE: Contact Info */}
-                                    <Col lg={5} className="bg-light p-5 border-end border-light d-flex flex-column">
-                                        <div className="mb-5">
-                                            <h3 className="fw-bold" style={{ color: '#002a54' }}>Contact Information</h3>
-                                            <div style={{ width: '40px', height: '3px', backgroundColor: '#D4AF37', marginTop: '15px' }}></div>
-                                        </div>
-
+                                    {/* LEFT SIDE: Head Office & Direct Contact (Dark Theme) */}
+                                    <Col lg={3} className="p-4 d-flex flex-column text-white border-end border-secondary" style={{ backgroundColor: '#002a54' }}>
                                         <div className="mb-4">
-                                            <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Head Office</h6>
-                                            <div className="text-muted mb-0">
+                                            <h5 className="fw-bold text-white mb-3">Head Office</h5>
+                                            <div style={{ width: '30px', height: '3px', backgroundColor: '#D4AF37', marginBottom: '15px' }}></div>
+                                            <p className="text-white-50 mb-0 opacity-75 small">
                                                 Flat B1, AC 229, Street 39, Classic Apartments<br />
                                                 Action Area 1, New Town, Kolkata – 700156
-                                            </div>
-                                        </div>
-
-                                        <div className="mb-4">
-                                            <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Branch Office 1</h6>
-                                            <div className="text-muted mb-0">
-                                                Flat-1A, Premise No. 18-0206, Plot No. CE/1/C/122<br />
-                                                Newtown, Rajarhat, Kolkata – 700156
-                                            </div>
-                                        </div>
-
-                                        <div className="mb-4">
-                                            <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Branch Office 2</h6>
-                                            <div className="text-muted mb-0">
-                                                <span className="fw-bold">Santanu Chatterjee</span><br />
-                                                <a href="tel:+919051079796" className="text-decoration-none text-muted">
-                                                    <i className="fas fa-phone-alt me-2 text-warning small"></i> +91 90510 79796
-                                                </a><br />
-                                                <a href="mailto:santanu.chatterjee@dma-caoffice.in" className="text-decoration-none text-muted">
-                                                    <i className="fas fa-envelope me-2 text-warning small"></i> santanu.chatterjee@dma-caoffice.in
-                                                </a><br />
-                                                45E/14A - Gauri Apartment, Moore Avenue,<br />
-                                                Manick Bandopadhyay Sarani, Kolkata – 700040
-                                            </div>
-                                        </div>
-
-
-
-                                        <div className="mb-5">
-                                            <h6 className="fw-bold text-dark text-uppercase small mb-2" style={{ letterSpacing: '1px' }}>Direct Contact</h6>
-                                            <p className="text-muted mb-1">
-                                                <i className="fas fa-phone-alt me-2 text-warning"></i> 
-                                                <a href="tel:+919874300074" className="text-decoration-none text-muted">+91 98743 00074</a>
-                                                <span> / </span>
-                                                <a href="tel:+918961401688" className="text-decoration-none text-muted">+91 89614 01688</a>
-                                            </p>
-                                            <p className="text-muted mb-0">
-                                                <i className="fas fa-envelope me-2 text-warning"></i> 
-                                                <a href="mailto:admin@dma-caoffice.in" className="text-decoration-none text-muted">admin@dma-caoffice.in</a>
-                                            </p>
-                                            <p className="text-muted mb-0 mt-1">
-                                                <a href="https://in.linkedin.com/in/dasgupta-maiti-and-associates-07538a372" target="_blank" rel="noopener noreferrer" className="text-decoration-none text-muted">
-                                                    <i className="fab fa-linkedin me-2 text-warning"></i> LinkedIn Profile
-                                                </a>
                                             </p>
                                         </div>
 
                                         <div className="mt-auto">
-                                            <p className="text-muted small fst-italic mb-0">
-                                                "Integrity. Excellence. Vision."
+                                            <h6 className="fw-bold text-uppercase small mb-3" style={{ letterSpacing: '1px', color: '#D4AF37' }}>Direct Contact</h6>
+                                            <p className="text-white-50 mb-2 opacity-75 small">
+                                                <i className="fas fa-phone-alt me-2 text-warning"></i> 
+                                                <a href="tel:+919874300074" className="text-decoration-none text-white-50 hover-text-white">+91 98743 00074</a>
+                                                <span className="mx-1">/</span>
+                                                <a href="tel:+918961401688" className="text-decoration-none text-white-50 hover-text-white">+91 89614 01688</a>
+                                            </p>
+                                            <p className="text-white-50 mb-2 opacity-75 small">
+                                                <i className="fas fa-envelope me-2 text-warning"></i> 
+                                                <a href="mailto:admin@dma-caoffice.in" className="text-decoration-none text-white-50 hover-text-white">admin@dma-caoffice.in</a>
+                                            </p>
+                                            <p className="text-white-50 mb-0 opacity-75 small">
+                                                <a href="https://in.linkedin.com/in/dasgupta-maiti-and-associates-07538a372" target="_blank" rel="noopener noreferrer" className="text-decoration-none text-white-50 hover-text-white">
+                                                    <i className="fab fa-linkedin me-2 text-warning"></i> LinkedIn Profile
+                                                </a>
                                             </p>
                                         </div>
                                     </Col>
 
-                                    {/* RIGHT SIDE: The Form */}
-                                    <Col lg={7} className="p-5 bg-white">
+                                    {/* MIDDLE: The Form (White Background) */}
+                                    <Col lg={6} className="p-5 bg-white">
                                         <h3 className="mb-4 fw-bold" style={{ color: '#002a54' }}>Send us a Message</h3>
                                         <Form onSubmit={handleSubmit}>
                                             <Row>
@@ -288,6 +253,54 @@ const Contact = () => {
                                                 {loading ? 'Sending...' : 'Send Message'}
                                             </Button>
                                         </Form>
+                                    </Col>
+
+                                    {/* RIGHT SIDE: Branch Offices (Dark Theme) */}
+                                    <Col lg={3} className="p-4 d-flex flex-column text-white" style={{ backgroundColor: '#002a54' }}>
+                                        <div className="mb-4">
+                                            <h5 className="fw-bold text-white mb-3">Branches</h5>
+                                            <div style={{ width: '30px', height: '3px', backgroundColor: '#D4AF37', marginBottom: '15px' }}></div>
+                                        </div>
+
+                                        <div className="mb-4">
+                                            <h6 className="fw-bold text-uppercase small mb-2" style={{ letterSpacing: '1px', color: '#D4AF37' }}>Branch Office 1</h6>
+                                            <div className="text-white-50 mb-0 opacity-75 small">
+                                                Flat-1A, Premise No. 18-0206<br/>
+                                                Plot No. CE/1/C/122<br />
+                                                Newtown, Rajarhat, Kolkata – 700156<br />
+                                                <div className="mt-2 pt-2 border-top border-secondary">
+                                                    <span className="fw-bold text-white">Krishnendu Maiti</span><br />
+                                                    <a href="tel:+918961401688" className="text-decoration-none text-white-50 hover-text-white">
+                                                        <i className="fas fa-phone-alt me-2 text-warning small"></i> +91 89614 01688
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-0">
+                                            <h6 className="fw-bold text-uppercase small mb-2" style={{ letterSpacing: '1px', color: '#D4AF37' }}>Branch Office 2</h6>
+                                            <div className="text-white-50 mb-0 opacity-75 small">
+                                                45E/14A - Gauri Apartment<br/>
+                                                Moore Avenue<br />
+                                                Manick Bandopadhyay Sarani<br/>
+                                                Kolkata – 700040<br />
+                                                <div className="mt-2 pt-2 border-top border-secondary">
+                                                    <span className="fw-bold text-white">Santanu Chatterjee</span><br />
+                                                    <a href="tel:+919051079796" className="text-decoration-none text-white-50 hover-text-white">
+                                                        <i className="fas fa-phone-alt me-2 text-warning small"></i> +91 90510 79796
+                                                    </a><br />
+                                                    <a href="mailto:santanu.chatterjee@dma-caoffice.in" className="text-decoration-none text-white-50 hover-text-white">
+                                                        <i className="fas fa-envelope me-2 text-warning small"></i> santanu.chatterjee@dma-caoffice.in
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-auto pt-4 text-end">
+                                             <p className="text-white-50 small fst-italic mb-0 opacity-50">
+                                                "Integrity. Excellence. Vision."
+                                            </p>
+                                        </div>
                                     </Col>
                                 </Row>
                             </Card>

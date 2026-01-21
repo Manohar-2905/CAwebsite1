@@ -7,7 +7,7 @@ const NotFound = () => {
   return (
     <>
       <Helmet>
-        <title>404 - Page Not Found | CA Consultancy</title>
+        <title>404 - Page Not Found | DASGUPTA MAITI & ASSOCIATES</title>
       </Helmet>
       <Container className="text-center py-5">
         <div className="not-found-page fade-in-up">
