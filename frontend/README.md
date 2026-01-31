@@ -13,6 +13,12 @@ REACT_APP_API_URL=http://localhost:5000/api
 REACT_APP_BASE_URL=http://localhost:3000
 ```
 
+**For Production:**
+```env
+REACT_APP_API_URL=https://back.dasguptamaitiassociates.com/api
+REACT_APP_BASE_URL=https://dasguptamaitiassociates.com
+```
+
 3. Start development server:
 ```bash
 npm start

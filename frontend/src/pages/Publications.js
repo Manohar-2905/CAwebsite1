@@ -37,11 +37,12 @@ const Publications = () => {
   return (
     <>
       <Helmet>
-        <title>Publications - DASGUPTA MAITI & ASSOCIATES</title>
+        <title>Publications & Insights - DASGUPTA MAITI & ASSOCIATES</title>
         <meta
           name="description"
-          content="Browse our latest publications, insights, and industry updates."
+          content="Latest financial insights, tax updates, and business news from DASGUPTA MAITI & ASSOCIATES. Stay informed on GST, Income Tax, and Corporate Law."
         />
+        <meta name="keywords" content="CA Publications, Financial Insights, Tax News India, GST Updates, Corporate Law News, Chartered Accountant Blog" />
       </Helmet>
 
       {/* Hero Banner (Matching Services Style) */}

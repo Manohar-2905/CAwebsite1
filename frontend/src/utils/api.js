@@ -2,7 +2,7 @@ import axios from "axios";
 import API_BASE_URL from "../config/api";
 
 const api = axios.create({
-  baseURL: API_BASE_URL || "https://caweb.onrender.com/api",
+  baseURL: API_BASE_URL || "https://back.dasguptamaitiassociates.com/api",
   headers: {
     "Content-Type": "application/json",
   },

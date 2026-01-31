@@ -51,8 +51,9 @@ const Services = () => {
   return (
     <>
       <Helmet>
-        <title>Our Services - DASGUPTA MAITI & ASSOCIATES</title>
-        <meta name="description" content="Comprehensive CA services including Audit & Assurance, Tax, GST, ROC Compliance, and Financial Consulting." />
+        <title>Our Services - DASGUPTA MAITI & ASSOCIATES | Audit, Tax & GST</title>
+        <meta name="description" content="Expert CA services by DASGUPTA MAITI & ASSOCIATES in Kolkata. We offer Audit & Assurance, Income Tax Filing, GST Registration, ROC Compliance, and Startup Consulting." />
+        <meta name="keywords" content="CA Services Kolkata, Audit & Assurance, Statutory Audit, Tax Audit, Income Tax Filing, GST Registration, GST Filing, GSTR 3B, Company Incorporation, ROC Compliance, Project Financing, MSME Registration, Startup India, NGO Audit, 12A 80G Registration, Payroll Management, Bookkeeping, Digital Signature" />
       </Helmet>
 
       {/* Services Hero Banner */}

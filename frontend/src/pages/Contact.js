@@ -85,8 +85,9 @@ const Contact = () => {
     return (
         <>
             <Helmet>
-                <title>Contact - Dasgupta Maiti & Associates</title>
-                <meta name="description" content="Contact Dasgupta Maiti & Associates for professional Chartered Accountant services in India." />
+                <title>Contact Us - DASGUPTA MAITI & ASSOCIATES | CA in New Town</title>
+                <meta name="description" content="Contact Dasgupta Maiti & Associates, top Chartered Accountants in New Town, Kolkata. Get expert audit, tax, and financial consulting services today." />
+                <meta name="keywords" content="Contact CA Kolkata, Chartered Accountant New Town, Dasgupta Maiti Associates Address, best CA firm contact" />
             </Helmet>
 
             <div style={{ position: 'relative', backgroundColor: '#f9f9f9', minHeight: '100vh', paddingBottom: '80px' }}>

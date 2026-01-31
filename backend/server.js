@@ -11,17 +11,66 @@ console.log("NODE_ENV:", process.env.NODE_ENV);
 console.log("---");
 
 // Middleware
+// CORS configuration - Allow requests from frontend domain
+// Normalize URLs by removing trailing slashes
+const normalizeUrl = (url) => {
+  if (!url) return null;
+  return url.replace(/\/+$/, '');
+};
+
+const allowedOrigins = [
+  normalizeUrl(process.env.FRONTEND_URL),
+  "https://dasguptamaitiassociates.com",
+  "https://www.dasguptamaitiassociates.com",
+  "http://localhost:3000",
+  "http://localhost:5000"
+].filter(Boolean);
+
+console.log("Allowed CORS origins:", allowedOrigins);
+
 app.use(
   cors({
-    origin: [
-      process.env.FRONTEND_URL,
-      "https://caweb.onrender.com",
-      "http://localhost:3000",
-      "http://localhost:5000"
-    ].filter(Boolean),
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) {
+        console.log("CORS: Request with no origin, allowing");
+        return callback(null, true);
+      }
+      
+      // Normalize origin by removing trailing slash
+      const normalizedOrigin = normalizeUrl(origin);
+      
+      // Check if origin is in allowed list
+      if (allowedOrigins.indexOf(normalizedOrigin) !== -1) {
+        console.log("CORS: Allowing origin:", normalizedOrigin);
+        callback(null, true);
+      } else {
+        // Log for debugging
+        console.log("CORS: Blocked origin:", normalizedOrigin);
+        console.log("CORS: Allowed origins are:", allowedOrigins);
+        // In production, be more permissive for debugging
+        if (process.env.NODE_ENV === "production") {
+          console.log("CORS: Production mode - allowing origin for debugging");
+          callback(null, true);
+        } else {
+          callback(new Error("Not allowed by CORS"));
+        }
+      }
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: "Content-Type,Authorization"
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "Accept",
+      "Origin",
+      "Access-Control-Request-Method",
+      "Access-Control-Request-Headers"
+    ],
+    exposedHeaders: ["Content-Range", "X-Content-Range"],
+    preflightContinue: false,
+    optionsSuccessStatus: 204
   })
 );
 app.use(express.json());
@@ -62,7 +111,7 @@ const PORT = process.env.PORT || 5000;
 // Serve static files from React app in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/build")));
-  
+
   // Catch-all handler: send back React's index.html file for non-API routes
   app.get("*", (req, res) => {
     // Don't serve index.html for API routes

@@ -8,11 +8,12 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>About Us - Dasgupta Maiti & Associates</title>
+        <title>About Us - DASGUPTA MAITI & ASSOCIATES | Trusted CA Firm</title>
         <meta
           name="description"
-          content="Leard about Dasgupta Maiti & Associates, a trusted Chartered Accountancy firm."
+          content="Learn about DASGUPTA MAITI & ASSOCIATES, a trusted Chartered Accountancy firm in Kolkata offering expert financial solutions, compliance support, and strategic advisory."
         />
+        <meta name="keywords" content="About Dasgupta Maiti & Associates, CA firm history, Chartered Accountants team, Financial experts Kolkata" />
       </Helmet>
 
       {/* Simple Hero */}

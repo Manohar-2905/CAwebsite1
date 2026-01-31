@@ -8,6 +8,41 @@ import santanuImg from "../assets/images/team/santanu_chatterjee.png";
 import krishnenduImg from "../assets/images/team/krishnendu_maiti.png";
 
 const Home = () => {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AccountingService",
+    "name": "DASGUPTA MAITI & ASSOCIATES",
+    "image": "https://dma-caoffice.in/cawebsite_logo.png",
+    "@id": "https://dma-caoffice.in",
+    "url": "https://dma-caoffice.in",
+    "telephone": "+919874300074",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Flat B1, AC 229, Street 39, Classic Apartments, AA 1, New Town",
+      "addressLocality": "Kolkata",
+      "postalCode": "700156",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 22.5691,
+      "longitude": 88.4744
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "10:00",
+      "closes": "18:00"
+    },
+    "sameAs": []
+  };
+
   const [services, setServices] = useState([]);
   const [publications, setPublications] = useState([]);
   const [homepageFiles, setHomepageFiles] = useState([]);
@@ -77,26 +112,27 @@ const Home = () => {
     <>
       <Helmet>
         <title>
-          DASGUPTA MAITI & ASSOCIATES - Top Chartered Accountant Services in
-          India
+          DASGUPTA MAITI & ASSOCIATES - Top Chartered Accountants & CA Firm in Kolkata
         </title>
         <meta
           name="description"
-          content="Professional CA firm offering audit, tax, GST, ROC compliance, and financial consulting services in India."
+          content="DASGUPTA MAITI & ASSOCIATES is a leading Chartered Accountant firm in New Town, Kolkata. We specialize in Audit, Tax Planning, GST, ROC Compliance, and Financial Consulting."
         />
         <meta
           name="keywords"
-          content="CA services, Audit & Assurance, GST filing, ROC compliance, Company registration, ITR filing, Financial consulting, Chartered accountant services"
+          content="DASGUPTA MAITI & ASSOCIATES, CA firm Kolkata, Chartered Accountants New Town, Audit Services, Statutory Audit, Internal Audit, Forensic Audit, Tax Audit, Income Tax Filing, ITR Return, TDS Return, Tax Consultation, International Taxation, Transfer Pricing, GST Registration, GST Filing, GSTR 1, GSTR 3B, GST Audit, GST Refund, E-Way Bill, Company Registration, LLP Incorporation, ROC Compliance, Annual Filing, DIN Services, Startup India Registration, MSME Registration, Project Financing, Bank Audit, Stock Audit, Accounting Services, Bookkeeping, Payroll Management, Digital Signature Certificate, DSC, 12A 80G Registration, NGO Audit"
         />
         <meta
           property="og:title"
-          content="DASGUPTA MAITI & ASSOCIATES - Top Chartered Accountant Services"
+          content="DASGUPTA MAITI & ASSOCIATES - Trusted Chartered Accountants in Kolkata"
         />
         <meta
           property="og:description"
-          content="Professional CA firm offering comprehensive audit, tax, and financial consulting services."
+          content="Expert CA services including Audit, Taxation, and Corporate Compliance. Visit our office in New Town, Kolkata."
         />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://dma-caoffice.in" />
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
       {/* Hero Section - Premium Glassmorphism Design */}

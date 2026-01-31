@@ -2,6 +2,6 @@ const isLocal = window.location.hostname === "localhost" || window.location.host
 
 const API_BASE_URL = isLocal 
   ? "http://localhost:5000/api" 
-  : (process.env.REACT_APP_API_URL || "https://caweb.onrender.com/api");
+  : (process.env.REACT_APP_API_URL || "https://back.dasguptamaitiassociates.com/api");
 
 export default API_BASE_URL;
