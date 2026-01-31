@@ -110,15 +110,22 @@ const PORT = process.env.PORT || 5000;
 
 // Serve static files from React app in production
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/build")));
+  // Serve static files with fallthrough option
+  app.use(express.static(path.join(__dirname, "../frontend/build"), { fallthrough: true }));
 
   // Catch-all handler: send back React's index.html file for non-API routes
-  app.get("*", (req, res) => {
+  // This must be after all other routes
+  app.get("*", (req, res, next) => {
     // Don't serve index.html for API routes
     if (req.path.startsWith("/api/") || req.path.startsWith("/sitemap.xml")) {
       return res.status(404).json({ message: "Not found" });
     }
-    res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+    // Serve index.html for all other routes (client-side routing)
+    res.sendFile(path.join(__dirname, "../frontend/build/index.html"), (err) => {
+      if (err) {
+        next(err);
+      }
+    });
   });
 }
 
